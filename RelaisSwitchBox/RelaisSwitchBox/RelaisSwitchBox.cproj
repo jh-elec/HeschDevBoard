@@ -55,6 +55,8 @@
     </com_atmel_avrdbg_tool_avrdragon>
     <avrtoolinterface>ISP</avrtoolinterface>
     <avrtoolinterfaceclock>500000</avrtoolinterfaceclock>
+    <ResetRule>0</ResetRule>
+    <EraseKey />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
