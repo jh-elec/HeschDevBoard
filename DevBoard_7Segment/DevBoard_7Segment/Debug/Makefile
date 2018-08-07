@@ -41,6 +41,7 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../build_info.c \
+../cmd.c \
 ../DevBoardSegment.c \
 ../Hardware\ Libs/hard_init.c \
 ../Hardware\ Libs/mcp23017.c \
@@ -60,6 +61,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 build_info.o \
+cmd.o \
 DevBoardSegment.o \
 Hardware\ Libs/hard_init.o \
 Hardware\ Libs/i2cmaster.o \
@@ -72,6 +74,7 @@ main.o
 
 OBJS_AS_ARGS +=  \
 build_info.o \
+cmd.o \
 DevBoardSegment.o \
 "Hardware Libs/hard_init.o" \
 "Hardware Libs/i2cmaster.o" \
@@ -84,6 +87,7 @@ main.o
 
 C_DEPS +=  \
 build_info.d \
+cmd.d \
 DevBoardSegment.d \
 Hardware\ Libs/hard_init.d \
 Hardware\ Libs/i2cmaster.d \
@@ -96,6 +100,7 @@ main.d
 
 C_DEPS_AS_ARGS +=  \
 build_info.d \
+cmd.d \
 DevBoardSegment.d \
 "Hardware Libs/hard_init.d" \
 "Hardware Libs/i2cmaster.d" \
@@ -120,6 +125,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

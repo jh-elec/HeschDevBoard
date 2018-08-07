@@ -38,15 +38,15 @@
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
-    <avrtool>com.atmel.avrdbg.tool.ispmk2</avrtool>
-    <avrtoolserialnumber>0000A0004174</avrtoolserialnumber>
+    <avrtool>com.atmel.avrdbg.tool.avrdragon</avrtool>
+    <avrtoolserialnumber>00A20005054D</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x1E9502</avrdeviceexpectedsignature>
     <avrtoolinterface>ISP</avrtoolinterface>
     <avrtoolinterfaceclock>1000000</avrtoolinterfaceclock>
     <com_atmel_avrdbg_tool_ispmk2>
       <ToolOptions>
         <InterfaceProperties>
-          <IspClock>1000000</IspClock>
+          <IspClock>0</IspClock>
         </InterfaceProperties>
         <InterfaceName>ISP</InterfaceName>
       </ToolOptions>
@@ -56,6 +56,17 @@
     </com_atmel_avrdbg_tool_ispmk2>
     <ResetRule>0</ResetRule>
     <EraseKey />
+    <com_atmel_avrdbg_tool_avrdragon>
+      <ToolOptions>
+        <InterfaceProperties>
+          <IspClock>1000000</IspClock>
+        </InterfaceProperties>
+        <InterfaceName>ISP</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.avrdragon</ToolType>
+      <ToolNumber>00A20005054D</ToolNumber>
+      <ToolName>AVR Dragon</ToolName>
+    </com_atmel_avrdbg_tool_avrdragon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -140,6 +151,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="build_info.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="cmd.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="cmd.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DevBoardSegment.c">

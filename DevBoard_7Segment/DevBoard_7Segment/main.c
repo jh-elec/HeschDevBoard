@@ -26,6 +26,7 @@
 #include "Hardware Libs/rx8564.h"
 #include "Hardware Libs/uart.h"
 #include "build_info.h"
+#include "cmd.h"
 
 #include "LED Font/led_font.h"
 
@@ -86,6 +87,29 @@ eep_t eepRAM;
 
 
 rx8564_t rtc;
+
+void* test( void *ptr , void *ptr_ )
+{
+	uart_puts("Funktion wurde ausgeuehrt!\r\n");
+	
+	return NULL;
+}
+
+
+const cmdTable_t cmdTab[] =
+{
+	{"Relais_Handler!" 			, 	"-REL"		, 	test	},
+	{"Uhrzeit Stellen"			,	"-SETTime"	,	test	},
+};
+
+cmd_t cmd =
+{
+	.table	= cmdTab,
+	.tabLen = sizeof( cmdTab ) / sizeof( *cmdTab ),
+	.raw 	= &raw
+};
+
+
 
 void timerInit( void )
 {	
@@ -360,6 +384,62 @@ void testHardware( void )
 	}
 }
 
+char *readRingBuff( char *stream )
+{
+	static uint8_t index = 0;
+	
+	/*
+	*	Neustes Byte aus dem Ringpuffer abholen
+	*/
+	uint16_t c = uart_getc();
+	
+	/*
+	*	Wenn keine neuen Daten vorhanden, direkt wieder zurück!
+	*/
+	if ( c & UART_NO_DATA)
+	{
+		return NULL;
+	}
+	
+	/*
+	*	Ist ein Fehler aufgetreten?
+	*/
+	if ( c > UART_NO_DATA)
+	{
+		index = 0; 
+		return NULL;
+	}
+	
+	/*
+	*	Status und Error Bits ausmaskieren
+	*/
+	c &= 0x00FF;
+	
+	/*
+	*	Übertragungsende?
+	*/
+	if (c == '\n' || c == '\r')
+	{
+		*( stream + index ) = '\0';
+		index = 0; 
+		return stream;
+	}
+	
+	/*
+	*	Daten in unseren neuen Puffer zwischen speichern
+	*/
+	if (index >= UART_RX_BUFFER_SIZE)
+	{
+		index = 0;
+	}
+	else
+	{
+		*( stream + index++ ) = (uint8_t)c;	
+	}
+	
+	return NULL;
+}
+
 char out[60] = "";
 
 int main(void)
@@ -400,22 +480,44 @@ int main(void)
 
 	while (1) 
     {	
-			
-		if ( sys.scrollIsRdy )
+		char		*stream = readRingBuff( out );
+		const char	*cmdPtr = NULL;
+		if ( stream != NULL )
 		{
-			sys.i2cBusy = 1; // Multiplexing unterbrechen
-			readTemperature(); 
-			rtcGetData( &rtc );
-			sys.i2cBusy = 0; // Multiplexing wieder freigeben
-			sys.scrollIsRdy = 0; // Es darf wieder gescrollt werden
+			cmdPtr = cmdGetName( &cmd , stream );
+			if ( cmdPtr != NULL )
+			{
+				uart_puts( cmdPtr );
+				uart_puts( "\r\n" );				
+				cmdGetFunc( &cmd , stream );
+				uart_puts( "Parameter.: " );
+				uart_puts( cmdGetPara( &cmd , stream , 0 ) );
+				uart_puts( "\r\n" );
+				uart_puts( "Anzahl Parameter.: " );
+				uart_puts( itoa( cmd.raw->paraNumb , NULL , 10 ) );
+				uart_puts( "\r\n" );
+			}
+			else
+			{
+				uart_puts( "Error\r\n" );
+			}
 		}
-		
- 		strcpy( out , tempToStr( sts3x.actual , 0 ) );
- 		strcat( out , " - " );
- 		strcat( out , tempToStr( tmp102.actual , 1 ) );
- 		strcat( out , " - " );
- 		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );				
-		scrollMessage( out , 2000 , 0 );
+			
+// 		if ( sys.scrollIsRdy )
+// 		{
+// 			sys.i2cBusy = 1; // Multiplexing unterbrechen
+// 			readTemperature(); 
+// 			rtcGetData( &rtc );
+// 			sys.i2cBusy = 0; // Multiplexing wieder freigeben
+// 			sys.scrollIsRdy = 0; // Es darf wieder gescrollt werden
+// 		}
+// 		
+//  		strcpy( out , tempToStr( sts3x.actual , 0 ) );
+//  		strcat( out , " - " );
+//  		strcat( out , tempToStr( tmp102.actual , 1 ) );
+//  		strcat( out , " - " );
+//  		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );				
+// 		scrollMessage( out , 2000 , 0 );
 		
     }
 }

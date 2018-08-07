@@ -4,6 +4,8 @@
 
 build_info.c
 
+cmd.c
+
 DevBoardSegment.c
 
 Hardware Libs\hard_init.c
