@@ -17,6 +17,7 @@
 
 #include "cmd.h"
 
+char	*cmd_ = NULL;
 
 // const cmdTable_t cmdTab[] =
 // {
@@ -78,11 +79,13 @@ char			*cmdSearch			( char *inBuff , char *srchCmd )
 	{
 		return NULL;
 	}
+	
+	cmd_ = cmdBeginnPtr;
 		
 	return cmdBeginnPtr;
 }
 
-static int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff )				
+int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff )				
 {
 	uint8_t i;
 	
@@ -145,18 +148,12 @@ char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num )
 	const char 	*rawPtr		= NULL;
 	
 	static char buff[20] = "";
+	memset( ( char * ) buff , 0 , strlen( buff ) );
 	
 	uint8_t x;
-	
-	for ( x = 0 ; x < cmd->tabLen ; x++ )
-	{
-		rawPtr = ( const char *) cmdSearch( input , ( char * ) cmd->table[x].instruction );
-		if ( rawPtr != NULL )
-		{
-			break;
-		}
-	}
-		
+			
+	rawPtr = cmd_;
+			
 	if( rawPtr == NULL )
 	{
 		return NULL;
@@ -184,7 +181,8 @@ char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num )
 	
 	for ( x = 0 ; x < num ; x++ )
 	{
-		delimiter = strtok( NULL , CMD_RAW_PARA_DELIMITER );			
+		delimiter = strtok( NULL , CMD_RAW_PARA_DELIMITER );
+		//return "TWAT";			
 	}
 	
  	strcpy( buff , delimiter );

@@ -28,6 +28,7 @@ void* cmdRelais( void *ptr , void *ptr_ );
 const cmdTable_t cmdTab[] =
 {
 	{"Relais Handler:" 			, 	"-RELais"		, 	cmdRelais	},
+	{"Relais Handler:" 			, 	"-REL"			, 	cmdRelais	},
 };
 
 cmd_t cmd =
@@ -55,10 +56,10 @@ void* cmdRelais( void *ptr , void *ptr_ )
 // 	state	= atoi( cmdGetPara( &cmd , out , 1 ) );
 	
 	uart_puts( "Parameter0: " );
-	uart_putc( atoi( cmdSearch( out , "-RELais") + '0' ) + '0' );
+	uart_puts( cmdGetPara( &cmd , out , 0 ) );
 	uart_puts( "\r\n" );
 	uart_puts( "Parameter1: " );
-	uart_putc( atoi( cmdSearch( out , "-RELais") + '0' ) + '0' );
+	uart_puts( cmdGetPara( &cmd , out , 1 ) );
 	uart_puts( "\r\n" );	
 	
 // 	if ( state )

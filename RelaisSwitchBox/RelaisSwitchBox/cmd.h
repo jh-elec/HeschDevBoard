@@ -61,6 +61,8 @@ typedef struct
 
 char			*cmdSearch			( char *inBuff , char *srchCmd );
 
+int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff );
+
 const char			*cmdGetInstruction	( cmd_t *cmd , char *input );				
 
 const char			*cmdGetName			( cmd_t *cmd , char *input );				
