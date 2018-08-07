@@ -64,7 +64,7 @@ const char			*cmdGetInstruction	( cmd_t *cmd , char *input );
 
 const char			*cmdGetName			( cmd_t *cmd , char *input );				
 
-void				cmdGetFunc			( cmd_t *cmd , char *input );				
+void				*cmdGetFunc			( cmd_t *cmd , char *input );				
 
 char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num );	
 

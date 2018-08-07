@@ -128,13 +128,14 @@ const char			*cmdGetName			( cmd_t *cmd , char *input )
 	return NULL;
 }
 
-void				cmdGetFunc			( cmd_t *cmd , char *input )				
+void				*cmdGetFunc			( cmd_t *cmd , char *input )				
 {
 	int8_t ret = cmdGetIndex( cmd , input );
 	if ( ret != (int8_t) -1 )
 	{
-		cmd->table[ret].fnc( NULL , NULL );
+		return cmd->table[ret].fnc;
 	}
+	return NULL;
 }
 
 char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num )	
@@ -155,14 +156,14 @@ char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num )
 			break;
 		}
 	}
-	
+		
 	if( rawPtr == NULL )
 	{
 		return NULL;
 	}
 	
 	cmd->raw->paraNumb = cmdCntPara( ( char * ) rawPtr );
-	
+		
 	cmdEndPtr = strchr( rawPtr , ';' );	
 	if( cmdEndPtr == NULL )
 	{
@@ -181,14 +182,14 @@ char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num )
 		return  NULL;
 	}
 	
-	for ( x = 0 ; x < num || x < cmd->raw->paraNumb ; x++ )
+	for ( x = 0 ; x < num && x < cmd->raw->paraNumb ; x++ )
 	{
 		delimiter = strtok( NULL , CMD_RAW_PARA_DELIMITER );			
 	}
 	
-	strcpy( buff , delimiter );
+ 	strcpy( buff , delimiter );
 	char *ptr = strchr( buff , ';' );
-	*ptr = '\0';
+ 	*ptr = '\0';
 	
 	return buff; 
 }

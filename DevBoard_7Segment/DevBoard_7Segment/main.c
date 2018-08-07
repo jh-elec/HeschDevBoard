@@ -16,6 +16,7 @@
 #include <util/delay.h>
 #include <avr/eeprom.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "DevBoardSegment.h"
 #include "Hardware Libs/hard_init.h"
@@ -29,6 +30,8 @@
 #include "cmd.h"
 
 #include "LED Font/led_font.h"
+
+char out[60] = "";
 
 typedef struct				
 {
@@ -88,13 +91,7 @@ eep_t eepRAM;
 
 rx8564_t rtc;
 
-void* test( void *ptr , void *ptr_ )
-{
-	uart_puts("Funktion wurde ausgeuehrt!\r\n");
-	
-	return NULL;
-}
-
+void* test( void *ptr , void *ptr_ );
 
 const cmdTable_t cmdTab[] =
 {
@@ -109,6 +106,15 @@ cmd_t cmd =
 	.raw 	= &raw
 };
 
+void setRelais(uint8_t Kx);
+
+void* test( void *ptr , void *ptr_ )
+{ 
+ 	uint8_t kx = atoi( cmdGetPara( &cmd , out , 0 ) );
+ 	setRelais( kx );
+	
+	return NULL;
+}
 
 
 void timerInit( void )
@@ -440,7 +446,7 @@ char *readRingBuff( char *stream )
 	return NULL;
 }
 
-char out[60] = "";
+
 
 int main(void)
 {
@@ -448,9 +454,9 @@ int main(void)
 	uart_init( UART_BAUD_SELECT( 9600 , F_CPU ) );
 	
 	eepLoad( &eep );
-	i2c_init();
-	mcp23017_init();
-	sts3x_init();
+//	i2c_init();
+//	mcp23017_init();
+//	sts3x_init();
 	timerInit();
 
 	sei();
@@ -484,40 +490,57 @@ int main(void)
 		const char	*cmdPtr = NULL;
 		if ( stream != NULL )
 		{
+			uart_puts( "****************************\r\n" );
+			
 			cmdPtr = cmdGetName( &cmd , stream );
+	
 			if ( cmdPtr != NULL )
 			{
 				uart_puts( cmdPtr );
-				uart_puts( "\r\n" );				
-				cmdGetFunc( &cmd , stream );
-				uart_puts( "Parameter.: " );
-				uart_puts( cmdGetPara( &cmd , stream , 0 ) );
-				uart_puts( "\r\n" );
-				uart_puts( "Anzahl Parameter.: " );
-				uart_puts( itoa( cmd.raw->paraNumb , NULL , 10 ) );
-				uart_puts( "\r\n" );
+				uart_puts( "\r\n" );	
+			}
+						
+			void (*funcPtr)(void*,void*) = cmdGetFunc( &cmd , stream );
+			if ( funcPtr != NULL )
+			{
+				funcPtr( NULL , NULL );
+			}
+		
+			uart_puts( "Parameter.: " );
+			char *paraPtr = cmdGetPara( &cmd , stream , 0 );
+			if ( paraPtr != NULL )
+			{
+				uart_puts( paraPtr );
 			}
 			else
 			{
-				uart_puts( "Error\r\n" );
+				uart_puts( "NULL" );
 			}
+				
+			uart_puts( "\r\n" );
+			uart_puts( "Anzahl Parameter.: " );
+			uart_puts( itoa( cmd.raw->paraNumb , NULL , 10 ) );
+			uart_puts( "\r\n" );
+			
+			uart_puts( "****************************\r\n" );
+		
 		}
 			
-// 		if ( sys.scrollIsRdy )
-// 		{
-// 			sys.i2cBusy = 1; // Multiplexing unterbrechen
-// 			readTemperature(); 
-// 			rtcGetData( &rtc );
-// 			sys.i2cBusy = 0; // Multiplexing wieder freigeben
-// 			sys.scrollIsRdy = 0; // Es darf wieder gescrollt werden
-// 		}
-// 		
-//  		strcpy( out , tempToStr( sts3x.actual , 0 ) );
-//  		strcat( out , " - " );
-//  		strcat( out , tempToStr( tmp102.actual , 1 ) );
-//  		strcat( out , " - " );
-//  		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );				
-// 		scrollMessage( out , 2000 , 0 );
+		if ( sys.scrollIsRdy )
+		{
+			sys.i2cBusy = 1; // Multiplexing unterbrechen
+			readTemperature(); 
+			rtcGetData( &rtc );
+			sys.i2cBusy = 0; // Multiplexing wieder freigeben
+			sys.scrollIsRdy = 0; // Es darf wieder gescrollt werden
+		}
+		
+ 		strcpy( out , tempToStr( sts3x.actual , 0 ) );
+ 		strcat( out , " - " );
+ 		strcat( out , tempToStr( tmp102.actual , 1 ) );
+ 		strcat( out , " - " );
+ 		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );				
+			scrollMessage( out , 2000 , 0 );
 		
     }
 }
