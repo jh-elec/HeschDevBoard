@@ -18,11 +18,10 @@
 #include <stdlib.h>
 
 
-#define CMD_SIZE_OF_TAB			7
 #define CMD_RAW_DATA_BEGINN		":"
 #define CMD_RAW_PARA_DELIMITER	","
-#define CMD_DATA_END			';'
-
+#define CMD_DATA_END			";"
+#define CMD_CRC_BEGINN			"#"
 
 
 typedef struct						
@@ -59,17 +58,17 @@ typedef struct
 					cmdRaw_t	*raw;
 }cmd_t;
 
-char			*cmdSearch			( char *inBuff , char *srchCmd );
 
-int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff );
+uint8_t 			cmdCntPara			( cmd_t *cmd , char *stream );
 
-const char			*cmdGetInstruction	( cmd_t *cmd , char *input );				
+const char			*cmdGetInstruction	( cmd_t *cmd , char *input );
 
-const char			*cmdGetName			( cmd_t *cmd , char *input );				
+const char			*cmdGetName			( cmd_t *cmd , char *input );
 
-void				*cmdGetFunc			( cmd_t *cmd , char *input );				
+void				*cmdGetFunc			( cmd_t *cmd , char *input );
 
-char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num );	
+char 				*cmdGetPara 		( cmd_t *cmd , char *out , char *in , uint8_t num );
 
+char 				*cmdGetCRC 			( char *out , char *stream );
 
 #endif

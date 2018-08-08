@@ -3,10 +3,10 @@
 #include <stdint.h>
 #include <string.h>
 
-#define CMD_SIZE_OF_TAB			7
 #define CMD_RAW_DATA_BEGINN		":"
 #define CMD_RAW_PARA_DELIMITER	","
-#define CMD_DATA_END			';'
+#define CMD_DATA_END			";"
+#define CMD_CRC_BEGINN			'#'
 
 char	*cmd_ = NULL;
 
@@ -47,7 +47,6 @@ typedef struct
 const cmdTable_t cmdTab[] =
 {
 	{"Relais Handler:" 			, 	"-RELais"		, 	NULL	},
-	{"Relais Handler:" 			, 	"-REL"			, 	NULL	},
 };
 
 cmd_t cmd =
@@ -57,16 +56,16 @@ cmd_t cmd =
 	.raw 	= &raw
 };
 
-static uint8_t 		cmdCntPara			( char *cmd )								
+static uint8_t 		cmdCntPara			( cmd_t *cmd , char *stream )								
 {
 	uint8_t x = 0;
-	char *cmdPtr = cmd;
-	char *beginnPtr = cmd;
+	char *cmdPtr = stream;
+	char *beginnPtr = stream;
 	
-	beginnPtr = strchr( beginnPtr , ':' ); // Erster Parameter
+	beginnPtr = strchr( beginnPtr , CMD_RAW_DATA_BEGINN[0] ); // Erster Parameter
 	if ( beginnPtr != NULL )
 	{
-		if ( *(beginnPtr + 1 ) != ';' )
+		if ( *(beginnPtr + 1 ) != CMD_DATA_END[0] )
 		{
 			x++;	
 		}
@@ -74,14 +73,16 @@ static uint8_t 		cmdCntPara			( char *cmd )
 	
 	for ( ; cmdPtr != NULL ;  )
 	{
-		cmdPtr = strchr( cmdPtr + 1 , ',' ); // weitere Parameter
+		cmdPtr = strchr( cmdPtr + 1 , CMD_RAW_PARA_DELIMITER[0] ); // weitere Parameter
 		x++;
 	}
+	
+	cmd->raw->paraNumb = ( x - 1 );
 	
 	return ( x - 1 );
 }
 
-char			*cmdSearch			( char *inBuff , char *srchCmd )			
+char				*cmdSearch			( char *inBuff , char *srchCmd )			
 {
 	/*
 	*	Zeiger deklarieren).
@@ -97,7 +98,7 @@ char			*cmdSearch			( char *inBuff , char *srchCmd )
 	}
 
 	cmdBeginnPtr = strstr( inBuffPtr , srchCmdPtr );
-	cmdEndPtr	 = strchr( inBuffPtr , CMD_DATA_END );	      
+	cmdEndPtr	 = strchr( inBuffPtr , CMD_DATA_END[0] );	      
 
 	if ( cmdEndPtr == NULL || cmdBeginnPtr == NULL )
 	{
@@ -109,7 +110,7 @@ char			*cmdSearch			( char *inBuff , char *srchCmd )
 	return cmdBeginnPtr;
 }
 
-int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff )				
+int8_t				cmdGetIndex			( cmd_t *cmd , char *inBuff )				
 {
 	uint8_t i;
 	
@@ -129,7 +130,6 @@ int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff )
 	
 	return -1;	
 }
-
 
 const char			*cmdGetInstruction	( cmd_t *cmd , char *input )				
 {
@@ -165,55 +165,84 @@ void				*cmdGetFunc			( cmd_t *cmd , char *input )
 	return NULL;
 }
 
-
-char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num )	
+char 				*cmdGetPara 		( cmd_t *cmd , char *out , char *in , uint8_t num )
 {
-	char 		*delimiter 	= NULL;
-	char 		*cmdEndPtr	= NULL;
 	const char 	*rawPtr		= NULL;
 
 	uint8_t x;
-			
+	
 	for ( x = 0 ; x < cmd->tabLen ; x++ )
 	{
-		rawPtr = cmdSearch( input , ( char * ) cmd->table[x].instruction );
+		rawPtr = cmdSearch( in , ( char * ) cmd->table[x].instruction );
 		if ( rawPtr != NULL )
 		{
 			break;
-		}	
+		}
 	}
-			
+	
 	if ( rawPtr == NULL )
 	{
 		return NULL;
 	}
-	
-	cmd->raw->paraNumb = cmdCntPara( ( char * ) rawPtr );
 		
-	cmdEndPtr = strchr( rawPtr , ';' );	
-	if ( cmdEndPtr == NULL )
-	{
-		return  NULL;
-	}
-
-	delimiter = strchr( rawPtr , ':' ) + 1;
-	if ( ( delimiter - 1 ) == NULL )
-	{
-		return  NULL;
-	}
-
-	uint8_t pos;
-	pos = strcspn( delimiter , "," );
+	char *streamPtr = in;
 	
+	streamPtr = strchr( in , CMD_RAW_DATA_BEGINN[0] ) + 1;
 	
-	return delimiter; 
+	uint8_t i;
+	for ( i = 0 ; i < num ; i++ )
+	{
+		streamPtr = strchr( streamPtr , CMD_RAW_PARA_DELIMITER[0] ) + 1;
+	}
+	
+	char *streamEndPtr = strchr( streamPtr , CMD_RAW_PARA_DELIMITER[0] );
+	
+	char *outPtr = out;
+	while( *streamPtr != '\0' && *streamPtr != CMD_RAW_PARA_DELIMITER[0] && *streamPtr != CMD_DATA_END[0] )
+	{
+		if ( *( streamPtr )  == CMD_CRC_BEGINN )
+		{
+			return NULL;
+		}
+		*outPtr++ = *streamPtr++;
+	}
+	
+	return out;
 }
+
+char 				*cmdGetCRC 			( char *out , char *stream )
+{
+	char *crcPtr = stream;
+	char *outPtr = out;
+	
+	crcPtr = strchr( crcPtr , CMD_CRC_BEGINN ) + 1;
+	
+	if ( ( crcPtr - 1 ) == NULL )
+	{
+		return NULL;
+	}
+	
+	while( *crcPtr != '\0' && *crcPtr != CMD_DATA_END[0] )
+	{
+		*outPtr++ = *crcPtr++;
+	}	
+	
+	return out;	
+}
+
+
+char stream[] = "-RELais:0565,1*787,#00000;";
 
 int main(int argc, char *argv[]) 
 {
-	char stream[] = "-RELais:0,1,2,3,4;";
 	
-	printf( "%s\r\n" , cmdGetPara( &cmd , stream , 0 ) );
+	char buff[10]="";
+	
+	printf( "Parameter 1.: %s\r\n" , cmdGetPara( &cmd , buff , stream , 0 ) );
+	printf( "Parameter 2.: %s\r\n" , cmdGetPara( &cmd , buff , stream , 1 ) );
+	printf( "Parameter 3.: %s\r\n" , cmdGetPara( &cmd , buff , stream , 2 ) );
+	printf( "Parameter 4.: %s\r\n" , cmdGetPara( &cmd , buff , stream , 3 ) );
+	printf( "Buff.: %s\r\n" , cmdGetCRC( buff , stream ) );
 
 	return 0;
 }

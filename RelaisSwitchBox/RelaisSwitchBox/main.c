@@ -23,12 +23,14 @@
 char out[20] = "";
 
 
-void* cmdRelais( void *ptr , void *ptr_ );
+void *cmdRelais	( void *ptr , void *ptr_ );
+void *uartTest	( void *ptr , void *ptr_ );
+
 
 const cmdTable_t cmdTab[] =
 {
 	{"Relais Handler:" 			, 	"-RELais"		, 	cmdRelais	},
-	{"Relais Handler:" 			, 	"-REL"			, 	cmdRelais	},
+	{"UART Handler:"			,	"-TEST"			,	uartTest	},
 };
 
 cmd_t cmd =
@@ -38,40 +40,60 @@ cmd_t cmd =
 	.raw 	= &raw
 };
 
-void setRelais(uint8_t Kx)
-{	
-	/*
-	*	Setze Relais
-	*/
-	RELAIS_PORT1_PORT = (Kx<<2);
-	RELAIS_PORT2_PORT = ((Kx&0xC0)>>4);
-}
-
-void* cmdRelais( void *ptr , void *ptr_ )
+void *cmdRelais( void *ptr , void *ptr_ )
 { 
  	uint8_t kx;
  	uint8_t state;
-	 
-// 	kx		= atoi( cmdGetPara( &cmd , out , 0 ) ); 
-// 	state	= atoi( cmdGetPara( &cmd , out , 1 ) );
+	char para[10] = "";
+	 	 
+	// -RELais:2,1,#21;
+ 	kx		= atoi( cmdGetPara( &cmd , para , ptr , 0 ) ); 
+ 	state	= atoi( cmdGetPara( &cmd , para , ptr , 1 ) );
 	
-	uart_puts( "Parameter0: " );
-	uart_puts( cmdGetPara( &cmd , out , 0 ) );
+	uart_puts( "Relais: " );
+	uart_putc( kx + '0' );
+	
+	switch ( state )
+	{
+		case 0 :
+		{
+			if ( kx < 7 )
+			{
+				RELAIS_PORT1_PORT &= ~( 1 << ( ( kx ) + 1 ) );
+			}
+			else
+			{
+				RELAIS_PORT2_PORT &= ~(1 << ( kx - 5 ));
+			}	
+			uart_puts( " unset" );
+					
+		}break;
+		
+		case 1 :
+		{
+			if ( kx < 7 )
+			{
+				RELAIS_PORT1_PORT |= ( 1 << ( ( kx ) + 1 ) );
+			}
+			else
+			{
+				RELAIS_PORT2_PORT |= 1 << ( kx - 5 );
+			}
+			uart_puts( " set" );
+		}break;
+	}
+	
 	uart_puts( "\r\n" );
-	uart_puts( "Parameter1: " );
-	uart_puts( cmdGetPara( &cmd , out , 1 ) );
-	uart_puts( "\r\n" );	
-	
-// 	if ( state )
-// 	{
-// 		RELAIS_PORT1_PORT |= ( kx << 2 );
-// 		RELAIS_PORT2_PORT |= ( ( kx & 0xC0 ) >> 4 );
-// 	}
-// 	else
-// 	{
-// 		RELAIS_PORT1_PORT &= ~( kx << 2 );
-// 		RELAIS_PORT2_PORT &= ~( ( kx & 0xC0 ) >> 4 );		
-// 	}
+
+	return NULL;
+}
+
+void *uartTest( void *ptr , void *ptr_ )
+{
+	char buff[30]="";
+	uart_puts( "Loopback.: " );
+	uart_puts( cmdGetPara( &cmd , buff , ptr , 0 ) );
+	uart_puts( "\r\n" );
 	
 	return NULL;
 }
@@ -132,6 +154,9 @@ char *readRingBuff( char *stream )
 	{
 		*( stream + index ) = '\0';
 		index = 0; 
+		
+		cmdCntPara( &cmd , stream );
+		
 		return stream;
 	}
 	
@@ -166,35 +191,52 @@ int main(void)
 	uart_puts( "www.jh-elec.de\r\n" );
 	uart_puts( "Ver.: " );
 	uart_puts( buildVer() );
-
+	uart_puts( "\r\n\n" );
+	
 	while (1) 
     {	
 		char		*stream = readRingBuff( out );
 		const char	*cmdPtr = NULL;
 		if ( stream != NULL )
 		{
-			uart_puts( "****************************\r\n" );
-			
 			cmdPtr = cmdGetName( &cmd , stream );
-	
-			if ( cmdPtr != NULL )
+			if ( cmdPtr != NULL  )
 			{
+				uart_puts( "****************************\r\n" );
+
 				uart_puts( cmdPtr );
 				uart_puts( "\r\n" );	
-			}
-						
-			void (*funcPtr)(void*,void*) = cmdGetFunc( &cmd , stream );
-			if ( funcPtr != NULL )
-			{
-				funcPtr( NULL , NULL );
-			}
-		
- 			uart_puts( "Anzahl Parameter.: " );
- 			uart_puts( itoa( cmd.raw->paraNumb , NULL , 10 ) );
- 			uart_puts( "\r\n" );
 			
-			uart_puts( "****************************\r\n" );
+				if ( cmd.raw->paraNumb != 0 )
+				{
+ 					uart_puts( "Anzahl Parameter.: " );
+ 					uart_puts( itoa( cmd.raw->paraNumb , NULL , 10 ) );
+ 					uart_puts( "\r\n" );			
+				}
 		
+				void (*funcPtr)(void*,void*) = cmdGetFunc( &cmd , stream );
+				if ( funcPtr != NULL )
+				{
+					funcPtr( stream , NULL );
+				}
+			
+				char crc[5] = "";
+				char *crcPtr = cmdGetCRC( crc , stream );
+				if ( crcPtr != NULL )
+				{
+					uart_puts( "CRC.: " );
+					uart_puts( crcPtr );
+					uart_puts( "\r\n" );
+				}
+			
+				memset( ( char * ) out , 0 , strlen( out ) );
+			
+				uart_puts( "****************************\r\n" );				
+			}
+			else
+			{
+				uart_puts( "no command\r\n" );
+			}
 		}		
     }
 }
