@@ -20,7 +20,7 @@
 
 #define CMD_RAW_DATA_BEGINN		":"
 #define CMD_RAW_PARA_DELIMITER	","
-#define CMD_DATA_END			";"
+#define CMD_DATA_END			'\0'
 #define CMD_CRC_BEGINN			"#"
 
 
@@ -29,18 +29,23 @@ typedef struct
 	/*
 	*	Name des Kommandos
 	*/
-	char	name[20];
+	char		name[20];
 	
 	/*
 	*	Befehl der empfangen werden muss
 	*/
-	char	instruction[15];
+	char		instruction[15];
 			
 	/*
 	*	Funktion die beim entsprechenden Kommando 
 	*	ausgeführt werden soll
 	*/	
-	void*	(*fnc) (void* , void*);
+	void*		(*fnc) (void* , void*);
+	
+	/*
+	*	Befehlssyntax
+	*/
+	const char	*syntax;
 	
 }cmdTable_t;
 
@@ -70,5 +75,7 @@ void				*cmdGetFunc			( cmd_t *cmd , char *input );
 char 				*cmdGetPara 		( cmd_t *cmd , char *out , char *in , uint8_t num );
 
 char 				*cmdGetCRC 			( char *out , char *stream );
+
+char				*cmdHelp			( cmd_t *cmd , char *helpBuff );
 
 #endif

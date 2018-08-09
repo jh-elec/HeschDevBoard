@@ -17,6 +17,7 @@
 
 #include "cmd.h"
 
+
 char	*cmd_ = NULL;
 
 // const cmdTable_t cmdTab[] =
@@ -31,7 +32,6 @@ char	*cmd_ = NULL;
 // 	.tabLen = sizeof( cmdTab ) / sizeof( *cmdTab ),
 // 	.raw 	= &raw
 // };
-
 
 
 static char			*cmdSearch			( char *inBuff , char *srchCmd )					
@@ -50,7 +50,7 @@ static char			*cmdSearch			( char *inBuff , char *srchCmd )
 	}
 
 	cmdBeginnPtr = strstr( inBuffPtr , srchCmdPtr );
-	cmdEndPtr	 = strchr( inBuffPtr , CMD_DATA_END[0] );	      
+	cmdEndPtr	 = strchr( inBuffPtr , CMD_DATA_END );	      
 
 	if ( cmdEndPtr == NULL || cmdBeginnPtr == NULL )
 	{
@@ -93,7 +93,7 @@ uint8_t 			cmdCntPara			( cmd_t *cmd , char *stream )
 	beginnPtr = strchr( beginnPtr , CMD_RAW_DATA_BEGINN[0] ); // Erster Parameter
 	if ( beginnPtr != NULL )
 	{
-		if ( *(beginnPtr + 1 ) != CMD_DATA_END[0] )
+		if ( *(beginnPtr + 1 ) != CMD_DATA_END )
 		{
 			x++;	
 		}
@@ -175,7 +175,7 @@ char 				*cmdGetPara 		( cmd_t *cmd , char *out , char *in , uint8_t num )
 	}
 		
 	char *outPtr = out;
-	while( *streamPtr != '\0' && *streamPtr != CMD_RAW_PARA_DELIMITER[0] && *streamPtr != CMD_DATA_END[0] )
+	while( *streamPtr != '\0' && *streamPtr != CMD_RAW_PARA_DELIMITER[0] && *streamPtr != CMD_DATA_END )
 	{
 		if ( *( streamPtr )  == CMD_CRC_BEGINN[0] )
 		{
@@ -199,7 +199,7 @@ char 				*cmdGetCRC 			( char *out , char *stream )
 		return NULL;
 	}
 	
-	while( *crcPtr != '\0' && *crcPtr != CMD_DATA_END[0] )
+	while( *crcPtr != '\0' && *crcPtr != CMD_DATA_END )
 	{
 		*outPtr++ = *crcPtr++;
 	}	
@@ -207,5 +207,48 @@ char 				*cmdGetCRC 			( char *out , char *stream )
 	return out;	
 }
 
+char				*cmdHelp			( cmd_t *cmd , char *helpBuff )							
+{
+	
+	memset( helpBuff , 0 , strlen( helpBuff ) );
+	
+	strcpy( ( char * ) helpBuff , "Kommando Syntax: " );
+	strcat( ( char * ) helpBuff , "[KOMMANDO WORD][PARAMETER START][PARAMETER][KOMMANDO ENDE]\r\n" );
+	
+	strcat( ( char * ) helpBuff , "'" );
+	strcat( ( char * ) helpBuff , CMD_RAW_DATA_BEGINN );	
+	strcat( ( char * ) helpBuff , "' ->[PARA. START]\r\n" );
+
+	strcat( ( char * ) helpBuff , "'" );
+	strcat( ( char * ) helpBuff , CMD_RAW_PARA_DELIMITER );
+	strcat( ( char * ) helpBuff , "' ->[PARA. TRENNER]\r\n" );
+
+	strcat( ( char * ) helpBuff , "'" );
+	
+	uint8_t pos = strlen( helpBuff );
+	
+	if ( CMD_DATA_END == '\0' )
+	{
+		strcat( ( char * ) helpBuff , "\\0" );
+	}
+	else
+	{
+		helpBuff[ pos ] = CMD_DATA_END;
+	}
+	strcat( ( char * ) helpBuff , "' ->[KOMMANDO ENDE]\r\n\n" );
 
 
+ 	strcat( ( char * ) helpBuff , "Kommandos:\r\n\n" );
+	
+	for ( uint8_t x = 0 ; x < cmd->tabLen ; x++ )
+	{
+		strcat( ( char * ) helpBuff , cmd->table[x].name );
+		strcat( ( char * ) helpBuff , " " );
+		strcat( ( char * ) helpBuff , cmd->table[x].instruction );
+		strcat( ( char * ) helpBuff , cmd->table[x].syntax );
+		strcat( ( char * ) helpBuff , "\r\n" );
+	}
+	
+	
+	return helpBuff;
+}

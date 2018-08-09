@@ -215,13 +215,15 @@ char 				*cmdGetCRC 			( char *out , char *stream )
 	char *crcPtr = stream;
 	char *outPtr = out;
 	
-	crcPtr = strchr( crcPtr , CMD_CRC_BEGINN ) + 1;
+	crcPtr = strchr( crcPtr , CMD_CRC_BEGINN );
 	
-	if ( ( crcPtr - 1 ) == NULL )
+	if ( crcPtr == NULL || *( crcPtr - 1 ) != CMD_RAW_PARA_DELIMITER[0] )
 	{
 		return NULL;
 	}
 	
+	crcPtr += 1;
+		
 	while( *crcPtr != '\0' && *crcPtr != CMD_DATA_END[0] )
 	{
 		*outPtr++ = *crcPtr++;
@@ -231,7 +233,7 @@ char 				*cmdGetCRC 			( char *out , char *stream )
 }
 
 
-char stream[] = "-RELais:0565,1*787,#00000;";
+char stream[] = "-RELais:123,345,312,431,#543;";
 
 int main(int argc, char *argv[]) 
 {

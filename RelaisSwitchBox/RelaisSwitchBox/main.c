@@ -24,13 +24,13 @@ char out[20] = "";
 
 
 void *cmdRelais	( void *ptr , void *ptr_ );
-void *uartTest	( void *ptr , void *ptr_ );
+void *help	( void *ptr , void *ptr_ );
 
 
 const cmdTable_t cmdTab[] =
 {
-	{"Relais Handler:" 			, 	"-RELais"		, 	cmdRelais	},
-	{"UART Handler:"			,	"-TEST"			,	uartTest	},
+	{"Relais:" 	, 	"-k"	, 	cmdRelais ,	":Relais , 0=off || 1=on"	},
+	{"Help  :"	,	"-h"	,	help	  ,	NULL						},
 };
 
 cmd_t cmd =
@@ -46,13 +46,14 @@ void *cmdRelais( void *ptr , void *ptr_ )
  	uint8_t state;
 	char para[10] = "";
 	 	 
-	// -RELais:2,1,#21;
+	/*	Relais Handler
+	*	Einzel Bit Modus: 
+	*				Kommando: -k:1,0; // Relais 1 , rücksetzen
+	*						  -k:1,1; // Relais 1 , setzen
+	*/
  	kx		= atoi( cmdGetPara( &cmd , para , ptr , 0 ) ); 
  	state	= atoi( cmdGetPara( &cmd , para , ptr , 1 ) );
-	
-	uart_puts( "Relais: " );
-	uart_putc( kx + '0' );
-	
+		
 	switch ( state )
 	{
 		case 0 :
@@ -64,9 +65,7 @@ void *cmdRelais( void *ptr , void *ptr_ )
 			else
 			{
 				RELAIS_PORT2_PORT &= ~(1 << ( kx - 5 ));
-			}	
-			uart_puts( " unset" );
-					
+			}						
 		}break;
 		
 		case 1 :
@@ -79,8 +78,19 @@ void *cmdRelais( void *ptr , void *ptr_ )
 			{
 				RELAIS_PORT2_PORT |= 1 << ( kx - 5 );
 			}
-			uart_puts( " set" );
 		}break;
+		
+		/*	Relais Handler
+		*	Byte Modus: 
+		*				Kommando: -k:170,3;
+		*	Hier können direkt mehrere Relais mit einem Byte gesetzt werden
+		*/
+		case 3 :
+		{
+			uart_puts( "**Byte Modus**" );
+			RELAIS_PORT1_PORT = kx << 2;
+			RELAIS_PORT2_PORT = ( kx & 0xC0 ) >> 4;
+		}
 	}
 	
 	uart_puts( "\r\n" );
@@ -88,12 +98,15 @@ void *cmdRelais( void *ptr , void *ptr_ )
 	return NULL;
 }
 
-void *uartTest( void *ptr , void *ptr_ )
+void *help( void *ptr , void *ptr_ )
 {
-	char buff[30]="";
-	uart_puts( "Loopback.: " );
-	uart_puts( cmdGetPara( &cmd , buff , ptr , 0 ) );
+	static char helpBuff[250] = "";
+	
+	uart_puts( "Ver.: " );
+	uart_puts( buildVer() );
 	uart_puts( "\r\n" );
+	
+	uart_puts( cmdHelp( &cmd , helpBuff ) );
 	
 	return NULL;
 }
