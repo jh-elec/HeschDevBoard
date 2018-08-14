@@ -20,21 +20,8 @@
 
 char	*cmd_ = NULL;
 
-// const cmdTable_t cmdTab[] =
-// {
-// 	{"Relais_Handler!" 			, 	"-REL"		, 	NULL 	},
-// 
-// };
-// 
-// cmd_t cmd =
-// {
-// 	.table	= cmdTab,
-// 	.tabLen = sizeof( cmdTab ) / sizeof( *cmdTab ),
-// 	.raw 	= &raw
-// };
 
-
-static char			*cmdSearch			( char *inBuff , char *srchCmd )					
+static char			*cmdSearch			( char *inBuff , char *srchCmd )						
 {
 	/*
 	*	Zeiger deklarieren).
@@ -62,11 +49,11 @@ static char			*cmdSearch			( char *inBuff , char *srchCmd )
 	return cmdBeginnPtr;
 }
 
-static int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff )						
+static int8_t		cmdGetIndex			( char *inBuff )										
 {
 	uint8_t i;
 	
-	cmd_t 	*cmdPtr			= cmd;
+	cmd_t 	*cmdPtr			= &cmd;
 	char  	*cmdSearchPtr 	= NULL;
 	char	*inputPtr		= inBuff;
 
@@ -84,7 +71,14 @@ static int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff )
 }
 
 
-uint8_t 			cmdCntPara			( cmd_t *cmd , char *stream )						
+void				cmdInit				( const cmdTable_t *tab , cmdRaw_t *raw , size_t tableSize )	
+{
+	cmd.table	= tab;
+	cmd.tabLen	= tableSize;
+	cmd.raw		= raw;
+}
+
+uint8_t 			cmdCntPara			( char *stream )										
 {
 	uint8_t x = 0;
 	char *cmdPtr = stream;
@@ -105,54 +99,54 @@ uint8_t 			cmdCntPara			( cmd_t *cmd , char *stream )
 		x++;
 	}
 	
-	cmd->raw->paraNumb = ( x - 1 );
+	cmd.raw->paraNumb = ( x - 1 );
 	
 	return ( x - 1 );
 }
 
-const char			*cmdGetInstruction	( cmd_t *cmd , char *input )						
+const char			*cmdGetInstruction	( char *input )											
 {
-	int8_t i = cmdGetIndex( cmd , input );
+	int8_t i = cmdGetIndex( input );
 	
 	if ( i != (int8_t) -1 )
 	{
-		return cmd->table[i].instruction;
+		return cmd.table[i].instruction;
 	}
 	
 	return NULL;
 }
 
-const char			*cmdGetName			( cmd_t *cmd , char *input )						
+const char			*cmdGetName			( char *input )											
 {
-	int8_t ret = cmdGetIndex( cmd , input );
+	int8_t ret = cmdGetIndex( input );
 	
 	if ( ret != (int8_t) -1 )
 	{
-		return cmd->table[ret].name;
+		return cmd.table[ret].name;
 	}
 		
 	return NULL;
 }
 
-void				*cmdGetFunc			( cmd_t *cmd , char *input )						
+void				*cmdGetFunc			( char *input )											
 {
-	int8_t ret = cmdGetIndex( cmd , input );
+	int8_t ret = cmdGetIndex( input );
 	if ( ret != (int8_t) -1 )
 	{
-		return cmd->table[ret].fnc;
+		return cmd.table[ret].fnc;
 	}
 	return NULL;
 }
 
-char 				*cmdGetPara 		( cmd_t *cmd , char *out , char *in , uint8_t num )	
+char 				*cmdGetPara 		( char *out , char *in , uint8_t num )					
 {
 	const char 	*rawPtr		= NULL;
 
 	uint8_t x;
 	
-	for ( x = 0 ; x < cmd->tabLen ; x++ )
+	for ( x = 0 ; x < cmd.tabLen ; x++ )
 	{
-		rawPtr = cmdSearch( in , ( char * ) cmd->table[x].instruction );
+		rawPtr = cmdSearch( in , ( char * ) cmd.table[x].instruction );
 		if ( rawPtr != NULL )
 		{
 			break;
@@ -187,7 +181,7 @@ char 				*cmdGetPara 		( cmd_t *cmd , char *out , char *in , uint8_t num )
 	return out;
 }
 
-char 				*cmdGetCRC 			( char *out , char *stream )						
+char 				*cmdGetCRC 			( char *out , char *stream )							
 {
 	char *crcPtr = stream;
 	char *outPtr = out;
@@ -199,7 +193,7 @@ char 				*cmdGetCRC 			( char *out , char *stream )
 		return NULL;
 	}
 	
-	while( *crcPtr != '\0' && *crcPtr != CMD_DATA_END )
+	while( *crcPtr != '\0' && *crcPtr != CMD_CRC_BEGINN[0] )
 	{
 		*outPtr++ = *crcPtr++;
 	}	
@@ -207,9 +201,8 @@ char 				*cmdGetCRC 			( char *out , char *stream )
 	return out;	
 }
 
-char				*cmdHelp			( cmd_t *cmd , char *helpBuff )							
+char				*cmdHelp			( char *helpBuff )										
 {
-	
 	memset( helpBuff , 0 , strlen( helpBuff ) );
 	
 	strcpy( ( char * ) helpBuff , "Kommando Syntax: " );
@@ -240,15 +233,14 @@ char				*cmdHelp			( cmd_t *cmd , char *helpBuff )
 
  	strcat( ( char * ) helpBuff , "Kommandos:\r\n\n" );
 	
-	for ( uint8_t x = 0 ; x < cmd->tabLen ; x++ )
+	for ( uint8_t x = 0 ; x < cmd.tabLen ; x++ )
 	{
-		strcat( ( char * ) helpBuff , cmd->table[x].name );
+		strcat( ( char * ) helpBuff , cmd.table[x].name );
 		strcat( ( char * ) helpBuff , " " );
-		strcat( ( char * ) helpBuff , cmd->table[x].instruction );
-		strcat( ( char * ) helpBuff , cmd->table[x].syntax );
+		strcat( ( char * ) helpBuff , cmd.table[x].instruction );
+		strcat( ( char * ) helpBuff , cmd.table[x].syntax );
 		strcat( ( char * ) helpBuff , "\r\n" );
 	}
-	
-	
+
 	return helpBuff;
 }

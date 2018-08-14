@@ -20,27 +20,9 @@
 #include "cmd.h"
 
 
-char out[20] = "";
+char streamIn[64] = "";
 
-
-void *cmdRelais	( void *ptr , void *ptr_ );
-void *help	( void *ptr , void *ptr_ );
-
-
-const cmdTable_t cmdTab[] =
-{
-	{"Relais:" 	, 	"-k"	, 	cmdRelais ,	":Relais , 0=off || 1=on"	},
-	{"Help  :"	,	"-h"	,	help	  ,	NULL						},
-};
-
-cmd_t cmd =
-{
-	.table	= cmdTab,
-	.tabLen = sizeof( cmdTab ) / sizeof( *cmdTab ),
-	.raw 	= &raw
-};
-
-void *cmdRelais( void *ptr , void *ptr_ )
+void		*cmdRelais	( void *ptr , void *ptr_ )			
 { 
  	uint8_t kx;
  	uint8_t state;
@@ -51,8 +33,15 @@ void *cmdRelais( void *ptr , void *ptr_ )
 	*				Kommando: -k:1,0; // Relais 1 , rücksetzen
 	*						  -k:1,1; // Relais 1 , setzen
 	*/
- 	kx		= atoi( cmdGetPara( &cmd , para , ptr , 0 ) ); 
- 	state	= atoi( cmdGetPara( &cmd , para , ptr , 1 ) );
+ 	kx		= atoi( cmdGetPara( para , ptr , 0 ) ); 
+ 	state	= atoi( cmdGetPara( para , ptr , 1 ) );
+		
+	uart_puts( cmdGetPara( para , ptr , 1 ) );
+		
+	if ( state > 2 )
+	{
+		//return NULL;
+	}
 		
 	switch ( state )
 	{
@@ -85,20 +74,18 @@ void *cmdRelais( void *ptr , void *ptr_ )
 		*				Kommando: -k:170,3;
 		*	Hier können direkt mehrere Relais mit einem Byte gesetzt werden
 		*/
-		case 3 :
+		case 2 :
 		{
-			uart_puts( "**Byte Modus**" );
+			uart_puts( "\r\n**Byte Modus**\r\n" );
 			RELAIS_PORT1_PORT = kx << 2;
 			RELAIS_PORT2_PORT = ( kx & 0xC0 ) >> 4;
-		}
+		}break;
 	}
-	
-	uart_puts( "\r\n" );
 
-	return NULL;
+	return ( char * ) '0';
 }
-
-void *help( void *ptr , void *ptr_ )
+	
+void		*help		( void *ptr , void *ptr_ )			
 {
 	static char helpBuff[250] = "";
 	
@@ -106,21 +93,29 @@ void *help( void *ptr , void *ptr_ )
 	uart_puts( buildVer() );
 	uart_puts( "\r\n" );
 	
-	uart_puts( cmdHelp( &cmd , helpBuff ) );
+	uart_puts( cmdHelp( helpBuff ) );
 	
 	return NULL;
 }
 
-void timerInit( void )
+const		cmdTable_t	cmdTab[] =							
+{
+	{"Relais:" 	, 	"-k"	, 	cmdRelais ,	":RELAIS,0=OFF|1=ON|2=ByteMode,#CRC[OPTIONAL]"	},
+	{"Help  :"	,	"-h"	,	help	  ,	NULL											},
+};
+
+
+
+void		timerInit( void )								
 {	
 	TCCR1B |= ((1<<WGM12) | (1<<CS10)); //CTC Mode 1
 
-	TIMSK  |= (1<<OCIE1A); // OutputCompareEnable
+	TIMSK  |= (1<<OCIE1A); // streamInputCompareEnable
 	
 	OCR1A   = ( (uint16_t)( F_CPU / 1 / 8000 ) );	
 }
 
-uint16_t checkMaxValue( uint16_t val , uint16_t max )
+uint16_t	checkMaxValue( uint16_t val , uint16_t max )	
 {
 	if( val > max )
 	{
@@ -128,8 +123,8 @@ uint16_t checkMaxValue( uint16_t val , uint16_t max )
 	}
 	return val;
 }
-
-char *readRingBuff( char *stream )
+	
+char		*readRingBuff( char *stream )					
 {
 	static uint8_t index = 0;
 	
@@ -163,13 +158,11 @@ char *readRingBuff( char *stream )
 	/*
 	*	Übertragungsende?
 	*/
-	if (c == '\n' || c == '\r')
+	if ( c == '\r' || c == '\n' )
 	{
 		*( stream + index ) = '\0';
 		index = 0; 
-		
-		cmdCntPara( &cmd , stream );
-		
+			
 		return stream;
 	}
 	
@@ -193,62 +186,70 @@ char *readRingBuff( char *stream )
 int main(void)
 {
 	hardware_init();
+	
 	uart_init( UART_BAUD_SELECT( 9600 , F_CPU ) );
 	
 	timerInit();
 
 	sei();
 
-	uart_puts( "**HeschDevBoard_7Segment**\r\n");
+	uart_puts( "**RelaisSwitchBoard**\r\n");
 	uart_puts( "Support by J.H - Elec.\r\n");
 	uart_puts( "www.jh-elec.de\r\n" );
 	uart_puts( "Ver.: " );
 	uart_puts( buildVer() );
 	uart_puts( "\r\n\n" );
+
+	cmdInit( cmdTab , &raw , CMD_TAB_SIZE( cmdTab ) );
+
+	char *streamPtr		= NULL;
+	const char *cmdPtr	= NULL;
 	
 	while (1) 
     {	
-		char		*stream = readRingBuff( out );
-		const char	*cmdPtr = NULL;
-		if ( stream != NULL )
+		streamPtr = readRingBuff( streamIn );
+		
+		if ( streamPtr != NULL )
 		{
-			cmdPtr = cmdGetName( &cmd , stream );
+			cmdPtr = cmdGetName( streamPtr );
+
 			if ( cmdPtr != NULL  )
 			{
 				uart_puts( "****************************\r\n" );
-
-				uart_puts( cmdPtr );
-				uart_puts( "\r\n" );	
-			
-				if ( cmd.raw->paraNumb != 0 )
-				{
- 					uart_puts( "Anzahl Parameter.: " );
- 					uart_puts( itoa( cmd.raw->paraNumb , NULL , 10 ) );
- 					uart_puts( "\r\n" );			
-				}
 		
-				void (*funcPtr)(void*,void*) = cmdGetFunc( &cmd , stream );
+				void *(*funcPtr)(void*,void*) = cmdGetFunc( streamIn );
 				if ( funcPtr != NULL )
 				{
-					funcPtr( stream , NULL );
+					uart_puts( cmdPtr ); // Namen der Funktion ausgeben
+					
+					if ( funcPtr( streamIn , NULL ) != NULL )
+					{
+						uart_puts( "CMD_OK\r\n" );
+					}
+					else
+					{
+						uart_puts( "CMD_BAD\r\n" );
+					}
+					
 				}
 			
-				char crc[5] = "";
-				char *crcPtr = cmdGetCRC( crc , stream );
-				if ( crcPtr != NULL )
-				{
-					uart_puts( "CRC.: " );
-					uart_puts( crcPtr );
-					uart_puts( "\r\n" );
-				}
-			
-				memset( ( char * ) out , 0 , strlen( out ) );
-			
+// 				char crc[5] = "";
+// 				char *crcPtr = cmdGetCRC( crc , streamIn );
+// 				if ( crcPtr != NULL )
+// 				{
+// 					uart_puts( "CRC.: " );
+// 					uart_puts( crcPtr );
+// 					uart_puts( "\r\n" );
+// 				}
+						
 				uart_puts( "****************************\r\n" );				
 			}
 			else
 			{
 				uart_puts( "no command\r\n" );
+				uart_puts( "Loopback: " );
+				uart_puts( streamIn );
+				uart_puts( "\r\n" );
 			}
 		}		
     }
