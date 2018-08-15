@@ -39,7 +39,7 @@ void		*cmdRelais	( void *ptr , void *ptr_ )
  	kx		= atoi( cmdGetPara( para , ptr , 0 ) ); 
  	state	= atoi( cmdGetPara( para , ptr , 1 ) );
 						
-	if ( state > 2 )
+	if ( state > 2 || cmd.raw->paraNumb != 2 )
 	{
 		return NULL;
 	}
