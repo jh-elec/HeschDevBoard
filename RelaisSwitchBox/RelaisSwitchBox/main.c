@@ -24,10 +24,13 @@ char streamIn[64] = "";
 
 void		*cmdRelais	( void *ptr , void *ptr_ )			
 { 
- 	uint8_t kx;
- 	uint8_t state;
-	char para[10] = "";
+ 					uint16_t		kx;
+ 					uint8_t			state;
+	static			uint8_t			lastMde = 0;
+					char			para[10] = "";
 	 	 
+	const static	char __flash	msg[] = "\r\n**Einzelbit Modus**\r\n";
+		  
 	/*	Relais Handler
 	*	Einzel Bit Modus: 
 	*				Kommando: -k:1,0; // Relais 1 , rücksetzen
@@ -35,18 +38,20 @@ void		*cmdRelais	( void *ptr , void *ptr_ )
 	*/
  	kx		= atoi( cmdGetPara( para , ptr , 0 ) ); 
  	state	= atoi( cmdGetPara( para , ptr , 1 ) );
-		
-	uart_puts( cmdGetPara( para , ptr , 1 ) );
-		
+						
 	if ( state > 2 )
 	{
-		//return NULL;
+		return NULL;
 	}
 		
 	switch ( state )
 	{
 		case 0 :
 		{
+			if ( lastMde != state )
+			{
+				uart_puts( msg );
+			}
 			if ( kx < 7 )
 			{
 				RELAIS_PORT1_PORT &= ~( 1 << ( ( kx ) + 1 ) );
@@ -59,6 +64,10 @@ void		*cmdRelais	( void *ptr , void *ptr_ )
 		
 		case 1 :
 		{
+			if ( lastMde != state )
+			{
+				uart_puts( msg );
+			}
 			if ( kx < 7 )
 			{
 				RELAIS_PORT1_PORT |= ( 1 << ( ( kx ) + 1 ) );
@@ -76,11 +85,16 @@ void		*cmdRelais	( void *ptr , void *ptr_ )
 		*/
 		case 2 :
 		{
-			uart_puts( "\r\n**Byte Modus**\r\n" );
+			if ( lastMde != state )
+			{
+				uart_puts( "\r\n**Byte Modus**\r\n" );	
+			}
 			RELAIS_PORT1_PORT = kx << 2;
 			RELAIS_PORT2_PORT = ( kx & 0xC0 ) >> 4;
+			
 		}break;
 	}
+	lastMde = state;
 
 	return ( char * ) '0';
 }
@@ -187,7 +201,7 @@ int main(void)
 {
 	hardware_init();
 	
-	uart_init( UART_BAUD_SELECT( 9600 , F_CPU ) );
+	uart_init( UART_BAUD_SELECT( 19200 , F_CPU ) );
 	
 	timerInit();
 
@@ -233,14 +247,14 @@ int main(void)
 					
 				}
 			
-// 				char crc[5] = "";
-// 				char *crcPtr = cmdGetCRC( crc , streamIn );
-// 				if ( crcPtr != NULL )
-// 				{
-// 					uart_puts( "CRC.: " );
-// 					uart_puts( crcPtr );
-// 					uart_puts( "\r\n" );
-// 				}
+				char crc[5] = "";
+				char *crcPtr = cmdGetCRC( crc , streamIn );
+				if ( crcPtr != NULL )
+				{
+					uart_puts( "CRC.: " );
+					uart_puts( crcPtr );
+					uart_puts( "\r\n" );
+				}
 						
 				uart_puts( "****************************\r\n" );				
 			}

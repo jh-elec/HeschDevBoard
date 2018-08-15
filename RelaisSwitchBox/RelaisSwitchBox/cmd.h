@@ -17,46 +17,49 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+
 #define CMD_TAB_SIZE( TABLE )			sizeof( TABLE ) / sizeof( *TABLE )
 
 #define CMD_RAW_DATA_BEGINN		":"
 #define CMD_RAW_PARA_DELIMITER	","
 #define CMD_DATA_END			';'
-#define CMD_CRC_BEGINN			"#"
+#define CMD_CRC_BEGINN			"["
+#define CMD_CRC_END             "]"
 
-typedef struct						
+
+typedef struct
 {
 	/*
 	*	Name des Kommandos
 	*/
 	char		name[20];
-	
+
 	/*
 	*	Befehl der empfangen werden muss
 	*/
 	char		instruction[15];
-			
+
 	/*
-	*	Funktion die beim entsprechenden Kommando 
+	*	Funktion die beim entsprechenden Kommando
 	*	ausgeführt werden soll
-	*/	
+	*/
 	void*		(*fnc) (void* , void*);
-	
+
 	/*
 	*	Befehlssyntax
 	*/
 	const char	*syntax;
-	
+
 }cmdTable_t;
 
-typedef struct						
+typedef struct
 {
 	char 	*cmdPtr;
-	uint8_t  paraNumb;	
+	uint8_t  paraNumb;
 }cmdRaw_t;
 cmdRaw_t raw;
 
-typedef struct						
+typedef struct
 {
 	const 			cmdTable_t 	*table;
 					size_t		tabLen;
@@ -64,22 +67,22 @@ typedef struct
 }cmd_t;
 cmd_t cmd;
 
-			
+
 void				cmdInit				( const cmdTable_t *tab , cmdRaw_t *raw , size_t tableSize );
 
-uint8_t 			cmdCntPara			( char *stream );						
+uint8_t 			cmdCntPara			( char *stream );
 
-const char			*cmdGetInstruction	( char *input );						
+const char			*cmdGetInstruction	( char *input );
 
-const char			*cmdGetName			( char *input );						
+const char			*cmdGetName			( char *input );
 
-void				*cmdGetFunc			( char *input );						
+void				*cmdGetFunc			( char *input );
 
-char 				*cmdGetPara 		( char *out , char *in , uint8_t num );	
+char 				*cmdGetPara 		( char *out , char *in , uint8_t num );
 
-char 				*cmdGetCRC 			( char *out , char *stream );						
+char 				*cmdGetCRC 			( char *out , char *stream );
 
-char				*cmdHelp			( char *helpBuff );							
+char				*cmdHelp			( char *helpBuff );
 
 
 #endif
