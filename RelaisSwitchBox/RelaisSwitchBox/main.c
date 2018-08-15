@@ -22,6 +22,18 @@
 
 char streamIn[64] = "";
 
+typedef struct  
+{
+	char *projectName;
+	char *swVersion;
+}info_t;
+
+info_t info =
+{
+	.projectName = "***RelaisSwitchBox***\r\n",
+};
+
+
 void		*cmdRelais	( void *ptr , void *ptr_ )			
 { 
  					uint16_t		kx;
@@ -112,15 +124,26 @@ void		*help		( void *ptr , void *ptr_ )
 	return NULL;
 }
 
+void		*reInit		( void *ptr , void *ptr_ )			
+{
+	void (*restart)(void) = 0;
+	uart_puts( "Reboot now..\r\n\n" );
+	_delay_ms(100);
+	restart();
+	
+	return NULL;
+}
+
 const		cmdTable_t	cmdTab[] =							
 {
 	{"Relais:" 	, 	"-k"	, 	cmdRelais ,	":RELAIS,0=OFF|1=ON|2=ByteMode,#CRC[OPTIONAL]"	},
+	{"Init:"	,	"-init"	,	reInit	  , NULL											},
 	{"Help  :"	,	"-h"	,	help	  ,	NULL											},
 };
 
 
 
-void		timerInit( void )								
+void		timerInit		( void )						
 {	
 	TCCR1B |= ((1<<WGM12) | (1<<CS10)); //CTC Mode 1
 
@@ -129,7 +152,7 @@ void		timerInit( void )
 	OCR1A   = ( (uint16_t)( F_CPU / 1 / 8000 ) );	
 }
 
-uint16_t	checkMaxValue( uint16_t val , uint16_t max )	
+uint16_t	checkMaxValue	( uint16_t val , uint16_t max )	
 {
 	if( val > max )
 	{
@@ -138,7 +161,7 @@ uint16_t	checkMaxValue( uint16_t val , uint16_t max )
 	return val;
 }
 	
-char		*readRingBuff( char *stream )					
+char		*readRingBuff	( char *stream )				
 {
 	static uint8_t index = 0;
 	
@@ -195,6 +218,14 @@ char		*readRingBuff( char *stream )
 	return NULL;
 }
 
+void		showInfo		( info_t *inf )					
+{
+	inf->swVersion = buildVer();
+	uart_puts( inf->projectName );
+	uart_puts( "Ver: " );
+	uart_puts( inf->swVersion );
+	uart_puts( "\r\n" );
+}
 
 
 int main(void)
@@ -207,13 +238,8 @@ int main(void)
 
 	sei();
 
-	uart_puts( "**RelaisSwitchBoard**\r\n");
-	uart_puts( "Support by J.H - Elec.\r\n");
-	uart_puts( "www.jh-elec.de\r\n" );
-	uart_puts( "Ver.: " );
-	uart_puts( buildVer() );
-	uart_puts( "\r\n\n" );
-
+	showInfo( &info );
+	
 	cmdInit( cmdTab , &raw , CMD_TAB_SIZE( cmdTab ) );
 
 	char *streamPtr		= NULL;
