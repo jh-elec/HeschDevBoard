@@ -1,0 +1,13 @@
+
+	Serielle Kommunikation "RelaisSwitchBox"
+	
+	Kommandos für:
+	
+					Software Version: 1.0.1148.0880
+					{
+							Relais setzen		[BIT MODE] 	= "-K:[RELAIS],[1 = ON],[CRC OPTIONAL];
+							Relais rücksetzen	[BIT MODE] 	= "-K:[RELAIS],[0 = OFF],[CRC OPTIONAL];
+							Relais				[BYTE MODE] = "-K:[RELAIS_BYTE],[2 = BYTE_MODE],[CRC OPTIONAL];
+							Neustart						= "-init;"
+							Hilfe							= "-h;"
+					}
