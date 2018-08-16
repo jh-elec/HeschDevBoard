@@ -758,7 +758,7 @@ uint8_t uartProcess(uart_t *u)
 	uint8_t handlingErr = 0;
 		
 	if(readRingBuff(u))
-	{			
+	{					
 		/*
 		*	Lösche alten CRC Wert von dem letzten empfangenen String.
 		*/
@@ -2170,38 +2170,38 @@ int main(void)
 	
 	glcdClear();
 	
-	sys.autoDimmEnable = eepRAM.autoDimmEnable;
-	
-	uint8_t menueExit = 0;
-	while( menueExit != 12 )
-	{
-		menueExit = showMenue( menueStructMain , (enc_t*)&encoder, ARRAY_SIZE(menueStructMain) );
-	};
+// 	sys.autoDimmEnable = eepRAM.autoDimmEnable;
+// 	
+// 	uint8_t menueExit = 0;
+// 	while( menueExit != 12 )
+// 	{
+// 		menueExit = showMenue( menueStructMain , (enc_t*)&encoder, ARRAY_SIZE(menueStructMain) );
+// 	};
 	
 	while (1) 
     {			
-		/*
-		*	Lauftext.: Newsticker.
-		*/
-		if (sys.scrollTime > 5000)
-		{
-			sys.scrollTime = 0;
-	
-			glcdDrawLine(10,0,127);	
-			addNewstickerErrors(&newsticker,sys.state.result);
-			addNewstickerTime(&newsticker);
-			addNewstickerStr(&newsticker,"User.: ",0);
-			addNewstickerStr(&newsticker,(char*)eepRAM.userName,1);	
-						
-			glcdScrollMsg(7,newsticker.newsBuff);
-		}
-		
-		refreshTemp();
+// 		/*
+// 		*	Lauftext.: Newsticker.
+// 		*/
+// 		if (sys.scrollTime > 5000)
+// 		{
+// 			sys.scrollTime = 0;
+// 	
+// 			glcdDrawLine(10,0,127);	
+// 			addNewstickerErrors(&newsticker,sys.state.result);
+// 			addNewstickerTime(&newsticker);
+// 			addNewstickerStr(&newsticker,"User.: ",0);
+// 			addNewstickerStr(&newsticker,(char*)eepRAM.userName,1);	
+// 						
+// 			glcdScrollMsg(7,newsticker.newsBuff);
+// 		}
+// 		
+// 		refreshTemp();
 		
 		/*
 		*	Verarbeite Kommandos von der Seriellen Schnittstelle
 		*/
-		uartProcess(&uart);				
+		uartProcess(&uart);		
     }
 }
 
