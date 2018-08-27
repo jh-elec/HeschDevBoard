@@ -142,8 +142,7 @@ const		cmdTable_t	cmdTab[] =
 };
 
 
-
-void		timerInit		( void )						
+void		timerInit		( void )							
 {	
 	TCCR1B |= ((1<<WGM12) | (1<<CS10)); //CTC Mode 1
 
@@ -152,7 +151,7 @@ void		timerInit		( void )
 	OCR1A   = ( (uint16_t)( F_CPU / 1 / 8000 ) );	
 }
 
-uint16_t	checkMaxValue	( uint16_t val , uint16_t max )	
+uint16_t	checkMaxValue	( uint16_t val , uint16_t max )		
 {
 	if( val > max )
 	{
@@ -161,7 +160,7 @@ uint16_t	checkMaxValue	( uint16_t val , uint16_t max )
 	return val;
 }
 	
-char		*readRingBuff	( char *stream )				
+char		*readRingBuff	( char *stream )					
 {
 	static uint8_t index = 0;
 	
@@ -218,7 +217,7 @@ char		*readRingBuff	( char *stream )
 	return NULL;
 }
 
-void		showInfo		( info_t *inf )					
+void		showInfo		( info_t *inf )						
 {
 	inf->swVersion = buildVer();
 	uart_puts( inf->projectName );
@@ -251,6 +250,7 @@ int main(void)
 		
 		if ( streamPtr != NULL )
 		{
+			
 			cmdPtr = cmdGetName( streamPtr );
 
 			if ( cmdPtr != NULL  )
@@ -271,17 +271,7 @@ int main(void)
 						uart_puts( "CMD_BAD\r\n" );
 					}
 					
-				}
-			
-				char crc[5] = "";
-				char *crcPtr = cmdGetCRC( crc , streamIn );
-				if ( crcPtr != NULL )
-				{
-					uart_puts( "CRC.: " );
-					uart_puts( crcPtr );
-					uart_puts( "\r\n" );
-				}
-						
+				}								
 				uart_puts( "****************************\r\n" );				
 			}
 			else
