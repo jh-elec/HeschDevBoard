@@ -1,9 +1,9 @@
-
+﻿
 	Serielle Kommunikation "RelaisSwitchBox"
 	
 	Kommandos für:
 	
-					Software Version: 1.0.1054.2509
+					Software Version: 1.0.1148.0880
 					{
 						Baudrate: 19200Baud
 					
