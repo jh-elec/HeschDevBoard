@@ -21,6 +21,7 @@
 
 
 char streamIn[64] = "";
+char streamOut[64] = "";
 
 typedef struct  
 {
@@ -47,6 +48,7 @@ void		*cmdRelais	( void *ptr , void *ptr_ )
 	*	Einzel Bit Modus: 
 	*				Kommando: -k:1,0; // Relais 1 , rücksetzen
 	*						  -k:1,1; // Relais 1 , setzen
+	*						  -k:1,2; // Relais 1 , Byte Modus
 	*/
  	kx		= atoi( cmdGetPara( para , ptr , 0 ) ); 
  	state	= atoi( cmdGetPara( para , ptr , 1 ) );
@@ -136,9 +138,9 @@ void		*reInit		( void *ptr , void *ptr_ )
 
 const		cmdTable_t	cmdTab[] =							
 {
-	{"Relais:" 	, 	"-k"	, 	cmdRelais ,	":RELAIS,0=OFF|1=ON|2=ByteMode,#CRC[OPTIONAL]"	},
-	{"Init:"	,	"-init"	,	reInit	  , NULL											},
-	{"Help  :"	,	"-h"	,	help	  ,	NULL											},
+	{"Relais:" 	, 	"k"		, 	cmdRelais 	},
+	{"Init:"	,	"init"	,	reInit		},
+	{"Help  :"	,	"h"		,	help		},
 };
 
 
@@ -245,17 +247,34 @@ int main(void)
 	const char *cmdPtr	= NULL;
 	
 	while (1) 
-    {	
+    {			
 		streamPtr = readRingBuff( streamIn );
 		
 		if ( streamPtr != NULL )
 		{
-			
 			cmdPtr = cmdGetName( streamPtr );
 
 			if ( cmdPtr != NULL  )
 			{
 				uart_puts( "****************************\r\n" );
+		
+				char *crcCmdPtr = cmdGetCRC( streamOut , streamPtr ); // Empfangener CRC Wert
+				uint8_t crcCmd = 0;
+
+				if ( crcCmdPtr )// CRC gefunden..
+				{
+					crcCmd = cmdCrc8StrCCITT( streamPtr ); // CRC bilden
+					if( atoi( crcCmdPtr ) == crcCmd )
+					{
+						uart_puts("CRC_OK\r\n");
+					}
+					else
+					{
+						uart_puts("CRC_BAD\r\n");
+						goto WrongCRC;
+					}
+					crcCmdPtr = NULL;
+				}
 		
 				void *(*funcPtr)(void*,void*) = cmdGetFunc( streamIn );
 				if ( funcPtr != NULL )
@@ -270,8 +289,8 @@ int main(void)
 					{
 						uart_puts( "CMD_BAD\r\n" );
 					}
-					
-				}								
+				}	
+WrongCRC:								
 				uart_puts( "****************************\r\n" );				
 			}
 			else

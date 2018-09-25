@@ -20,12 +20,12 @@
 
 #define CMD_TAB_SIZE( TABLE )			sizeof( TABLE ) / sizeof( *TABLE )
 
+#define CMD_START				'-'
 #define CMD_RAW_DATA_BEGINN		":"
 #define CMD_RAW_PARA_DELIMITER	","
 #define CMD_DATA_END			';'
-#define CMD_CRC_BEGINN			"["
-#define CMD_CRC_END             "]"
-
+#define CMD_CRC_BEGINN			'#'
+#define CMD_CRC_END				'\0'
 
 typedef struct
 {
@@ -59,30 +59,41 @@ typedef struct
 }cmdRaw_t;
 cmdRaw_t raw;
 
+enum crc_state
+{
+	CMD_CRC_OK,
+	CMD_CRC_ERROR,	
+};
+
 typedef struct
 {
 	const 			cmdTable_t 	*table;
 					size_t		tabLen;
 					cmdRaw_t	*raw;
+	uint8_t			crcState;
 }cmd_t;
 cmd_t cmd;
 
 
-void				cmdInit				( const cmdTable_t *tab , cmdRaw_t *raw , size_t tableSize );
+void					cmdInit				( const cmdTable_t *tab , cmdRaw_t *raw , size_t tableSize );
 
-uint8_t 			cmdCntPara			( char *stream );
+uint8_t 				cmdCntPara			( char *stream );
 
-const char			*cmdGetInstruction	( char *input );
+const char				*cmdGetInstruction	( char *input );
 
-const char			*cmdGetName			( char *input );
+const char				*cmdGetName			( char *input );
 
-void				*cmdGetFunc			( char *input );
+void					*cmdGetFunc			( char *input );
 
-char 				*cmdGetPara 		( char *out , char *in , uint8_t num );
+char 					*cmdGetPara 		( char *out , char *in , uint8_t num );
 
-char 				*cmdGetCRC 			( char *out , char *stream );
+char 					*cmdGetCRC 			( char *out , char *stream );
 
-char				*cmdHelp			( char *helpBuff );
+char					*cmdGetCmdStr		( char *out , char *stream );
+
+char					*cmdHelp			( char *helpBuff );
+
+uint8_t 				cmdCrc8StrCCITT		( char *str );
 
 
 #endif

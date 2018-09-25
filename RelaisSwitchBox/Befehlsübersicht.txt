@@ -3,11 +3,13 @@
 	
 	Kommandos für:
 	
-					Software Version: 1.0.1148.0880
+					Software Version: 1.0.1054.2509
 					{
-							Relais setzen		[BIT MODE] 	= "-K:[RELAIS],[1 = ON],[CRC OPTIONAL];
-							Relais rücksetzen	[BIT MODE] 	= "-K:[RELAIS],[0 = OFF],[CRC OPTIONAL];
-							Relais				[BYTE MODE] = "-K:[RELAIS_BYTE],[2 = BYTE_MODE],[CRC OPTIONAL];
-							Neustart						= "-init;"
-							Hilfe							= "-h;"
+						Baudrate: 19200Baud
+					
+						Neu initalisieren: "-init;"
+						
+						Relais setzen 			[BIT Mode] : "-k:RELAIS_NUM,1;[OPTIONAL]#CRC8_CCITT
+						Relais löschen			[BIT Mode] : "-k:RELAIS_NUM,0;[OPTIONAL]#CRC8_CCITT
+						Relais setzen / löschen [BYTE Mode]: "-k:BIT_MSK,2;[OPTIONAL]#CRC8_CCITT;
 					}
