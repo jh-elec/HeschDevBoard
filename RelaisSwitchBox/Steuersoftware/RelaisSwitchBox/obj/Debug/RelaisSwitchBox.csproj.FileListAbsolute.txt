@@ -1,0 +1,20 @@
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.csprojAssemblyReference.cache
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.Form1.resources
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.Properties.Resources.resources
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.csproj.GenerateResource.cache
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.csproj.CoreCompileInputs.cache
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\bin\Debug\RelaisSwitchBox.exe.config
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\bin\Debug\RelaisSwitchBox.exe
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\bin\Debug\RelaisSwitchBox.pdb
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.exe
+C:\Users\Hm\Documents\Visual Studio 2017\Projects\RelaisSwitchBox\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.pdb
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\bin\Debug\RelaisSwitchBox.exe.config
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\bin\Debug\RelaisSwitchBox.exe
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\bin\Debug\RelaisSwitchBox.pdb
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.csprojAssemblyReference.cache
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.Form1.resources
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.Properties.Resources.resources
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.csproj.GenerateResource.cache
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.csproj.CoreCompileInputs.cache
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.exe
+C:\Users\Hm\Documents\Atmel Studio\7.0\HeschDevBoard\trunk\RelaisSwitchBox\Steuersoftware\RelaisSwitchBox\obj\Debug\RelaisSwitchBox.pdb
