@@ -49,10 +49,6 @@ namespace RelaisSwitchBox
             comboBox2.SelectedIndex = 6;
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if( port.IsOpen )
@@ -91,6 +87,7 @@ namespace RelaisSwitchBox
                 richTextBox1.AppendText(rx);
             }
         }
+
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
