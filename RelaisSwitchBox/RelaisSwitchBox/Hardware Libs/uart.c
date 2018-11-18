@@ -36,6 +36,7 @@ LICENSE:
     GNU General Public License for more details.
                         
 *************************************************************************/
+#include <stddef.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
@@ -446,6 +447,107 @@ unsigned int uart_getc(void)
 
 }/* uart_getc */
 
+/*************************************************************************
+Function: uartPutByte()
+Purpose:  write byte to ringbuffer for transmitting via UART
+Input:    byte to be transmitted
+Returns:  none
+**************************************************************************/
+void	uartPutByte	( uint8_t byte )
+{
+	uint8_t tmphead;
+
+	tmphead  = (UART_TxHead + 1) & UART_TX_BUFFER_MASK;
+	
+	while ( tmphead == UART_TxTail ){
+		;/* wait for free space in buffer */
+	}
+	
+	UART_TxBuf[tmphead] = (uint8_t)byte;
+	UART_TxHead = (uint8_t)tmphead;
+
+    /* enable UDRE interrupt */
+    UART0_CONTROL    |= _BV(UART0_UDRIE);
+}
+
+/*************************************************************************
+Function: uartPutByteStr()
+Purpose:  write byte string to ringbuffer for transmitting via UART
+Input:    string to be transmitted , lenght of string
+Returns:  none
+**************************************************************************/
+void	uartPutByteStr	( uint8_t *str , uint8_t len )
+{
+	if ( str )
+	{
+		for ( uint8_t x = 0 ; x < len ; x++ )
+		{
+			uartPutByte( *str++ );
+		}
+	}
+}
+
+/*************************************************************************
+Function: uartReadRingBuff()
+Purpose:  read a byte from ringbuffer
+Input:    pointer of buffer
+Returns:  pointer of start commando sequence
+**************************************************************************/
+uint8_t		*uartReadRingBuff		( uint8_t *stream )		
+{
+	static uint8_t index = 0;
+	
+	/*
+	*	Neustes Byte aus dem Ringpuffer abholen
+	*/
+	uint16_t c = uart_getc();
+	
+	/*
+	*	Wenn keine neuen Daten vorhanden, direkt wieder zurück!
+	*/
+	if ( c & UART_NO_DATA )
+	{
+		return NULL;
+	}
+
+	/*
+	*	Ist ein Fehler aufgetreten?
+	*/
+	if ( c > UART_NO_DATA)
+	{
+		index = 0; 
+		return NULL;
+	}
+
+	/*
+	*	Übertragungsende?
+	*/
+	static uint8_t last = 0;
+	 
+	if ( last == '\r' && c == '\n' )
+	{
+		*( stream + ( index - 1 ) ) = '\0';
+		index = 0; 
+		return stream;
+	}last = c;	
+	
+	
+	/*
+	*	Daten in unseren neuen Puffer zwischen speichern
+	*/
+	if ( index >= UART_RX_BUFFER_SIZE )
+	{
+		index = 0;
+	}
+	else
+	{
+		*( stream + index++ ) = (uint8_t)c;	
+	}
+	
+	return NULL;
+}
+
+
 
 /*************************************************************************
 Function: uart_putc()
@@ -684,6 +786,5 @@ void uart1_puts_p(const char *progmem_s )
       uart1_putc(c);
 
 }/* uart1_puts_p */
-
 
 #endif
