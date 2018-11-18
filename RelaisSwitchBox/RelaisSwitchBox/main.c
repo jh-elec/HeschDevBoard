@@ -9,7 +9,6 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
 #include <string.h>
 #include <stdio.h>
 
@@ -124,8 +123,6 @@ uint8_t		cmdReset		( cmd_t * c)
 	cmdBuildAnswer( &cmd , 3 , DATA_TYP_STRING , 0 , 6 , (uint8_t*)"Reboot");
 	cmdSendAnswer( &cmd );
 	
-	_delay_ms(100);
-	
 	reboot();
 	
 	return 0;
@@ -162,13 +159,16 @@ int main(void)
 {
 	hardware_init();
 	
-	uart_init( UART_BAUD_SELECT( 9600 , F_CPU ) );
+	uart_init( UART_BAUD_SELECT( 19600 , 16000000 ) );
 	
 	cmdInit( &cmd );
 	
 	timerInit();
 
 	sei();
+
+	cmdBuildAnswer( &cmd , 255 , DATA_TYP_STRING , 255 , 4 , (uint8_t*)"Boot");
+	cmdSendAnswer( &cmd );
 
 	while (1) 
     {			

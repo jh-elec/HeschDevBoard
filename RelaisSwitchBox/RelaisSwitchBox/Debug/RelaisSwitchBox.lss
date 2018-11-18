@@ -3,31 +3,31 @@ RelaisSwitchBox.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000087a  00000000  00000000  00000094  2**1
+  0 .text         0000088c  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000002a  00800060  0000087a  0000090e  2**0
+  1 .data         0000002e  00800060  0000088c  00000920  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000485  0080008a  0080008a  00000938  2**0
+  2 .bss          00000485  0080008e  0080008e  0000094e  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000938  2**0
+  3 .comment      00000030  00000000  00000000  0000094e  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000968  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000980  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000158  00000000  00000000  000009a4  2**0
+  5 .debug_aranges 00000158  00000000  00000000  000009bc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000180f  00000000  00000000  00000afc  2**0
+  6 .debug_info   000017f1  00000000  00000000  00000b14  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000bd4  00000000  00000000  0000230b  2**0
+  7 .debug_abbrev 00000b75  00000000  00000000  00002305  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000d3e  00000000  00000000  00002edf  2**0
+  8 .debug_line   00000cda  00000000  00000000  00002e7a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000368  00000000  00000000  00003c20  2**2
+  9 .debug_frame  00000368  00000000  00000000  00003b54  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000008b9  00000000  00000000  00003f88  2**0
+ 10 .debug_str    00000877  00000000  00000000  00003ebc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000107c  00000000  00000000  00004841  2**0
+ 11 .debug_loc    00001034  00000000  00000000  00004733  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000138  00000000  00000000  000058bd  2**0
+ 12 .debug_ranges 00000138  00000000  00000000  00005767  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -40,7 +40,7 @@ Disassembly of section .text:
   10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  1c:	0c 94 d1 03 	jmp	0x7a2	; 0x7a2 <__vector_7>
+  1c:	0c 94 da 03 	jmp	0x7b4	; 0x7b4 <__vector_7>
   20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,18 +67,18 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ea e7       	ldi	r30, 0x7A	; 122
+  66:	ec e8       	ldi	r30, 0x8C	; 140
   68:	f8 e0       	ldi	r31, 0x08	; 8
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	aa 38       	cpi	r26, 0x8A	; 138
+  70:	ae 38       	cpi	r26, 0x8E	; 142
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
   76:	25 e0       	ldi	r18, 0x05	; 5
-  78:	aa e8       	ldi	r26, 0x8A	; 138
+  78:	ae e8       	ldi	r26, 0x8E	; 142
   7a:	b0 e0       	ldi	r27, 0x00	; 0
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -86,11 +86,11 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	af 30       	cpi	r26, 0x0F	; 15
+  80:	a3 31       	cpi	r26, 0x13	; 19
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-  86:	0e 94 7a 03 	call	0x6f4	; 0x6f4 <main>
-  8a:	0c 94 3b 04 	jmp	0x876	; 0x876 <_exit>
+  86:	0e 94 71 03 	call	0x6e2	; 0x6e2 <main>
+  8a:	0c 94 44 04 	jmp	0x888	; 0x888 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -239,7 +239,7 @@ Disassembly of section .text:
  194:	a4 17       	cp	r26, r20
  196:	b5 07       	cpc	r27, r21
  198:	71 f7       	brne	.-36     	; 0x176 <cmdParse+0x78>
- 19a:	30 93 8a 00 	sts	0x008A, r19	; 0x80008a <__data_end>
+ 19a:	30 93 8e 00 	sts	0x008E, r19	; 0x80008e <__data_end>
  19e:	69 81       	ldd	r22, Y+1	; 0x01
  1a0:	66 23       	and	r22, r22
  1a2:	c9 f0       	breq	.+50     	; 0x1d6 <cmdParse+0xd8>
@@ -266,7 +266,7 @@ Disassembly of section .text:
  1cc:	4f 5f       	subi	r20, 0xFF	; 255
  1ce:	46 17       	cp	r20, r22
  1d0:	70 f3       	brcs	.-36     	; 0x1ae <cmdParse+0xb0>
- 1d2:	30 93 8a 00 	sts	0x008A, r19	; 0x80008a <__data_end>
+ 1d2:	30 93 8e 00 	sts	0x008E, r19	; 0x80008e <__data_end>
  1d6:	3e 83       	std	Y+6, r19	; 0x06
  1d8:	01 c0       	rjmp	.+2      	; 0x1dc <cmdParse+0xde>
  1da:	81 e0       	ldi	r24, 0x01	; 1
@@ -285,7 +285,7 @@ uint8_t	*cmdBuildHeader		( cmd_t *a )
  1ea:	df 93       	push	r29
  1ec:	dc 01       	movw	r26, r24
 	cmdMsg[CMD_HEADER_CRC]	= 0;
- 1ee:	eb e8       	ldi	r30, 0x8B	; 139
+ 1ee:	ef e8       	ldi	r30, 0x8F	; 143
  1f0:	f0 e0       	ldi	r31, 0x00	; 0
  1f2:	17 82       	std	Z+7, r1	; 0x07
 	
@@ -330,7 +330,7 @@ uint8_t	*cmdBuildHeader		( cmd_t *a )
  22c:	8c 91       	ld	r24, X
  22e:	14 97       	sbiw	r26, 0x04	; 4
  230:	86 83       	std	Z+6, r24	; 0x06
- 232:	63 e9       	ldi	r22, 0x93	; 147
+ 232:	67 e9       	ldi	r22, 0x97	; 151
  234:	70 e0       	ldi	r23, 0x00	; 0
 	
 	/*	Checksumme vom Header bilden
@@ -391,7 +391,7 @@ static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
  258:	e6 17       	cp	r30, r22
  25a:	f7 07       	cpc	r31, r23
  25c:	71 f7       	brne	.-36     	; 0x23a <cmdBuildHeader+0x54>
- 25e:	30 93 8a 00 	sts	0x008A, r19	; 0x80008a <__data_end>
+ 25e:	30 93 8e 00 	sts	0x008E, r19	; 0x80008e <__data_end>
 		crc = cmdCrc8CCITTUpdate( crc , &cmdMsg[x] );
 	}
 	
@@ -459,7 +459,7 @@ static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
  290:	4f 5f       	subi	r20, 0xFF	; 255
  292:	45 17       	cp	r20, r21
  294:	78 f3       	brcs	.-34     	; 0x274 <cmdBuildHeader+0x8e>
- 296:	30 93 8a 00 	sts	0x008A, r19	; 0x80008a <__data_end>
+ 296:	30 93 8e 00 	sts	0x008E, r19	; 0x80008e <__data_end>
  29a:	04 c0       	rjmp	.+8      	; 0x2a4 <cmdBuildHeader+0xbe>
 			crc = cmdCrc8CCITTUpdate( crc , tmpPtr++ );	
 		}			
@@ -474,7 +474,7 @@ static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
 	}
 		
 	cmdMsg[CMD_HEADER_CRC] = crc;
- 2a4:	30 93 92 00 	sts	0x0092, r19	; 0x800092 <cmdMsg+0x7>
+ 2a4:	30 93 96 00 	sts	0x0096, r19	; 0x800096 <cmdMsg+0x7>
 		
 	a->id			= 0;
  2a8:	13 96       	adiw	r26, 0x03	; 3
@@ -494,7 +494,7 @@ static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
 				
 	return cmdMsg;
 }
- 2bc:	8b e8       	ldi	r24, 0x8B	; 139
+ 2bc:	8f e8       	ldi	r24, 0x8F	; 143
  2be:	90 e0       	ldi	r25, 0x00	; 0
  2c0:	df 91       	pop	r29
  2c2:	cf 91       	pop	r28
@@ -561,22 +561,22 @@ void	cmdSendAnswer		( cmd_t *a )
  318:	8b b1       	in	r24, 0x0b	; 11
  31a:	2c b1       	in	r18, 0x0c	; 12
  31c:	88 71       	andi	r24, 0x18	; 24
- 31e:	e0 91 97 00 	lds	r30, 0x0097	; 0x800097 <UART_RxHead>
+ 31e:	e0 91 9b 00 	lds	r30, 0x009B	; 0x80009b <UART_RxHead>
  322:	ef 5f       	subi	r30, 0xFF	; 255
  324:	ef 73       	andi	r30, 0x3F	; 63
- 326:	90 91 96 00 	lds	r25, 0x0096	; 0x800096 <UART_RxTail>
+ 326:	90 91 9a 00 	lds	r25, 0x009A	; 0x80009a <UART_RxTail>
  32a:	e9 17       	cp	r30, r25
  32c:	39 f0       	breq	.+14     	; 0x33c <__vector_13+0x38>
- 32e:	e0 93 97 00 	sts	0x0097, r30	; 0x800097 <UART_RxHead>
+ 32e:	e0 93 9b 00 	sts	0x009B, r30	; 0x80009b <UART_RxHead>
  332:	f0 e0       	ldi	r31, 0x00	; 0
- 334:	e6 56       	subi	r30, 0x66	; 102
+ 334:	e2 56       	subi	r30, 0x62	; 98
  336:	ff 4f       	sbci	r31, 0xFF	; 255
  338:	20 83       	st	Z, r18
  33a:	01 c0       	rjmp	.+2      	; 0x33e <__vector_13+0x3a>
  33c:	82 e0       	ldi	r24, 0x02	; 2
- 33e:	90 91 95 00 	lds	r25, 0x0095	; 0x800095 <UART_LastRxError>
+ 33e:	90 91 99 00 	lds	r25, 0x0099	; 0x800099 <UART_LastRxError>
  342:	89 2b       	or	r24, r25
- 344:	80 93 95 00 	sts	0x0095, r24	; 0x800095 <UART_LastRxError>
+ 344:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <UART_LastRxError>
  348:	ff 91       	pop	r31
  34a:	ef 91       	pop	r30
  34c:	9f 91       	pop	r25
@@ -598,16 +598,16 @@ void	cmdSendAnswer		( cmd_t *a )
  368:	9f 93       	push	r25
  36a:	ef 93       	push	r30
  36c:	ff 93       	push	r31
- 36e:	90 91 99 00 	lds	r25, 0x0099	; 0x800099 <UART_TxHead>
- 372:	80 91 98 00 	lds	r24, 0x0098	; 0x800098 <UART_TxTail>
+ 36e:	90 91 9d 00 	lds	r25, 0x009D	; 0x80009d <UART_TxHead>
+ 372:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <UART_TxTail>
  376:	98 17       	cp	r25, r24
  378:	61 f0       	breq	.+24     	; 0x392 <__vector_14+0x36>
- 37a:	e0 91 98 00 	lds	r30, 0x0098	; 0x800098 <UART_TxTail>
+ 37a:	e0 91 9c 00 	lds	r30, 0x009C	; 0x80009c <UART_TxTail>
  37e:	ef 5f       	subi	r30, 0xFF	; 255
  380:	ef 71       	andi	r30, 0x1F	; 31
- 382:	e0 93 98 00 	sts	0x0098, r30	; 0x800098 <UART_TxTail>
+ 382:	e0 93 9c 00 	sts	0x009C, r30	; 0x80009c <UART_TxTail>
  386:	f0 e0       	ldi	r31, 0x00	; 0
- 388:	e6 52       	subi	r30, 0x26	; 38
+ 388:	e2 52       	subi	r30, 0x22	; 34
  38a:	ff 4f       	sbci	r31, 0xFF	; 255
  38c:	80 81       	ld	r24, Z
  38e:	8c b9       	out	0x0c, r24	; 12
@@ -624,10 +624,10 @@ void	cmdSendAnswer		( cmd_t *a )
  3a4:	18 95       	reti
 
 000003a6 <uart_init>:
- 3a6:	10 92 99 00 	sts	0x0099, r1	; 0x800099 <UART_TxHead>
- 3aa:	10 92 98 00 	sts	0x0098, r1	; 0x800098 <UART_TxTail>
- 3ae:	10 92 97 00 	sts	0x0097, r1	; 0x800097 <UART_RxHead>
- 3b2:	10 92 96 00 	sts	0x0096, r1	; 0x800096 <UART_RxTail>
+ 3a6:	10 92 9d 00 	sts	0x009D, r1	; 0x80009d <UART_TxHead>
+ 3aa:	10 92 9c 00 	sts	0x009C, r1	; 0x80009c <UART_TxTail>
+ 3ae:	10 92 9b 00 	sts	0x009B, r1	; 0x80009b <UART_RxHead>
+ 3b2:	10 92 9a 00 	sts	0x009A, r1	; 0x80009a <UART_RxTail>
  3b6:	99 23       	and	r25, r25
  3b8:	1c f4       	brge	.+6      	; 0x3c0 <uart_init+0x1a>
  3ba:	22 e0       	ldi	r18, 0x02	; 2
@@ -642,20 +642,20 @@ void	cmdSendAnswer		( cmd_t *a )
  3cc:	08 95       	ret
 
 000003ce <uart_getc>:
- 3ce:	90 91 97 00 	lds	r25, 0x0097	; 0x800097 <UART_RxHead>
- 3d2:	80 91 96 00 	lds	r24, 0x0096	; 0x800096 <UART_RxTail>
+ 3ce:	90 91 9b 00 	lds	r25, 0x009B	; 0x80009b <UART_RxHead>
+ 3d2:	80 91 9a 00 	lds	r24, 0x009A	; 0x80009a <UART_RxTail>
  3d6:	98 17       	cp	r25, r24
  3d8:	81 f0       	breq	.+32     	; 0x3fa <uart_getc+0x2c>
- 3da:	e0 91 96 00 	lds	r30, 0x0096	; 0x800096 <UART_RxTail>
+ 3da:	e0 91 9a 00 	lds	r30, 0x009A	; 0x80009a <UART_RxTail>
  3de:	ef 5f       	subi	r30, 0xFF	; 255
  3e0:	ef 73       	andi	r30, 0x3F	; 63
- 3e2:	e0 93 96 00 	sts	0x0096, r30	; 0x800096 <UART_RxTail>
+ 3e2:	e0 93 9a 00 	sts	0x009A, r30	; 0x80009a <UART_RxTail>
  3e6:	f0 e0       	ldi	r31, 0x00	; 0
- 3e8:	e6 56       	subi	r30, 0x66	; 102
+ 3e8:	e2 56       	subi	r30, 0x62	; 98
  3ea:	ff 4f       	sbci	r31, 0xFF	; 255
  3ec:	80 81       	ld	r24, Z
- 3ee:	90 91 95 00 	lds	r25, 0x0095	; 0x800095 <UART_LastRxError>
- 3f2:	10 92 95 00 	sts	0x0095, r1	; 0x800095 <UART_LastRxError>
+ 3ee:	90 91 99 00 	lds	r25, 0x0099	; 0x800099 <UART_LastRxError>
+ 3f2:	10 92 99 00 	sts	0x0099, r1	; 0x800099 <UART_LastRxError>
  3f6:	90 e0       	ldi	r25, 0x00	; 0
  3f8:	08 95       	ret
  3fa:	80 e0       	ldi	r24, 0x00	; 0
@@ -663,18 +663,18 @@ void	cmdSendAnswer		( cmd_t *a )
  3fe:	08 95       	ret
 
 00000400 <uartPutByte>:
- 400:	20 91 99 00 	lds	r18, 0x0099	; 0x800099 <UART_TxHead>
+ 400:	20 91 9d 00 	lds	r18, 0x009D	; 0x80009d <UART_TxHead>
  404:	2f 5f       	subi	r18, 0xFF	; 255
  406:	2f 71       	andi	r18, 0x1F	; 31
- 408:	90 91 98 00 	lds	r25, 0x0098	; 0x800098 <UART_TxTail>
+ 408:	90 91 9c 00 	lds	r25, 0x009C	; 0x80009c <UART_TxTail>
  40c:	29 17       	cp	r18, r25
  40e:	e1 f3       	breq	.-8      	; 0x408 <uartPutByte+0x8>
  410:	e2 2f       	mov	r30, r18
  412:	f0 e0       	ldi	r31, 0x00	; 0
- 414:	e6 52       	subi	r30, 0x26	; 38
+ 414:	e2 52       	subi	r30, 0x22	; 34
  416:	ff 4f       	sbci	r31, 0xFF	; 255
  418:	80 83       	st	Z, r24
- 41a:	20 93 99 00 	sts	0x0099, r18	; 0x800099 <UART_TxHead>
+ 41a:	20 93 9d 00 	sts	0x009D, r18	; 0x80009d <UART_TxHead>
  41e:	55 9a       	sbi	0x0a, 5	; 10
  420:	08 95       	ret
 
@@ -717,37 +717,37 @@ void	cmdSendAnswer		( cmd_t *a )
  468:	21 e0       	ldi	r18, 0x01	; 1
  46a:	92 07       	cpc	r25, r18
  46c:	28 f0       	brcs	.+10     	; 0x478 <uartReadRingBuff+0x20>
- 46e:	10 92 94 00 	sts	0x0094, r1	; 0x800094 <index.1836>
+ 46e:	10 92 98 00 	sts	0x0098, r1	; 0x800098 <index.1836>
  472:	80 e0       	ldi	r24, 0x00	; 0
  474:	90 e0       	ldi	r25, 0x00	; 0
  476:	2a c0       	rjmp	.+84     	; 0x4cc <uartReadRingBuff+0x74>
- 478:	20 91 93 00 	lds	r18, 0x0093	; 0x800093 <last.1838>
+ 478:	20 91 97 00 	lds	r18, 0x0097	; 0x800097 <last.1838>
  47c:	2d 30       	cpi	r18, 0x0D	; 13
  47e:	79 f4       	brne	.+30     	; 0x49e <uartReadRingBuff+0x46>
  480:	8a 30       	cpi	r24, 0x0A	; 10
  482:	91 05       	cpc	r25, r1
  484:	61 f4       	brne	.+24     	; 0x49e <uartReadRingBuff+0x46>
- 486:	80 91 94 00 	lds	r24, 0x0094	; 0x800094 <index.1836>
+ 486:	80 91 98 00 	lds	r24, 0x0098	; 0x800098 <index.1836>
  48a:	fe 01       	movw	r30, r28
  48c:	e8 0f       	add	r30, r24
  48e:	f1 1d       	adc	r31, r1
  490:	31 97       	sbiw	r30, 0x01	; 1
  492:	10 82       	st	Z, r1
- 494:	10 92 94 00 	sts	0x0094, r1	; 0x800094 <index.1836>
+ 494:	10 92 98 00 	sts	0x0098, r1	; 0x800098 <index.1836>
  498:	8c 2f       	mov	r24, r28
  49a:	9d 2f       	mov	r25, r29
  49c:	17 c0       	rjmp	.+46     	; 0x4cc <uartReadRingBuff+0x74>
- 49e:	80 93 93 00 	sts	0x0093, r24	; 0x800093 <last.1838>
- 4a2:	20 91 94 00 	lds	r18, 0x0094	; 0x800094 <index.1836>
+ 49e:	80 93 97 00 	sts	0x0097, r24	; 0x800097 <last.1838>
+ 4a2:	20 91 98 00 	lds	r18, 0x0098	; 0x800098 <index.1836>
  4a6:	20 34       	cpi	r18, 0x40	; 64
  4a8:	28 f0       	brcs	.+10     	; 0x4b4 <uartReadRingBuff+0x5c>
- 4aa:	10 92 94 00 	sts	0x0094, r1	; 0x800094 <index.1836>
+ 4aa:	10 92 98 00 	sts	0x0098, r1	; 0x800098 <index.1836>
  4ae:	80 e0       	ldi	r24, 0x00	; 0
  4b0:	90 e0       	ldi	r25, 0x00	; 0
  4b2:	0c c0       	rjmp	.+24     	; 0x4cc <uartReadRingBuff+0x74>
  4b4:	91 e0       	ldi	r25, 0x01	; 1
  4b6:	92 0f       	add	r25, r18
- 4b8:	90 93 94 00 	sts	0x0094, r25	; 0x800094 <index.1836>
+ 4b8:	90 93 98 00 	sts	0x0098, r25	; 0x800098 <index.1836>
  4bc:	c2 0f       	add	r28, r18
  4be:	d1 1d       	adc	r29, r1
  4c0:	88 83       	st	Y, r24
@@ -899,7 +899,7 @@ void	cmdSendAnswer		( cmd_t *a )
  5d0:	25 bb       	out	0x15, r18	; 21
  5d2:	99 83       	std	Y+1, r25	; 0x01
  5d4:	8a 83       	std	Y+2, r24	; 0x02
- 5d6:	e6 e0       	ldi	r30, 0x06	; 6
+ 5d6:	ea e0       	ldi	r30, 0x0A	; 10
  5d8:	f5 e0       	ldi	r31, 0x05	; 5
  5da:	13 82       	std	Z+3, r1	; 0x03
  5dc:	14 82       	std	Z+4, r1	; 0x04
@@ -928,10 +928,10 @@ void	cmdSendAnswer		( cmd_t *a )
  60a:	20 e0       	ldi	r18, 0x00	; 0
  60c:	44 e0       	ldi	r20, 0x04	; 4
  60e:	61 e0       	ldi	r22, 0x01	; 1
- 610:	86 e0       	ldi	r24, 0x06	; 6
+ 610:	8a e0       	ldi	r24, 0x0A	; 10
  612:	95 e0       	ldi	r25, 0x05	; 5
  614:	0e 94 64 01 	call	0x2c8	; 0x2c8 <cmdBuildAnswer>
- 618:	86 e0       	ldi	r24, 0x06	; 6
+ 618:	8a e0       	ldi	r24, 0x0A	; 10
  61a:	95 e0       	ldi	r25, 0x05	; 5
  61c:	0e 94 72 01 	call	0x2e4	; 0x2e4 <cmdSendAnswer>
  620:	80 e0       	ldi	r24, 0x00	; 0
@@ -951,7 +951,7 @@ void	cmdSendAnswer		( cmd_t *a )
  638:	00 d0       	rcall	.+0      	; 0x63a <cmdState+0x10>
  63a:	cd b7       	in	r28, 0x3d	; 61
  63c:	de b7       	in	r29, 0x3e	; 62
- 63e:	e0 e0       	ldi	r30, 0x00	; 0
+ 63e:	e4 e0       	ldi	r30, 0x04	; 4
  640:	f5 e0       	ldi	r31, 0x05	; 5
  642:	94 81       	ldd	r25, Z+4	; 0x04
  644:	85 81       	ldd	r24, Z+5	; 0x05
@@ -972,10 +972,10 @@ void	cmdSendAnswer		( cmd_t *a )
  662:	20 e0       	ldi	r18, 0x00	; 0
  664:	41 e0       	ldi	r20, 0x01	; 1
  666:	62 e0       	ldi	r22, 0x02	; 2
- 668:	86 e0       	ldi	r24, 0x06	; 6
+ 668:	8a e0       	ldi	r24, 0x0A	; 10
  66a:	95 e0       	ldi	r25, 0x05	; 5
  66c:	0e 94 64 01 	call	0x2c8	; 0x2c8 <cmdBuildAnswer>
- 670:	86 e0       	ldi	r24, 0x06	; 6
+ 670:	8a e0       	ldi	r24, 0x0A	; 10
  672:	95 e0       	ldi	r25, 0x05	; 5
  674:	0e 94 72 01 	call	0x2e4	; 0x2e4 <cmdSendAnswer>
  678:	80 e0       	ldi	r24, 0x00	; 0
@@ -1006,311 +1006,321 @@ void	cmdSendAnswer		( cmd_t *a )
  6a6:	20 e0       	ldi	r18, 0x00	; 0
  6a8:	44 e0       	ldi	r20, 0x04	; 4
  6aa:	63 e0       	ldi	r22, 0x03	; 3
- 6ac:	86 e0       	ldi	r24, 0x06	; 6
+ 6ac:	8a e0       	ldi	r24, 0x0A	; 10
  6ae:	95 e0       	ldi	r25, 0x05	; 5
  6b0:	0e 94 64 01 	call	0x2c8	; 0x2c8 <cmdBuildAnswer>
- 6b4:	86 e0       	ldi	r24, 0x06	; 6
+ 6b4:	8a e0       	ldi	r24, 0x0A	; 10
  6b6:	95 e0       	ldi	r25, 0x05	; 5
  6b8:	0e 94 72 01 	call	0x2e4	; 0x2e4 <cmdSendAnswer>
- 6bc:	2f ef       	ldi	r18, 0xFF	; 255
- 6be:	81 ee       	ldi	r24, 0xE1	; 225
- 6c0:	94 e0       	ldi	r25, 0x04	; 4
- 6c2:	21 50       	subi	r18, 0x01	; 1
- 6c4:	80 40       	sbci	r24, 0x00	; 0
- 6c6:	90 40       	sbci	r25, 0x00	; 0
- 6c8:	e1 f7       	brne	.-8      	; 0x6c2 <cmdReset+0x30>
- 6ca:	00 c0       	rjmp	.+0      	; 0x6cc <cmdReset+0x3a>
- 6cc:	00 00       	nop
- 6ce:	e0 e0       	ldi	r30, 0x00	; 0
- 6d0:	f0 e0       	ldi	r31, 0x00	; 0
- 6d2:	09 95       	icall
- 6d4:	80 e0       	ldi	r24, 0x00	; 0
- 6d6:	0f 91       	pop	r16
- 6d8:	ff 90       	pop	r15
- 6da:	ef 90       	pop	r14
- 6dc:	08 95       	ret
+ 6bc:	e0 e0       	ldi	r30, 0x00	; 0
+ 6be:	f0 e0       	ldi	r31, 0x00	; 0
+ 6c0:	09 95       	icall
+ 6c2:	80 e0       	ldi	r24, 0x00	; 0
+ 6c4:	0f 91       	pop	r16
+ 6c6:	ff 90       	pop	r15
+ 6c8:	ef 90       	pop	r14
+ 6ca:	08 95       	ret
 
-000006de <timerInit>:
- 6de:	8e b5       	in	r24, 0x2e	; 46
- 6e0:	89 60       	ori	r24, 0x09	; 9
- 6e2:	8e bd       	out	0x2e, r24	; 46
- 6e4:	89 b7       	in	r24, 0x39	; 57
- 6e6:	80 61       	ori	r24, 0x10	; 16
- 6e8:	89 bf       	out	0x39, r24	; 57
- 6ea:	80 ed       	ldi	r24, 0xD0	; 208
- 6ec:	97 e0       	ldi	r25, 0x07	; 7
- 6ee:	9b bd       	out	0x2b, r25	; 43
- 6f0:	8a bd       	out	0x2a, r24	; 42
- 6f2:	08 95       	ret
+000006cc <timerInit>:
+ 6cc:	8e b5       	in	r24, 0x2e	; 46
+ 6ce:	89 60       	ori	r24, 0x09	; 9
+ 6d0:	8e bd       	out	0x2e, r24	; 46
+ 6d2:	89 b7       	in	r24, 0x39	; 57
+ 6d4:	80 61       	ori	r24, 0x10	; 16
+ 6d6:	89 bf       	out	0x39, r24	; 57
+ 6d8:	80 ed       	ldi	r24, 0xD0	; 208
+ 6da:	97 e0       	ldi	r25, 0x07	; 7
+ 6dc:	9b bd       	out	0x2b, r25	; 43
+ 6de:	8a bd       	out	0x2a, r24	; 42
+ 6e0:	08 95       	ret
 
-000006f4 <main>:
+000006e2 <main>:
 	
 
 int main(void)
 {
 	hardware_init();
- 6f4:	0e 94 69 02 	call	0x4d2	; 0x4d2 <hardware_init>
+ 6e2:	0e 94 69 02 	call	0x4d2	; 0x4d2 <hardware_init>
 	
-	uart_init( UART_BAUD_SELECT( 9600 , F_CPU ) );
- 6f8:	87 e6       	ldi	r24, 0x67	; 103
- 6fa:	90 e0       	ldi	r25, 0x00	; 0
- 6fc:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <uart_init>
+	uart_init( UART_BAUD_SELECT( 19600 , 16000000 ) );
+ 6e6:	82 e3       	ldi	r24, 0x32	; 50
+ 6e8:	90 e0       	ldi	r25, 0x00	; 0
+ 6ea:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <uart_init>
 	
 	cmdInit( &cmd );
- 700:	86 e0       	ldi	r24, 0x06	; 6
- 702:	95 e0       	ldi	r25, 0x05	; 5
- 704:	0e 94 65 00 	call	0xca	; 0xca <cmdInit>
+ 6ee:	8a e0       	ldi	r24, 0x0A	; 10
+ 6f0:	95 e0       	ldi	r25, 0x05	; 5
+ 6f2:	0e 94 65 00 	call	0xca	; 0xca <cmdInit>
 	
 	timerInit();
- 708:	0e 94 6f 03 	call	0x6de	; 0x6de <timerInit>
+ 6f6:	0e 94 66 03 	call	0x6cc	; 0x6cc <timerInit>
 
 	sei();
- 70c:	78 94       	sei
+ 6fa:	78 94       	sei
+
+	cmdBuildAnswer( &cmd , 255 , DATA_TYP_STRING , 255 , 4 , (uint8_t*)"Boot");
+ 6fc:	0f 2e       	mov	r0, r31
+ 6fe:	f9 e7       	ldi	r31, 0x79	; 121
+ 700:	ef 2e       	mov	r14, r31
+ 702:	f0 e0       	ldi	r31, 0x00	; 0
+ 704:	ff 2e       	mov	r15, r31
+ 706:	f0 2d       	mov	r31, r0
+ 708:	04 e0       	ldi	r16, 0x04	; 4
+ 70a:	2f ef       	ldi	r18, 0xFF	; 255
+ 70c:	44 e0       	ldi	r20, 0x04	; 4
+ 70e:	6f ef       	ldi	r22, 0xFF	; 255
+ 710:	8a e0       	ldi	r24, 0x0A	; 10
+ 712:	95 e0       	ldi	r25, 0x05	; 5
+ 714:	0e 94 64 01 	call	0x2c8	; 0x2c8 <cmdBuildAnswer>
+	cmdSendAnswer( &cmd );
+ 718:	8a e0       	ldi	r24, 0x0A	; 10
+ 71a:	95 e0       	ldi	r25, 0x05	; 5
+ 71c:	0e 94 72 01 	call	0x2e4	; 0x2e4 <cmdSendAnswer>
 					state.cmdCounter++;
 					state.crcOkay++;
 					cmdFuncTab[cmd.id].fnc( &cmd );
 				}else
 				{
 					state.crcError++;
- 70e:	c0 e0       	ldi	r28, 0x00	; 0
- 710:	d5 e0       	ldi	r29, 0x05	; 5
-
-	sei();
+ 720:	c4 e0       	ldi	r28, 0x04	; 4
+ 722:	d5 e0       	ldi	r29, 0x05	; 5
+	cmdBuildAnswer( &cmd , 255 , DATA_TYP_STRING , 255 , 4 , (uint8_t*)"Boot");
+	cmdSendAnswer( &cmd );
 
 	while (1) 
     {			
 		streamPtr	= uartReadRingBuff( streamIn );
- 712:	8e ef       	ldi	r24, 0xFE	; 254
- 714:	90 e0       	ldi	r25, 0x00	; 0
- 716:	0e 94 2c 02 	call	0x458	; 0x458 <uartReadRingBuff>
- 71a:	90 93 ff 04 	sts	0x04FF, r25	; 0x8004ff <streamPtr+0x1>
- 71e:	80 93 fe 04 	sts	0x04FE, r24	; 0x8004fe <streamPtr>
+ 724:	82 e0       	ldi	r24, 0x02	; 2
+ 726:	91 e0       	ldi	r25, 0x01	; 1
+ 728:	0e 94 2c 02 	call	0x458	; 0x458 <uartReadRingBuff>
+ 72c:	90 93 03 05 	sts	0x0503, r25	; 0x800503 <streamPtr+0x1>
+ 730:	80 93 02 05 	sts	0x0502, r24	; 0x800502 <streamPtr>
 		
 		if ( streamPtr != NULL )
- 722:	00 97       	sbiw	r24, 0x00	; 0
- 724:	b1 f3       	breq	.-20     	; 0x712 <main+0x1e>
+ 734:	00 97       	sbiw	r24, 0x00	; 0
+ 736:	b1 f3       	breq	.-20     	; 0x724 <main+0x42>
 		{
  			if ( !cmdParse( streamPtr , &cmd ) )
- 726:	66 e0       	ldi	r22, 0x06	; 6
- 728:	75 e0       	ldi	r23, 0x05	; 5
- 72a:	0e 94 7f 00 	call	0xfe	; 0xfe <cmdParse>
- 72e:	81 11       	cpse	r24, r1
- 730:	f0 cf       	rjmp	.-32     	; 0x712 <main+0x1e>
+ 738:	6a e0       	ldi	r22, 0x0A	; 10
+ 73a:	75 e0       	ldi	r23, 0x05	; 5
+ 73c:	0e 94 7f 00 	call	0xfe	; 0xfe <cmdParse>
+ 740:	81 11       	cpse	r24, r1
+ 742:	f0 cf       	rjmp	.-32     	; 0x724 <main+0x42>
  			{								 
 				if( cmd.inCrc == cmd.outCrc && (cmd.id < sizeof(cmdFuncTab) / sizeof(*cmdFuncTab)) )
- 732:	e6 e0       	ldi	r30, 0x06	; 6
- 734:	f5 e0       	ldi	r31, 0x05	; 5
- 736:	95 81       	ldd	r25, Z+5	; 0x05
- 738:	86 81       	ldd	r24, Z+6	; 0x06
- 73a:	98 13       	cpse	r25, r24
- 73c:	1a c0       	rjmp	.+52     	; 0x772 <main+0x7e>
- 73e:	e0 91 09 05 	lds	r30, 0x0509	; 0x800509 <cmd+0x3>
- 742:	e4 30       	cpi	r30, 0x04	; 4
- 744:	b0 f4       	brcc	.+44     	; 0x772 <main+0x7e>
+ 744:	ea e0       	ldi	r30, 0x0A	; 10
+ 746:	f5 e0       	ldi	r31, 0x05	; 5
+ 748:	95 81       	ldd	r25, Z+5	; 0x05
+ 74a:	86 81       	ldd	r24, Z+6	; 0x06
+ 74c:	98 13       	cpse	r25, r24
+ 74e:	1a c0       	rjmp	.+52     	; 0x784 <main+0xa2>
+ 750:	e0 91 0d 05 	lds	r30, 0x050D	; 0x80050d <cmd+0x3>
+ 754:	e4 30       	cpi	r30, 0x04	; 4
+ 756:	b0 f4       	brcc	.+44     	; 0x784 <main+0xa2>
 				{
 					state.cmdCounter++;
- 746:	8c 81       	ldd	r24, Y+4	; 0x04
- 748:	9d 81       	ldd	r25, Y+5	; 0x05
- 74a:	01 96       	adiw	r24, 0x01	; 1
- 74c:	9d 83       	std	Y+5, r25	; 0x05
- 74e:	8c 83       	std	Y+4, r24	; 0x04
+ 758:	8c 81       	ldd	r24, Y+4	; 0x04
+ 75a:	9d 81       	ldd	r25, Y+5	; 0x05
+ 75c:	01 96       	adiw	r24, 0x01	; 1
+ 75e:	9d 83       	std	Y+5, r25	; 0x05
+ 760:	8c 83       	std	Y+4, r24	; 0x04
 					state.crcOkay++;
- 750:	8a 81       	ldd	r24, Y+2	; 0x02
- 752:	9b 81       	ldd	r25, Y+3	; 0x03
- 754:	01 96       	adiw	r24, 0x01	; 1
- 756:	9b 83       	std	Y+3, r25	; 0x03
- 758:	8a 83       	std	Y+2, r24	; 0x02
+ 762:	8a 81       	ldd	r24, Y+2	; 0x02
+ 764:	9b 81       	ldd	r25, Y+3	; 0x03
+ 766:	01 96       	adiw	r24, 0x01	; 1
+ 768:	9b 83       	std	Y+3, r25	; 0x03
+ 76a:	8a 83       	std	Y+2, r24	; 0x02
 					cmdFuncTab[cmd.id].fnc( &cmd );
- 75a:	f0 e0       	ldi	r31, 0x00	; 0
- 75c:	ee 0f       	add	r30, r30
- 75e:	ff 1f       	adc	r31, r31
- 760:	ef 57       	subi	r30, 0x7F	; 127
- 762:	ff 4f       	sbci	r31, 0xFF	; 255
- 764:	01 90       	ld	r0, Z+
- 766:	f0 81       	ld	r31, Z
- 768:	e0 2d       	mov	r30, r0
- 76a:	86 e0       	ldi	r24, 0x06	; 6
- 76c:	95 e0       	ldi	r25, 0x05	; 5
- 76e:	09 95       	icall
- 770:	d0 cf       	rjmp	.-96     	; 0x712 <main+0x1e>
+ 76c:	f0 e0       	ldi	r31, 0x00	; 0
+ 76e:	ee 0f       	add	r30, r30
+ 770:	ff 1f       	adc	r31, r31
+ 772:	ea 57       	subi	r30, 0x7A	; 122
+ 774:	ff 4f       	sbci	r31, 0xFF	; 255
+ 776:	01 90       	ld	r0, Z+
+ 778:	f0 81       	ld	r31, Z
+ 77a:	e0 2d       	mov	r30, r0
+ 77c:	8a e0       	ldi	r24, 0x0A	; 10
+ 77e:	95 e0       	ldi	r25, 0x05	; 5
+ 780:	09 95       	icall
+ 782:	d0 cf       	rjmp	.-96     	; 0x724 <main+0x42>
 				}else
 				{
 					state.crcError++;
- 772:	88 81       	ld	r24, Y
- 774:	99 81       	ldd	r25, Y+1	; 0x01
- 776:	01 96       	adiw	r24, 0x01	; 1
- 778:	99 83       	std	Y+1, r25	; 0x01
- 77a:	88 83       	st	Y, r24
+ 784:	88 81       	ld	r24, Y
+ 786:	99 81       	ldd	r25, Y+1	; 0x01
+ 788:	01 96       	adiw	r24, 0x01	; 1
+ 78a:	99 83       	std	Y+1, r25	; 0x01
+ 78c:	88 83       	st	Y, r24
 					cmdBuildAnswer( &cmd , 255 , DATA_TYP_STRING , 255 , 7 , (uint8_t*)"cmd_bad" );
- 77c:	0f 2e       	mov	r0, r31
- 77e:	f9 e7       	ldi	r31, 0x79	; 121
- 780:	ef 2e       	mov	r14, r31
- 782:	f0 e0       	ldi	r31, 0x00	; 0
- 784:	ff 2e       	mov	r15, r31
- 786:	f0 2d       	mov	r31, r0
- 788:	07 e0       	ldi	r16, 0x07	; 7
- 78a:	2f ef       	ldi	r18, 0xFF	; 255
- 78c:	44 e0       	ldi	r20, 0x04	; 4
- 78e:	6f ef       	ldi	r22, 0xFF	; 255
- 790:	86 e0       	ldi	r24, 0x06	; 6
- 792:	95 e0       	ldi	r25, 0x05	; 5
- 794:	0e 94 64 01 	call	0x2c8	; 0x2c8 <cmdBuildAnswer>
+ 78e:	0f 2e       	mov	r0, r31
+ 790:	fe e7       	ldi	r31, 0x7E	; 126
+ 792:	ef 2e       	mov	r14, r31
+ 794:	f0 e0       	ldi	r31, 0x00	; 0
+ 796:	ff 2e       	mov	r15, r31
+ 798:	f0 2d       	mov	r31, r0
+ 79a:	07 e0       	ldi	r16, 0x07	; 7
+ 79c:	2f ef       	ldi	r18, 0xFF	; 255
+ 79e:	44 e0       	ldi	r20, 0x04	; 4
+ 7a0:	6f ef       	ldi	r22, 0xFF	; 255
+ 7a2:	8a e0       	ldi	r24, 0x0A	; 10
+ 7a4:	95 e0       	ldi	r25, 0x05	; 5
+ 7a6:	0e 94 64 01 	call	0x2c8	; 0x2c8 <cmdBuildAnswer>
 					cmdSendAnswer( &cmd );
- 798:	86 e0       	ldi	r24, 0x06	; 6
- 79a:	95 e0       	ldi	r25, 0x05	; 5
- 79c:	0e 94 72 01 	call	0x2e4	; 0x2e4 <cmdSendAnswer>
- 7a0:	b8 cf       	rjmp	.-144    	; 0x712 <main+0x1e>
+ 7aa:	8a e0       	ldi	r24, 0x0A	; 10
+ 7ac:	95 e0       	ldi	r25, 0x05	; 5
+ 7ae:	0e 94 72 01 	call	0x2e4	; 0x2e4 <cmdSendAnswer>
+ 7b2:	b8 cf       	rjmp	.-144    	; 0x724 <main+0x42>
 
-000007a2 <__vector_7>:
+000007b4 <__vector_7>:
     }
 }
 
 /* live the CPU?*/
 ISR(TIMER1_COMPA_vect)
 {
- 7a2:	1f 92       	push	r1
- 7a4:	0f 92       	push	r0
- 7a6:	0f b6       	in	r0, 0x3f	; 63
- 7a8:	0f 92       	push	r0
- 7aa:	11 24       	eor	r1, r1
- 7ac:	2f 93       	push	r18
- 7ae:	4f 93       	push	r20
- 7b0:	5f 93       	push	r21
- 7b2:	6f 93       	push	r22
- 7b4:	7f 93       	push	r23
- 7b6:	8f 93       	push	r24
- 7b8:	9f 93       	push	r25
- 7ba:	af 93       	push	r26
- 7bc:	bf 93       	push	r27
+ 7b4:	1f 92       	push	r1
+ 7b6:	0f 92       	push	r0
+ 7b8:	0f b6       	in	r0, 0x3f	; 63
+ 7ba:	0f 92       	push	r0
+ 7bc:	11 24       	eor	r1, r1
+ 7be:	2f 93       	push	r18
+ 7c0:	4f 93       	push	r20
+ 7c2:	5f 93       	push	r21
+ 7c4:	6f 93       	push	r22
+ 7c6:	7f 93       	push	r23
+ 7c8:	8f 93       	push	r24
+ 7ca:	9f 93       	push	r25
+ 7cc:	af 93       	push	r26
+ 7ce:	bf 93       	push	r27
 	static uint32_t stateLED = 0;
 	
 	/*
 	*	Status Anzeige
 	*/
 	stateLED = checkMaxValue( ++stateLED , 10e3 );
- 7be:	80 91 fa 00 	lds	r24, 0x00FA	; 0x8000fa <stateLED.2383>
- 7c2:	90 91 fb 00 	lds	r25, 0x00FB	; 0x8000fb <stateLED.2383+0x1>
- 7c6:	a0 91 fc 00 	lds	r26, 0x00FC	; 0x8000fc <stateLED.2383+0x2>
- 7ca:	b0 91 fd 00 	lds	r27, 0x00FD	; 0x8000fd <stateLED.2383+0x3>
- 7ce:	01 96       	adiw	r24, 0x01	; 1
- 7d0:	a1 1d       	adc	r26, r1
- 7d2:	b1 1d       	adc	r27, r1
+ 7d0:	80 91 fe 00 	lds	r24, 0x00FE	; 0x8000fe <stateLED.2256>
+ 7d4:	90 91 ff 00 	lds	r25, 0x00FF	; 0x8000ff <stateLED.2256+0x1>
+ 7d8:	a0 91 00 01 	lds	r26, 0x0100	; 0x800100 <stateLED.2256+0x2>
+ 7dc:	b0 91 01 01 	lds	r27, 0x0101	; 0x800101 <stateLED.2256+0x3>
+ 7e0:	01 96       	adiw	r24, 0x01	; 1
+ 7e2:	a1 1d       	adc	r26, r1
+ 7e4:	b1 1d       	adc	r27, r1
 	OCR1A   = ( (uint16_t)( F_CPU / 1 / 8000 ) );	
 }
 
 uint16_t	checkMaxValue	( uint16_t val , uint16_t max )		
 {
 	if( val > max )
- 7d4:	81 31       	cpi	r24, 0x11	; 17
- 7d6:	27 e2       	ldi	r18, 0x27	; 39
- 7d8:	92 07       	cpc	r25, r18
- 7da:	b0 f5       	brcc	.+108    	; 0x848 <__vector_7+0xa6>
- 7dc:	aa 27       	eor	r26, r26
- 7de:	bb 27       	eor	r27, r27
+ 7e6:	81 31       	cpi	r24, 0x11	; 17
+ 7e8:	27 e2       	ldi	r18, 0x27	; 39
+ 7ea:	92 07       	cpc	r25, r18
+ 7ec:	b0 f5       	brcc	.+108    	; 0x85a <__vector_7+0xa6>
+ 7ee:	aa 27       	eor	r26, r26
+ 7f0:	bb 27       	eor	r27, r27
 	static uint32_t stateLED = 0;
 	
 	/*
 	*	Status Anzeige
 	*/
 	stateLED = checkMaxValue( ++stateLED , 10e3 );
- 7e0:	80 93 fa 00 	sts	0x00FA, r24	; 0x8000fa <stateLED.2383>
- 7e4:	90 93 fb 00 	sts	0x00FB, r25	; 0x8000fb <stateLED.2383+0x1>
- 7e8:	a0 93 fc 00 	sts	0x00FC, r26	; 0x8000fc <stateLED.2383+0x2>
- 7ec:	b0 93 fd 00 	sts	0x00FD, r27	; 0x8000fd <stateLED.2383+0x3>
+ 7f2:	80 93 fe 00 	sts	0x00FE, r24	; 0x8000fe <stateLED.2256>
+ 7f6:	90 93 ff 00 	sts	0x00FF, r25	; 0x8000ff <stateLED.2256+0x1>
+ 7fa:	a0 93 00 01 	sts	0x0100, r26	; 0x800100 <stateLED.2256+0x2>
+ 7fe:	b0 93 01 01 	sts	0x0101, r27	; 0x800101 <stateLED.2256+0x3>
 	
 	if ( stateLED <= 200 )
- 7f0:	89 3c       	cpi	r24, 0xC9	; 201
- 7f2:	91 05       	cpc	r25, r1
- 7f4:	a1 05       	cpc	r26, r1
- 7f6:	b1 05       	cpc	r27, r1
- 7f8:	10 f4       	brcc	.+4      	; 0x7fe <__vector_7+0x5c>
+ 802:	89 3c       	cpi	r24, 0xC9	; 201
+ 804:	91 05       	cpc	r25, r1
+ 806:	a1 05       	cpc	r26, r1
+ 808:	b1 05       	cpc	r27, r1
+ 80a:	10 f4       	brcc	.+4      	; 0x810 <__vector_7+0x5c>
 	{
 		BC(LED_HEARTBEAT_PORT,LED_HEARTBEAT_bp);
- 7fa:	c7 98       	cbi	0x18, 7	; 24
- 7fc:	2e c0       	rjmp	.+92     	; 0x85a <__vector_7+0xb8>
+ 80c:	c7 98       	cbi	0x18, 7	; 24
+ 80e:	2e c0       	rjmp	.+92     	; 0x86c <__stack+0xd>
 	}
 	else if ( ( stateLED >= 400 ) && ( stateLED <= 600 ) )
- 7fe:	ac 01       	movw	r20, r24
- 800:	bd 01       	movw	r22, r26
- 802:	40 59       	subi	r20, 0x90	; 144
- 804:	51 40       	sbci	r21, 0x01	; 1
- 806:	61 09       	sbc	r22, r1
- 808:	71 09       	sbc	r23, r1
- 80a:	49 3c       	cpi	r20, 0xC9	; 201
- 80c:	51 05       	cpc	r21, r1
- 80e:	61 05       	cpc	r22, r1
- 810:	71 05       	cpc	r23, r1
- 812:	10 f4       	brcc	.+4      	; 0x818 <__vector_7+0x76>
+ 810:	ac 01       	movw	r20, r24
+ 812:	bd 01       	movw	r22, r26
+ 814:	40 59       	subi	r20, 0x90	; 144
+ 816:	51 40       	sbci	r21, 0x01	; 1
+ 818:	61 09       	sbc	r22, r1
+ 81a:	71 09       	sbc	r23, r1
+ 81c:	49 3c       	cpi	r20, 0xC9	; 201
+ 81e:	51 05       	cpc	r21, r1
+ 820:	61 05       	cpc	r22, r1
+ 822:	71 05       	cpc	r23, r1
+ 824:	10 f4       	brcc	.+4      	; 0x82a <__vector_7+0x76>
 	{
 		BS(LED_HEARTBEAT_PORT,LED_HEARTBEAT_bp);
- 814:	c7 9a       	sbi	0x18, 7	; 24
- 816:	21 c0       	rjmp	.+66     	; 0x85a <__vector_7+0xb8>
+ 826:	c7 9a       	sbi	0x18, 7	; 24
+ 828:	21 c0       	rjmp	.+66     	; 0x86c <__stack+0xd>
 	}
 	else if ( ( stateLED >= 1000 ) && ( stateLED <= 1400 ) )
- 818:	ac 01       	movw	r20, r24
- 81a:	bd 01       	movw	r22, r26
- 81c:	48 5e       	subi	r20, 0xE8	; 232
- 81e:	53 40       	sbci	r21, 0x03	; 3
- 820:	61 09       	sbc	r22, r1
- 822:	71 09       	sbc	r23, r1
- 824:	41 39       	cpi	r20, 0x91	; 145
- 826:	51 40       	sbci	r21, 0x01	; 1
- 828:	61 05       	cpc	r22, r1
- 82a:	71 05       	cpc	r23, r1
- 82c:	10 f4       	brcc	.+4      	; 0x832 <__vector_7+0x90>
+ 82a:	ac 01       	movw	r20, r24
+ 82c:	bd 01       	movw	r22, r26
+ 82e:	48 5e       	subi	r20, 0xE8	; 232
+ 830:	53 40       	sbci	r21, 0x03	; 3
+ 832:	61 09       	sbc	r22, r1
+ 834:	71 09       	sbc	r23, r1
+ 836:	41 39       	cpi	r20, 0x91	; 145
+ 838:	51 40       	sbci	r21, 0x01	; 1
+ 83a:	61 05       	cpc	r22, r1
+ 83c:	71 05       	cpc	r23, r1
+ 83e:	10 f4       	brcc	.+4      	; 0x844 <__vector_7+0x90>
 	{
 		BC(LED_HEARTBEAT_PORT,LED_HEARTBEAT_bp);
- 82e:	c7 98       	cbi	0x18, 7	; 24
- 830:	14 c0       	rjmp	.+40     	; 0x85a <__vector_7+0xb8>
+ 840:	c7 98       	cbi	0x18, 7	; 24
+ 842:	14 c0       	rjmp	.+40     	; 0x86c <__stack+0xd>
 	}
 	else if ( ( stateLED >= 1600 ) && ( stateLED <= 1800 ) )
- 832:	80 54       	subi	r24, 0x40	; 64
- 834:	96 40       	sbci	r25, 0x06	; 6
- 836:	a1 09       	sbc	r26, r1
- 838:	b1 09       	sbc	r27, r1
- 83a:	89 3c       	cpi	r24, 0xC9	; 201
- 83c:	91 05       	cpc	r25, r1
- 83e:	a1 05       	cpc	r26, r1
- 840:	b1 05       	cpc	r27, r1
- 842:	58 f4       	brcc	.+22     	; 0x85a <__vector_7+0xb8>
+ 844:	80 54       	subi	r24, 0x40	; 64
+ 846:	96 40       	sbci	r25, 0x06	; 6
+ 848:	a1 09       	sbc	r26, r1
+ 84a:	b1 09       	sbc	r27, r1
+ 84c:	89 3c       	cpi	r24, 0xC9	; 201
+ 84e:	91 05       	cpc	r25, r1
+ 850:	a1 05       	cpc	r26, r1
+ 852:	b1 05       	cpc	r27, r1
+ 854:	58 f4       	brcc	.+22     	; 0x86c <__stack+0xd>
 	{
 		BS(LED_HEARTBEAT_PORT,LED_HEARTBEAT_bp);
- 844:	c7 9a       	sbi	0x18, 7	; 24
+ 856:	c7 9a       	sbi	0x18, 7	; 24
 	}
- 846:	09 c0       	rjmp	.+18     	; 0x85a <__vector_7+0xb8>
+ 858:	09 c0       	rjmp	.+18     	; 0x86c <__stack+0xd>
 	static uint32_t stateLED = 0;
 	
 	/*
 	*	Status Anzeige
 	*/
 	stateLED = checkMaxValue( ++stateLED , 10e3 );
- 848:	10 92 fa 00 	sts	0x00FA, r1	; 0x8000fa <stateLED.2383>
- 84c:	10 92 fb 00 	sts	0x00FB, r1	; 0x8000fb <stateLED.2383+0x1>
- 850:	10 92 fc 00 	sts	0x00FC, r1	; 0x8000fc <stateLED.2383+0x2>
- 854:	10 92 fd 00 	sts	0x00FD, r1	; 0x8000fd <stateLED.2383+0x3>
- 858:	d0 cf       	rjmp	.-96     	; 0x7fa <__vector_7+0x58>
+ 85a:	10 92 fe 00 	sts	0x00FE, r1	; 0x8000fe <stateLED.2256>
+ 85e:	10 92 ff 00 	sts	0x00FF, r1	; 0x8000ff <stateLED.2256+0x1>
+ 862:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <stateLED.2256+0x2>
+ 866:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <stateLED.2256+0x3>
+ 86a:	d0 cf       	rjmp	.-96     	; 0x80c <__vector_7+0x58>
 	}
 	else if ( ( stateLED >= 1600 ) && ( stateLED <= 1800 ) )
 	{
 		BS(LED_HEARTBEAT_PORT,LED_HEARTBEAT_bp);
 	}
- 85a:	bf 91       	pop	r27
- 85c:	af 91       	pop	r26
- 85e:	9f 91       	pop	r25
- 860:	8f 91       	pop	r24
- 862:	7f 91       	pop	r23
- 864:	6f 91       	pop	r22
- 866:	5f 91       	pop	r21
- 868:	4f 91       	pop	r20
- 86a:	2f 91       	pop	r18
- 86c:	0f 90       	pop	r0
- 86e:	0f be       	out	0x3f, r0	; 63
- 870:	0f 90       	pop	r0
- 872:	1f 90       	pop	r1
- 874:	18 95       	reti
+ 86c:	bf 91       	pop	r27
+ 86e:	af 91       	pop	r26
+ 870:	9f 91       	pop	r25
+ 872:	8f 91       	pop	r24
+ 874:	7f 91       	pop	r23
+ 876:	6f 91       	pop	r22
+ 878:	5f 91       	pop	r21
+ 87a:	4f 91       	pop	r20
+ 87c:	2f 91       	pop	r18
+ 87e:	0f 90       	pop	r0
+ 880:	0f be       	out	0x3f, r0	; 63
+ 882:	0f 90       	pop	r0
+ 884:	1f 90       	pop	r1
+ 886:	18 95       	reti
 
-00000876 <_exit>:
- 876:	f8 94       	cli
+00000888 <_exit>:
+ 888:	f8 94       	cli
 
-00000878 <__stop_program>:
- 878:	ff cf       	rjmp	.-2      	; 0x878 <__stop_program>
+0000088a <__stop_program>:
+ 88a:	ff cf       	rjmp	.-2      	; 0x88a <__stop_program>
