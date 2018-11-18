@@ -21,9 +21,16 @@
 
 uint8_t *streamPtr		= NULL;
 cmd_t cmd;
-uint8_t streamIn[64] = "";
+uint8_t streamIn[1024] = "";
 
+typedef struct
+{
+	uint16_t crcError;
+	uint16_t crcOkay;
+	uint16_t cmdCounter;
+}state_t;
 
+state_t state;
 
 uint8_t		cmdRelais	( cmd_t *c )			
 { 
@@ -90,10 +97,46 @@ uint8_t		cmdVersion ( cmd_t *c )
 	return 0;
 }	
 
+uint8_t		cmdState	( cmd_t *c )
+{
+	uint8_t buff[] =
+	{
+		state.cmdCounter & 0x00FF,
+		(state.cmdCounter & 0xFF00) >> 8,
+		
+		state.crcOkay & 0x00FF,
+		(state.crcOkay & 0xFF00) >> 8,
+		
+		state.crcError & 0x00FF,
+		(state.crcError & 0xFF00) >> 8
+	};
+	
+	cmdBuildAnswer( &cmd , 2 , DATA_TYP_UINT16 , 0 , sizeof(buff) , buff );
+	cmdSendAnswer( &cmd );
+	
+	return 0;
+}
+
+uint8_t		cmdReset		( cmd_t * c)
+{
+	void (*reboot)() = (void*)0;
+	
+	cmdBuildAnswer( &cmd , 3 , DATA_TYP_STRING , 0 , 6 , (uint8_t*)"Reboot");
+	cmdSendAnswer( &cmd );
+	
+	_delay_ms(100);
+	
+	reboot();
+	
+	return 0;
+}
+
 const cmdFuncTab_t cmdFuncTab[] =
 {
-	{ cmdRelais },
-	{ cmdVersion },
+	{ cmdRelais		},
+	{ cmdVersion	},
+	{ cmdState		},
+	{ cmdReset		},
 };
 
 void		timerInit		( void )							
@@ -137,9 +180,12 @@ int main(void)
  			{								 
 				if( cmd.inCrc == cmd.outCrc && (cmd.id < sizeof(cmdFuncTab) / sizeof(*cmdFuncTab)) )
 				{
+					state.cmdCounter++;
+					state.crcOkay++;
 					cmdFuncTab[cmd.id].fnc( &cmd );
 				}else
 				{
+					state.crcError++;
 					cmdBuildAnswer( &cmd , 255 , DATA_TYP_STRING , 255 , 7 , (uint8_t*)"cmd_bad" );
 					cmdSendAnswer( &cmd );
 				}

@@ -160,9 +160,6 @@
     <Compile Include="cmd.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="cmdTab.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Hardware Libs\hard_init.h">
       <SubType>compile</SubType>
     </Compile>
