@@ -116,7 +116,7 @@ uint8_t		cmdState	( cmd_t *c )
 	return 0;
 }
 
-uint8_t		cmdReset		( cmd_t * c)
+uint8_t		cmdReset		( cmd_t *c )
 {
 	void (*reboot)() = (void*)0;
 	
@@ -128,8 +128,17 @@ uint8_t		cmdReset		( cmd_t * c)
 	return 0;
 }
 
+uint8_t		cmdPing		( cmd_t *c )
+{
+	cmdBuildAnswer( &cmd , ID_PING , DATA_TYP_STRING , 0 , 4 , (uint8_t*)"ping" );
+	cmdSendAnswer( &cmd );
+	
+	return 0;
+}
+
 const cmdFuncTab_t cmdFuncTab[] =
 {
+	{ cmdPing		},	
 	{ cmdRelais		},
 	{ cmdVersion	},
 	{ cmdState		},
@@ -159,7 +168,7 @@ int main(void)
 {
 	hardware_init();
 	
-	uart_init( UART_BAUD_SELECT( 19600 , 16000000 ) );
+	uart_init( UART_BAUD_SELECT( 115200 , 16000000 ) );
 	
 	cmdInit( &cmd );
 	
@@ -167,7 +176,7 @@ int main(void)
 
 	sei();
 
-	cmdBuildAnswer( &cmd , 255 , DATA_TYP_STRING , 255 , 4 , (uint8_t*)"Boot");
+	cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 4 , (uint8_t*)"Boot");
 	cmdSendAnswer( &cmd );
 
 	while (1) 
@@ -186,7 +195,7 @@ int main(void)
 				}else
 				{
 					state.crcError++;
-					cmdBuildAnswer( &cmd , 255 , DATA_TYP_STRING , 255 , 7 , (uint8_t*)"cmd_bad" );
+					cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 7 , (uint8_t*)"cmd_bad" );
 					cmdSendAnswer( &cmd );
 				}
 			}
