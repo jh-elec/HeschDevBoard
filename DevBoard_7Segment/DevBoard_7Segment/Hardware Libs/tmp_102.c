@@ -22,28 +22,27 @@ tmp102_t tmp102 =
 };
 
 
-int16_t tmp102_calc( uint16_t temp ){
-
-	double stemp=temp;
+uint16_t tmp102Calc( uint16_t temp )
+{
+	double stemp = temp;
 	stemp *= 0.0625;
 	
 	return (int16_t)stemp;
 }
 
-uint16_t tmp102_read( void )
+uint16_t tmp102Read( void )
 {
-	
-	uint8_t tmp[2] = { 0 , 0 };
+	uint8_t tmp[] = { 0 , 0 };
 	
 	i2c_start_wait( TMP102_ADDR+I2C_READ );
 	tmp[TMP102_MSB] = i2c_readAck();
 	tmp[TMP102_LSB] = i2c_readNak();
 	i2c_stop();
 	
-	return ( ( (uint16_t)tmp[TMP102_MSB] << 4 | tmp[TMP102_LSB] >> 3 ) );
+	return ( ( (uint16_t)tmp[TMP102_MSB] << 8 | tmp[TMP102_LSB] ) >> 4  );
 }
 
-int16_t tmp102_get_temp( void )
+int16_t tmp102GetTemp( void )
 {
-	return tmp102_calc( tmp102_read() );
+	return tmp102Calc( tmp102Read() );
 }

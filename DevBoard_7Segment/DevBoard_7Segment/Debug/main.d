@@ -23,7 +23,9 @@ main.d main.o: .././main.c \
  .././Hardware\ Libs/hard_init.h .././Hardware\ Libs/i2cmaster.h \
  .././Hardware\ Libs/sts3x.h .././Hardware\ Libs/tmp_102.h \
  .././Hardware\ Libs/mcp23017.h .././Hardware\ Libs/hard_def.h \
- .././Hardware\ Libs/rx8564.h .././Hardware\ Libs/uart.h \
+ .././Hardware\ Libs/rx8564.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
+ .././Hardware\ Libs/i2cmaster.h .././Hardware\ Libs/uart.h \
  .././build_info.h .././cmd.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  .././LED\ Font/led_font.h
@@ -85,6 +87,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 .././Hardware\ Libs/hard_def.h:
 
 .././Hardware\ Libs/rx8564.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
+
+.././Hardware\ Libs/i2cmaster.h:
 
 .././Hardware\ Libs/uart.h:
 

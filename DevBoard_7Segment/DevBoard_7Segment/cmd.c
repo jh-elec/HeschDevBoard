@@ -10,187 +10,189 @@
 *
 */
 
+#include <avr/io.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
 #include "cmd.h"
+#include "Hardware Libs/uart.h"
+
+/*	Speicher für den Antwort Header
+*	Die Nutzdaten werden werden dem Zeiger
+*	der cmd_t Struktur übergeben!
+*/
+static uint8_t cmdMsg[__CMD_HEADER_ENTRYS__];
 
 
-// const cmdTable_t cmdTab[] =
-// {
-// 	{"Relais_Handler!" 			, 	"-REL"		, 	NULL 	},
-// 
-// };
-// 
-// cmd_t cmd =
-// {
-// 	.table	= cmdTab,
-// 	.tabLen = sizeof( cmdTab ) / sizeof( *cmdTab ),
-// 	.raw 	= &raw
-// };
-
-
-static uint8_t 		cmdCntPara			( char *cmd )								
+static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
 {
-	uint8_t x = 0;
-	char *cmdPtr = cmd;
-	char *beginnPtr = cmd;
+	uint8_t   i = 0;
+	static uint8_t data = 0;
 	
-	beginnPtr = strchr( beginnPtr , ':' ); // Erster Parameter
-	if ( beginnPtr != NULL )
+	data = ( inCrc ^ ( *inData ) );
+	
+	for ( i = 0; i < 8; i++ )
 	{
-		if ( *(beginnPtr + 1 ) != ';' )
+		if ( ( data & 0x80 ) != 0 )
 		{
-			x++;	
+			data <<= 1;
+			data ^= 0x07;
+		}
+		else
+		{
+			data <<= 1;
 		}
 	}
-	
-	for ( ; cmdPtr != NULL ;  )
-	{
-		cmdPtr = strchr( cmdPtr + 1 , ',' ); // weitere Parameter
-		x++;
-	}
-	
-	return ( x - 1 );
+
+	return data;
 }
 
-static char			*cmdSearch			( char *inBuff , char *srchCmd )			
+
+void	cmdInit				( cmd_t *c )					
 {
-	/*
-	*	Zeiger deklarieren).
+	c->msgLen	= 0; // Länge der gesamten Message
+	c->dataLen	= 0; // Länge der Nutzdaten Bytes
+	c->dataType	= 0; // Datentyp der Nutzdaten
+	c->id		= 0; // Message Erkennung
+	c->exitcode = 0; // Exitkode aus Funktionen
+	c->inCrc	= 0; // Checksumme der gesamten Message
+	c->outCrc	= 0;
+	c->dataPtr	= NULL; // Zeiger auf Nutzdaten
+}
+
+int8_t	cmdGetStartIndex	( uint8_t *rx )					
+{
+	uint8_t index;
+	for( index = 0 ; index < 255 ; index++ )
+	{
+		if ( rx[index] == '-' && rx[index+1] == '+' )
+		{
+			return index;
+		}
+	}
+
+	return -1; // Kein Kommando gefunden
+}
+
+uint8_t	cmdGetEndIndex		( uint8_t *rx )					
+{
+	return ( strlen( ( char* )rx ) );
+}
+
+uint8_t	cmdParse			( uint8_t *rx , cmd_t *c )		
+{
+	int8_t indexStart 	= cmdGetStartIndex( rx );
+	
+	if ( indexStart == (int8_t)-1 )
+	{
+		return 1;
+	}
+
+	c->msgLen	= rx[ indexStart + CMD_HEADER_LENGHT		];
+	c->dataLen 	= rx[ indexStart + CMD_HEADER_DATA_LENGHT	];
+	c->dataType	= rx[ indexStart + CMD_HEADER_DATA_TYP		];
+	c->id 		= rx[ indexStart + CMD_HEADER_ID			];
+	c->exitcode	= rx[ indexStart + CMD_HEADER_EXITCODE		];	
+	c->inCrc 	= rx[ indexStart + CMD_HEADER_CRC			];
+
+	c->dataPtr = NULL;
+	if ( c->dataLen )
+	{
+		c->dataPtr = rx +  (indexStart + __CMD_HEADER_ENTRYS__);
+	}
+	
+	uint8_t crc = 0;
+	c->outCrc = 0;
+	rx[ indexStart + CMD_HEADER_CRC ] = 0;
+	for ( uint8_t x = 0 ; x < __CMD_HEADER_ENTRYS__ ; x++ )
+	{
+		crc = cmdCrc8CCITTUpdate( crc , &rx[ (indexStart + CMD_HEADER_START_BYTE1) + x ] );
+	}
+	
+	for ( uint8_t x = 0 ; x < c->dataLen ; x++ )
+	{
+		crc = cmdCrc8CCITTUpdate( crc , &rx[  (indexStart + __CMD_HEADER_ENTRYS__ ) + x ] );
+	}
+	c->outCrc = crc;
+	
+	return 0;
+}
+
+uint8_t	cmdCrc8StrCCITT		( uint8_t *str , uint8_t leng )	
+{
+	uint8_t crc = 0;
+		
+	for( uint8_t x = 0 ; x < leng ; x++ )
+	{
+		crc = cmdCrc8CCITTUpdate( crc , ( uint8_t * ) str );
+		str++;
+	}
+	
+	return crc;
+}
+
+uint8_t	*cmdBuildHeader		( cmd_t *a )					
+{			
+	cmdMsg[CMD_HEADER_CRC]	= 0;
+	
+	uint8_t *tmpPtr	= a->dataPtr;
+	uint8_t	msgLen	= __CMD_HEADER_ENTRYS__ + a->dataLen;
+	
+	cmdMsg[CMD_HEADER_START_BYTE1]	= '-';			// Start Byte 1
+	cmdMsg[CMD_HEADER_START_BYTE2]	= '+';			// Start Byte 2 
+	cmdMsg[CMD_HEADER_ID]			= a->id;		// 0..255
+	cmdMsg[CMD_HEADER_LENGHT]		= msgLen;		// Länge der ganzen Antwort
+	cmdMsg[CMD_HEADER_DATA_LENGHT]	= a->dataLen;	// Länge der Rohdaten
+	cmdMsg[CMD_HEADER_DATA_TYP]		= a->dataType;	// (u)char , (u)int8 , (u)int16 , (u)int32 usw.
+	cmdMsg[CMD_HEADER_EXITCODE]		= a->exitcode;	// 0..255
+	
+	/*	Checksumme vom Header bilden
 	*/
-	char *inBuffPtr		= inBuff;
-	char *srchCmdPtr	= srchCmd;
-	char *cmdBeginnPtr 	= NULL;
-	char *cmdEndPtr		= NULL;
-	
-	if ( inBuffPtr == NULL || srchCmdPtr == NULL )
+	uint8_t crc = 0;
+	for ( uint8_t x = 0 ; x < __CMD_HEADER_ENTRYS__ ; x++)
 	{
-		return NULL;
+		crc = cmdCrc8CCITTUpdate( crc , &cmdMsg[x] );
 	}
-
-	cmdBeginnPtr = strstr( inBuffPtr , srchCmdPtr );
-	cmdEndPtr	 = strchr( inBuffPtr , CMD_DATA_END );	      
-
-	if ( cmdEndPtr == NULL || cmdBeginnPtr == NULL )
-	{
-		return NULL;
-	}
-		
-	return cmdBeginnPtr;
-}
-
-static int8_t		cmdGetIndex			( cmd_t *cmd , char *inBuff )				
-{
-	uint8_t i;
 	
-	cmd_t 	*cmdPtr			= cmd;
-	char  	*cmdSearchPtr 	= NULL;
-	char	*inputPtr		= inBuff;
-
-	for ( i = 0 ; i < cmdPtr->tabLen ; i++ )
+	/*	Checksumme von Nutzdaten bilden
+	*/	
+	if ( a->dataLen )
 	{
-		cmdSearchPtr = cmdSearch( inputPtr , ( char* ) cmdPtr->table[i].instruction );
-		
-		if ( cmdSearchPtr != NULL )
+		for ( uint8_t x = 0 ; x < a->dataLen ; x++ )
 		{
-			return i;
-		}
+			crc = cmdCrc8CCITTUpdate( crc , tmpPtr++ );	
+		}			
 	}
-	
-	return -1;	
-}
-
-
-const char			*cmdGetInstruction	( cmd_t *cmd , char *input )				
-{
-	int8_t i = cmdGetIndex( cmd , input );
-	
-	if ( i != (int8_t) -1 )
+	else
 	{
-		return cmd->table[i].instruction;
-	}
-	
-	return NULL;
-}
-
-const char			*cmdGetName			( cmd_t *cmd , char *input )				
-{
-	int8_t ret = cmdGetIndex( cmd , input );
-	
-	if ( ret != (int8_t) -1 )
-	{
-		return cmd->table[ret].name;
+		a->dataPtr = NULL;
 	}
 		
-	return NULL;
-}
-
-void				*cmdGetFunc			( cmd_t *cmd , char *input )				
-{
-	int8_t ret = cmdGetIndex( cmd , input );
-	if ( ret != (int8_t) -1 )
-	{
-		return cmd->table[ret].fnc;
-	}
-	return NULL;
-}
-
-char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num )	
-{
-	char 		*delimiter 	= NULL;
-	char 		*cmdEndPtr	= NULL;
-	const char 	*rawPtr		= NULL;
-	
-	static char buff[20] = "";
-	
-	uint8_t x;
-	
-	for ( x = 0 ; x < cmd->tabLen ; x++ )
-	{
-		rawPtr = ( const char *) cmdSearch( input , ( char * ) cmd->table[x].instruction );
-		if ( rawPtr != NULL )
-		{
-			break;
-		}
-	}
+	cmdMsg[CMD_HEADER_CRC] = crc;
 		
-	if( rawPtr == NULL )
-	{
-		return NULL;
-	}
-	
-	cmd->raw->paraNumb = cmdCntPara( ( char * ) rawPtr );
-		
-	cmdEndPtr = strchr( rawPtr , ';' );	
-	if( cmdEndPtr == NULL )
-	{
-		return  NULL;
-	}
-
-	delimiter = strchr( rawPtr , ':' ) + 1;
-	if( ( delimiter - 1 ) == NULL )
-	{
-		return  NULL;
-	}
-
-	delimiter = strtok( delimiter , CMD_RAW_PARA_DELIMITER );
-	if( delimiter == NULL )
-	{
-		return  NULL;
-	}
-	
-	for ( x = 0 ; x < num && x < cmd->raw->paraNumb ; x++ )
-	{
-		delimiter = strtok( NULL , CMD_RAW_PARA_DELIMITER );			
-	}
-	
- 	strcpy( buff , delimiter );
-	char *ptr = strchr( buff , ';' );
- 	*ptr = '\0';
-	
-	return buff; 
+	a->id			= 0;
+	a->dataType		= 0;
+	a->exitcode		= 0;
+			
+	a->msgLen = msgLen;
+				
+	return cmdMsg;
 }
 
+void	cmdBuildAnswer( cmd_t *a , uint8_t id , enum Data_Type_Enum dataType , uint8_t exitcode , uint8_t dataLen , uint8_t *dataPtr )
+{
+	a->id		= id; // Beschreibt den Nachrichten Type. Damit die gegenstelle die Nachrichten unterscheiden kann
+	a->dataType = dataType; // Gibt an um welchen Daten Typ es sich handelt
+	a->exitcode = exitcode; // Rückgabewert einer Funktion 
+	a->dataPtr	= dataPtr; // Zeiger auf die Daten die gesendet werden sollen
+	a->dataLen	= dataLen; // Anzahl der Bytes
+}
+
+void	cmdSendAnswer		( cmd_t *a )					
+{
+	uint8_t *cmdBuff  = cmdBuildHeader( (cmd_t*)a );
+	uartPutByteStr( cmdBuff , __CMD_HEADER_ENTRYS__ );
+	uartPutByteStr( a->dataPtr , a->dataLen );
+}

@@ -51,27 +51,27 @@ typedef struct
 extern tmp102_t tmp102;
 
 
-/* tmp102_read
+/* tmp102Read
 * @para             -> -none
 * @return           -> ad value from sensor
 * @description      -> -none
 */
-uint16_t tmp102_read(void);
+uint16_t tmp102Read(void);
 
 
-/* tmp102_calc
+/* tmp102Calc
 * @para             -> ad value from sensor
 * @return           -> temp in °C
 * @description      -> -none
 */
-int16_t tmp102_calc(uint16_t temp);
+uint16_t tmp102Calc(uint16_t temp);
 
 
-/* tmp102_get_temp
+/* tmp102GetTemp
 * @para             -> -none
 * @return           -> Temperature in °C
 * @description      -> Get actual Temperature
 */
-int16_t tmp102_get_temp( void );
+int16_t tmp102GetTemp( void );
 
 #endif

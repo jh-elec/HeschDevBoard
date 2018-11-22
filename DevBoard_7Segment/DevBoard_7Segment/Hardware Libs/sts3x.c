@@ -27,7 +27,7 @@ sts3x_t sts3x =
 
 
 
-void sts3x_init(void)
+void sts3xInit(void)
 {
 	i2c_start_wait( STS3x_ADDR + I2C_WRITE );
 	
@@ -39,7 +39,7 @@ void sts3x_init(void)
 	i2c_stop();
 }
 
-int16_t sts3x_calc(uint16_t temp)
+int16_t sts3xCalc(uint16_t temp)
 {	
 	double stemp=temp;
 	stemp *= 175;
@@ -49,7 +49,7 @@ int16_t sts3x_calc(uint16_t temp)
 	return (int16_t)stemp;
 }
 
-uint16_t sts3x_read(void)
+uint16_t sts3xRead(void)
 {
 	uint8_t read[STS3X_NUM_OF_BYTES] = "";
 	
@@ -96,7 +96,7 @@ uint16_t sts3x_read(void)
 	return 17000;
 }
 
-int16_t sts3x_get_temp(void)
+int16_t sts3xGetTemp(void)
 {
 	/*
 	*	Sollte ein Checksummenfehler auftreten,
@@ -107,7 +107,7 @@ int16_t sts3x_get_temp(void)
 		//return sts3x.actual;
 	}
 	
-	sts3x.actual = sts3x_calc( sts3x_read() );
+	sts3x.actual = sts3xCalc( sts3xRead() );
 	
 	return (sts3x.actual);
 }

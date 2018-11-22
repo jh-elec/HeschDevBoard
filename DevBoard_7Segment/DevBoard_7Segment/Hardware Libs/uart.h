@@ -72,7 +72,7 @@ LICENSE:
 
 /** Size of the circular receive buffer, must be power of 2 */
 #ifndef UART_RX_BUFFER_SIZE
-#define UART_RX_BUFFER_SIZE 64
+#define UART_RX_BUFFER_SIZE 1024
 #endif
 /** Size of the circular transmit buffer, must be power of 2 */
 #ifndef UART_TX_BUFFER_SIZE
@@ -105,6 +105,26 @@ LICENSE:
 */
 extern void uart_init(unsigned int baudrate);
 
+/**
+   @brief   Put byte to ringbuffer for transmitting via UART
+   @param   data byte to be transmitted
+   @return  none
+*/
+void	uartPutByte	( uint8_t byte );
+
+/**
+   @brief   Put byte string to ringbuffer for transmitting via UART
+   @param   data string to be transmitted
+   @return  none
+*/
+void	uartPutByteStr	( uint8_t *str , uint8_t len );
+
+/**
+   @brief   Read byte from ringbuffer
+   @param   pointer from input stream buffer
+   @return  pointer to the cmd sequence
+*/
+uint8_t		*uartReadRingBuff		( uint8_t *stream );
 
 /**
  *  @brief   Get received byte from ringbuffer
@@ -172,7 +192,6 @@ extern void uart_puts_p(const char *s );
  * @brief    Macro to automatically put a string constant into program memory
  */
 #define uart_puts_P(__s)       uart_puts_p(PSTR(__s))
-
 
 
 /** @brief  Initialize USART1 (only available on selected ATmegas) @see uart_init */

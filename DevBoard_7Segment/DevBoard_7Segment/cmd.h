@@ -13,60 +13,94 @@
 #ifndef __CMD_H__
 #define __CMD_H__
 
-
 #include <stdint.h>
 #include <stdlib.h>
 
 
-#define CMD_SIZE_OF_TAB			7
-#define CMD_RAW_DATA_BEGINN		":"
-#define CMD_RAW_PARA_DELIMITER	","
-#define CMD_DATA_END			';'
 
-
-
-typedef struct						
+enum Communication_Header_Enum
 {
-	/*
-	*	Name des Kommandos
-	*/
-	char	name[20];
+	CMD_HEADER_START_BYTE1, // Kommando Start Byte 1
+	CMD_HEADER_START_BYTE2, // .. Byte 2
+	CMD_HEADER_LENGHT, 		// Länge des ganzen Streams
+	CMD_HEADER_DATA_LENGHT, // Länge der Roh Daten
+	CMD_HEADER_DATA_TYP, 	// (u)char , (u)int8 , (u)int16 , (u)int32
+	CMD_HEADER_ID, 			// Stream ID
+	CMD_HEADER_EXITCODE,	// Exitkode aus Funktionen
+	CMD_HEADER_CRC, 		// Checksumme von der Message
+
+	__CMD_HEADER_ENTRYS__
+};
+
+enum Data_Type_Enum
+{
+	DATA_TYP_UINT8,
+	DATA_TYP_UINT16,
+	DATA_TYP_UINT32,
+	DATA_TYP_FLOAT,	
+	DATA_TYP_STRING,
+
+	DATA_TYP_INT8,
+	DATA_TYP_INT16,
+	DATA_TYP_INT32,
+		
+	__DATA_TYP_MAX_INDEX__
+};
+
+enum Cmd_Id_Enum
+{
+	ID_PING = 0, // Darauf sollte die Firmware ein Lebenszeichen zurückliefern
 	
-	/*
-	*	Befehl der empfangen werden muss
-	*/
-	char	instruction[15];
-			
-	/*
-	*	Funktion die beim entsprechenden Kommando 
-	*	ausgeführt werden soll
-	*/	
-	void*	(*fnc) (void* , void*);
+	/*...*/
 	
-}cmdTable_t;
+	ID_APPLICATION = 255 // Für irgendwelche System spezifschen Meldungen
+};
 
-typedef struct						
+typedef struct
 {
-	char 	*cmdPtr;
-	uint8_t  paraNumb;	
-}cmdRaw_t;
-cmdRaw_t raw;
+	uint8_t msgLen;
+	uint8_t dataLen;
+	uint8_t dataType;
+	uint8_t id;
+	uint8_t exitcode;	
+	uint8_t inCrc;
+	uint8_t outCrc;
+	
+	uint8_t *dataPtr;
 
-typedef struct						
-{
-	const 			cmdTable_t 	*table;
-	const			size_t		tabLen;
-					cmdRaw_t	*raw;
 }cmd_t;
 
+/*	Hinweis
+*	Das erste Element ist IMMER eine "Ping" Funktion.
+*	Die einfach den String "ping" zurückliefert.
+*	Dies sollte in jedem Projekt beachtet werden.
+*/
+typedef struct 
+{
+	uint8_t (*fnc)( cmd_t *);	
+}cmdFuncTab_t;
 
-const char			*cmdGetInstruction	( cmd_t *cmd , char *input );				
 
-const char			*cmdGetName			( cmd_t *cmd , char *input );				
 
-void				*cmdGetFunc			( cmd_t *cmd , char *input );				
 
-char 				*cmdGetPara 		( cmd_t *cmd , char *input , uint8_t num );	
+
+
+void	cmdInit				( cmd_t *c );					
+
+int8_t	cmdGetStartIndex	( uint8_t *rx );					
+
+uint8_t	cmdGetEndIndex		( uint8_t *rx );					
+
+uint8_t	cmdParse			( uint8_t *rx , cmd_t *c );		
+
+uint8_t	cmdCrc8StrCCITT		( uint8_t *str , uint8_t leng );
+
+uint8_t	*cmdBuildHeader		( cmd_t *a );					
+
+void	cmdBuildAnswer		( cmd_t *a , uint8_t id , enum Data_Type_Enum dataType , uint8_t exitcode , uint8_t dataLen , uint8_t *dataPtr );
+
+void	cmdSendAnswer		( cmd_t *a );					
+
 
 
 #endif
