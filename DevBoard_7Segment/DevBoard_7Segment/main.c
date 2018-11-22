@@ -229,7 +229,7 @@ uint8_t		cmdRelais		( cmd_t *c )
 
 uint8_t		cmdGetTemp		( cmd_t *c )
 {
-	uint8_t buff[] =
+	int8_t buff[] =
 	{		
 		sts3x.actual,
 		tmp102.actual,
@@ -241,7 +241,7 @@ uint8_t		cmdGetTemp		( cmd_t *c )
 		tmp102.lowest,
 	};
 	
-	cmdBuildAnswer( &cmd , 5, DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
+	cmdBuildAnswer( &cmd , 5, DATA_TYP_INT8 , 0 , sizeof(buff) , (uint8_t*)buff );
 	cmdSendAnswer( &cmd );
 	
 	return 0;

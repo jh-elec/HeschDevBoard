@@ -220,7 +220,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x8c0
+.text           0x00000000      0x872
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -320,56 +320,56 @@ END GROUP
                 0x000002e4       0x20 cmd.o
                 0x000002e4                cmdSendAnswer
  .text.__vector_13
-                0x00000304       0x58 Hardware Libs/uart.o
+                0x00000304       0x56 Hardware Libs/uart.o
                 0x00000304                __vector_13
  .text.__vector_14
-                0x0000035c       0x4a Hardware Libs/uart.o
-                0x0000035c                __vector_14
+                0x0000035a       0x4a Hardware Libs/uart.o
+                0x0000035a                __vector_14
  .text.uart_init
-                0x000003a6       0x28 Hardware Libs/uart.o
-                0x000003a6                uart_init
+                0x000003a4       0x28 Hardware Libs/uart.o
+                0x000003a4                uart_init
  .text.uart_getc
-                0x000003ce       0x32 Hardware Libs/uart.o
-                0x000003ce                uart_getc
+                0x000003cc       0x30 Hardware Libs/uart.o
+                0x000003cc                uart_getc
  .text.uartPutByte
-                0x00000400       0x22 Hardware Libs/uart.o
-                0x00000400                uartPutByte
+                0x000003fc       0x22 Hardware Libs/uart.o
+                0x000003fc                uartPutByte
  .text.uartPutByteStr
-                0x00000422       0x36 Hardware Libs/uart.o
-                0x00000422                uartPutByteStr
+                0x0000041e       0x36 Hardware Libs/uart.o
+                0x0000041e                uartPutByteStr
  .text.uartReadRingBuff
-                0x00000458       0x7a Hardware Libs/uart.o
-                0x00000458                uartReadRingBuff
+                0x00000454       0x6c Hardware Libs/uart.o
+                0x00000454                uartReadRingBuff
  .text.hardware_init
-                0x000004d2       0x32 hard_init.o
-                0x000004d2                hardware_init
+                0x000004c0       0x32 hard_init.o
+                0x000004c0                hardware_init
  .text.cmdRelais
-                0x00000504       0xf8 main.o
-                0x00000504                cmdRelais
+                0x000004f2       0xb4 main.o
+                0x000004f2                cmdRelais
  .text.cmdVersion
-                0x000005fc       0x2e main.o
-                0x000005fc                cmdVersion
+                0x000005a6       0x2e main.o
+                0x000005a6                cmdVersion
  .text.cmdState
-                0x0000062a       0x68 main.o
-                0x0000062a                cmdState
+                0x000005d4       0x68 main.o
+                0x000005d4                cmdState
  .text.cmdReset
-                0x00000692       0x3a main.o
-                0x00000692                cmdReset
- .text.cmdPing  0x000006cc       0x34 main.o
-                0x000006cc                cmdPing
+                0x0000063c       0x3a main.o
+                0x0000063c                cmdReset
+ .text.cmdPing  0x00000676       0x34 main.o
+                0x00000676                cmdPing
  .text.timerInit
-                0x00000700       0x16 main.o
-                0x00000700                timerInit
- .text.main     0x00000716       0xd2 main.o
-                0x00000716                main
+                0x000006aa       0x16 main.o
+                0x000006aa                timerInit
+ .text.main     0x000006c0       0xda main.o
+                0x000006c0                main
  .text.__vector_7
-                0x000007e8       0xd4 main.o
-                0x000007e8                __vector_7
-                0x000008bc                . = ALIGN (0x2)
+                0x0000079a       0xd4 main.o
+                0x0000079a                __vector_7
+                0x0000086e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000008bc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000008bc                _exit
-                0x000008bc                exit
+ .fini9         0x0000086e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000086e                _exit
+                0x0000086e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -388,31 +388,31 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000008bc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000086e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000008c0                _etext = .
+                0x00000872                _etext = .
 
-.data           0x00800060       0x36 load address 0x000008c0
+.data           0x00800060       0x36 load address 0x00000872
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  .data.build.1607
                 0x00800060       0x12 build_info.o
+ .data.cmdFuncTab
+                0x00800072        0xa main.o
+                0x00800072                cmdFuncTab
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800072       0x19 main.o
- .rodata.cmdFuncTab
-                0x0080008b        0xa main.o
-                0x0080008b                cmdFuncTab
+                0x0080007c       0x19 main.o
  *(.gnu.linkonce.r*)
                 0x00800096                . = ALIGN (0x2)
  *fill*         0x00800095        0x1 
                 0x00800096                _edata = .
                 0x00800096                PROVIDE (__data_end, .)
 
-.bss            0x00800096      0x485
+.bss            0x00800096      0x545
                 0x00800096                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
@@ -434,29 +434,29 @@ END GROUP
  .bss.UART_TxHead
                 0x008000a5        0x1 Hardware Libs/uart.o
  .bss.UART_RxBuf
-                0x008000a6       0x40 Hardware Libs/uart.o
+                0x008000a6      0x400 Hardware Libs/uart.o
  .bss.UART_TxBuf
-                0x008000e6       0x20 Hardware Libs/uart.o
+                0x008004a6       0x20 Hardware Libs/uart.o
  .bss.stateLED.2262
-                0x00800106        0x4 main.o
- .bss.streamIn  0x0080010a      0x400 main.o
-                0x0080010a                streamIn
+                0x008004c6        0x4 main.o
+ .bss.streamIn  0x008004ca      0x100 main.o
+                0x008004ca                streamIn
  .bss.streamPtr
-                0x0080050a        0x2 main.o
-                0x0080050a                streamPtr
+                0x008005ca        0x2 main.o
+                0x008005ca                streamPtr
  *(COMMON)
- COMMON         0x0080050c        0xf main.o
-                0x0080050c                state
-                0x00800512                cmd
-                0x0080051b                PROVIDE (__bss_end, .)
-                0x000008c0                __data_load_start = LOADADDR (.data)
-                0x000008f6                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008005cc        0xf main.o
+                0x008005cc                state
+                0x008005d2                cmd
+                0x008005db                PROVIDE (__bss_end, .)
+                0x00000872                __data_load_start = LOADADDR (.data)
+                0x000008a8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080051b        0x0
+.noinit         0x008005db        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080051b                _end = .
+                0x008005db                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -541,60 +541,60 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x188c
+.debug_info     0x00000000     0x1868
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6       0xd3 build_info.o
  .debug_info    0x000005b9      0x637 cmd.o
- .debug_info    0x00000bf0      0x409 Hardware Libs/uart.o
- .debug_info    0x00000ff9       0xd5 hard_init.o
- .debug_info    0x000010ce      0x7be main.o
+ .debug_info    0x00000bf0      0x40a Hardware Libs/uart.o
+ .debug_info    0x00000ffa       0xd5 hard_init.o
+ .debug_info    0x000010cf      0x799 main.o
 
-.debug_abbrev   0x00000000      0xb75
+.debug_abbrev   0x00000000      0xb97
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3       0x88 build_info.o
  .debug_abbrev  0x0000052b      0x23d cmd.o
- .debug_abbrev  0x00000768      0x154 Hardware Libs/uart.o
- .debug_abbrev  0x000008bc       0x6b hard_init.o
- .debug_abbrev  0x00000927      0x24e main.o
+ .debug_abbrev  0x00000768      0x15d Hardware Libs/uart.o
+ .debug_abbrev  0x000008c5       0x6b hard_init.o
+ .debug_abbrev  0x00000930      0x267 main.o
 
-.debug_line     0x00000000      0xcfd
+.debug_line     0x00000000      0xcc7
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000115       0xbc build_info.o
  .debug_line    0x000001d1      0x3d7 cmd.o
- .debug_line    0x000005a8      0x329 Hardware Libs/uart.o
- .debug_line    0x000008d1       0xf6 hard_init.o
- .debug_line    0x000009c7      0x336 main.o
+ .debug_line    0x000005a8      0x317 Hardware Libs/uart.o
+ .debug_line    0x000008bf       0xf6 hard_init.o
+ .debug_line    0x000009b5      0x312 main.o
 
-.debug_frame    0x00000000      0x388
+.debug_frame    0x00000000      0x378
  *(.debug_frame)
  .debug_frame   0x00000000       0x24 build_info.o
  .debug_frame   0x00000024       0xd4 cmd.o
  .debug_frame   0x000000f8      0x130 Hardware Libs/uart.o
  .debug_frame   0x00000228       0x24 hard_init.o
- .debug_frame   0x0000024c      0x13c main.o
+ .debug_frame   0x0000024c      0x12c main.o
 
-.debug_str      0x00000000      0x8a3
+.debug_str      0x00000000      0x861
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x15c build_info.o
-                                0x195 (size before relaxing)
- .debug_str     0x000002f2      0x2d4 cmd.o
+ .debug_str     0x00000196      0x198 build_info.o
+                                0x1d1 (size before relaxing)
+ .debug_str     0x0000032e      0x256 cmd.o
                                 0x3fb (size before relaxing)
- .debug_str     0x000005c6      0x133 Hardware Libs/uart.o
-                                0x2b7 (size before relaxing)
- .debug_str     0x000006f9       0xb1 hard_init.o
-                                0x20d (size before relaxing)
- .debug_str     0x000007aa       0xf9 main.o
+ .debug_str     0x00000584      0x133 Hardware Libs/uart.o
+                                0x2f3 (size before relaxing)
+ .debug_str     0x000006b7       0xb1 hard_init.o
+                                0x249 (size before relaxing)
+ .debug_str     0x00000768       0xf9 main.o
                                 0x3b8 (size before relaxing)
 
-.debug_loc      0x00000000     0x1096
+.debug_loc      0x00000000     0x1000
  *(.debug_loc)
  .debug_loc     0x00000000      0x7ab cmd.o
- .debug_loc     0x000007ab      0x4d3 Hardware Libs/uart.o
- .debug_loc     0x00000c7e      0x418 main.o
+ .debug_loc     0x000007ab      0x4c3 Hardware Libs/uart.o
+ .debug_loc     0x00000c6e      0x392 main.o
 
 .debug_macinfo
  *(.debug_macinfo)

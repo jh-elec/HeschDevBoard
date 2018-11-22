@@ -25,14 +25,39 @@ sts3x_t sts3x =
 	.highest = -127,
 };
 
+static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
+{
+	uint8_t   i = 0;
+	static uint8_t data = 0;
+	
+	data = ( inCrc ^ ( *inData ) );
+	
+	for ( i = 0; i < 8; i++ )
+	{
+		if ( ( data & 0x80 ) != 0 )
+		{
+			data <<= 1;
+			data ^= 0x31;
+		}
+		else
+		{
+			data <<= 1;
+		}
+	}
+
+	return data;
+}
 
 
 void sts3xInit(void)
 {
+	sts3xReset();
+	
 	i2c_start_wait( STS3x_ADDR + I2C_WRITE );
 	
-	i2c_write( STS3x_1_MPS_MSB );
-	i2c_write( STS3x_1_MPS_HIG_LSB );
+	i2c_write( periodic_measure_commands_hpm[4][0] );
+	i2c_write( periodic_measure_commands_hpm[4][1] );
+
  	i2c_write( STS3x_FETCH_DATA_MSB );
  	i2c_write( STS3x_FETCH_DATA_LSB );	
 	 
@@ -51,19 +76,14 @@ int16_t sts3xCalc(uint16_t temp)
 
 uint16_t sts3xRead(void)
 {
-	uint8_t read[STS3X_NUM_OF_BYTES] = "";
+	static uint8_t read[STS3X_NUM_OF_BYTES] = "";
 	
 	/*
 	*	Alle Status Bits reseten..
 	*/
 	sts3x.state = 0;
 	
-	if ( i2c_rep_start( STS3x_ADDR + I2C_READ ) )
-	{
-		sts3x.state |= STS3X_NO_NEW_DATA;
-		i2c_start_wait( STS3x_ADDR + I2C_READ );
-	}
-
+	i2c_start_wait( STS3x_ADDR + I2C_READ );
 	read[STS3X_MSB] = i2c_readAck();
 	read[STS3X_LSB] = i2c_readAck();
 	read[STS3X_CRC] = i2c_readNak();
@@ -71,8 +91,8 @@ uint16_t sts3xRead(void)
 	i2c_stop();
 
 	uint8_t crc = 0xff;
-	crc = _crc8_ccitt_update(crc,read[STS3X_MSB]);
-	crc = _crc8_ccitt_update(crc,read[STS3X_LSB]);
+	crc = cmdCrc8CCITTUpdate(crc,&read[STS3X_MSB]);
+	crc = cmdCrc8CCITTUpdate(crc,&read[STS3X_LSB]);
 
 	/* 
 	* Generierten CRC mit empfangenen überprüfen 
@@ -93,7 +113,7 @@ uint16_t sts3xRead(void)
 	*	Schlägt eine Messung fehl oder CRC passt nicht
 	*	wird der Wert für "0 °C" zurück gegeben
 	*/
-	return 17000;
+	return 1700;
 }
 
 int16_t sts3xGetTemp(void)
@@ -110,4 +130,13 @@ int16_t sts3xGetTemp(void)
 	sts3x.actual = sts3xCalc( sts3xRead() );
 	
 	return (sts3x.actual);
+}
+
+
+void sts3xReset(void)
+{
+	i2c_start_wait( STS3x_ADDR + I2C_WRITE );
+	i2c_write( 0xA2 );
+	i2c_write( 0x30 );
+	i2c_stop();
 }

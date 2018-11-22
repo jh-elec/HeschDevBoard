@@ -20,7 +20,7 @@
 
 uint8_t *streamPtr		= NULL;
 cmd_t cmd;
-uint8_t streamIn[1024] = "";
+uint8_t streamIn[256] = "";
 
 typedef struct
 {
@@ -79,11 +79,11 @@ uint8_t		cmdRelais	( cmd_t *c )
 		state,
 	};
 
-	cmd.id = 0;
-	cmd.exitcode = 0;
-	cmd.dataPtr = buff;
-	cmd.dataLen = sizeof(buff);
-	cmdSendAnswer( &cmd );
+// 	cmd.id = 0;
+// 	cmd.exitcode = 0;
+// 	cmd.dataPtr = buff;
+// 	cmd.dataLen = sizeof(buff);
+// 	cmdSendAnswer( &cmd );
 
 	return 0;
 }
@@ -136,7 +136,7 @@ uint8_t		cmdPing		( cmd_t *c )
 	return 0;
 }
 
-const cmdFuncTab_t cmdFuncTab[] =
+cmdFuncTab_t cmdFuncTab[] =
 {
 	{ cmdPing		},	
 	{ cmdRelais		},
@@ -168,7 +168,7 @@ int main(void)
 {
 	hardware_init();
 	
-	uart_init( UART_BAUD_SELECT( 115200 , 16000000 ) );
+	uart_init( UART_BAUD_SELECT( 19200 , 16000000 ) );
 	
 	cmdInit( &cmd );
 	
@@ -192,6 +192,7 @@ int main(void)
 					state.cmdCounter++;
 					state.crcOkay++;
 					cmdFuncTab[cmd.id].fnc( &cmd );
+					streamPtr = NULL;
 				}else
 				{
 					state.crcError++;
