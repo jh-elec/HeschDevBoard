@@ -56,7 +56,7 @@ extern tmp102_t tmp102;
 * @return           -> ad value from sensor
 * @description      -> -none
 */
-uint16_t tmp102Read(void);
+int16_t tmp102Read(void);
 
 
 /* tmp102Calc
@@ -64,7 +64,7 @@ uint16_t tmp102Read(void);
 * @return           -> temp in °C
 * @description      -> -none
 */
-uint16_t tmp102Calc(uint16_t temp);
+int16_t tmp102Calc(uint16_t temp);
 
 
 /* tmp102GetTemp
@@ -72,6 +72,6 @@ uint16_t tmp102Calc(uint16_t temp);
 * @return           -> Temperature in °C
 * @description      -> Get actual Temperature
 */
-int16_t tmp102GetTemp( void );
+int8_t tmp102GetTemp( void );
 
 #endif

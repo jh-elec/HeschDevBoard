@@ -11,7 +11,7 @@
 */
 
 #include <avr/io.h>
-#include "tmp_102.h"
+#include "tmp102.h"
 #include "i2cmaster.h"
 
 tmp102_t tmp102 =
@@ -22,7 +22,7 @@ tmp102_t tmp102 =
 };
 
 
-uint16_t tmp102Calc( uint16_t temp )
+int16_t tmp102Calc		( uint16_t temp )
 {
 	double stemp = temp;
 	stemp *= 0.0625;
@@ -30,7 +30,7 @@ uint16_t tmp102Calc( uint16_t temp )
 	return (int16_t)stemp;
 }
 
-uint16_t tmp102Read( void )
+int16_t tmp102Read		( void )
 {
 	uint8_t tmp[] = { 0 , 0 };
 	
@@ -39,10 +39,21 @@ uint16_t tmp102Read( void )
 	tmp[TMP102_LSB] = i2c_readNak();
 	i2c_stop();
 	
-	return ( ( (uint16_t)tmp[TMP102_MSB] << 8 | tmp[TMP102_LSB] ) >> 4  );
+	uint16_t temp = ( (uint16_t)tmp[TMP102_MSB] << 8 | tmp[TMP102_LSB] ) >> 4;
+	
+	if ( temp & 1<<12 ) // Negatives Vorzeichen
+	{
+		return ( (int16_t)tmp[TMP102_MSB] << 8 | tmp[TMP102_LSB] ) >> 4;
+	}
+	else
+	{
+		return ( (uint16_t)tmp[TMP102_MSB] << 8 | tmp[TMP102_LSB] ) >> 4;
+	}
+	
+	return 0;
 }
 
-int16_t tmp102GetTemp( void )
+int8_t tmp102GetTemp	( void )
 {
 	return tmp102Calc( tmp102Read() );
 }
