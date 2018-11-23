@@ -22,7 +22,7 @@ char *timeBcdToStr( uint8_t hh , uint8_t mm , uint8_t ss);
 
 void timeDecToRam( uint8_t hh , uint8_t mm );
 
-char *tempToStr( int16_t tempIn , uint8_t sense );
+char *buildTemperatureString( char buff[5] , int8_t tempIn , uint8_t sensorSign );
 
 void chToRam( char ch , enum mcp23017_gpb dig );
 

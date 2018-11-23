@@ -100,60 +100,54 @@ void timeDecToRam( uint8_t hh , uint8_t mm )
 	}
 }
 
-char *tempToStr( int16_t tempIn , uint8_t sense )
+char *buildTemperatureString( char buff[6] , int8_t tempIn , uint8_t sensorSign )
 {
-	int16_t result		=0;
+	int8_t result		=0;
 	uint8_t sign		=0;
 		
-	result = tempIn;
-	if (result<0)
+	result = (int8_t)tempIn;
+	if (result<=(int8_t)-1)
 	{
 		result = result*-1;
 		sign = 0x5A;
 	}
 	
-	str[0] = ' ';
+	buff[0] = ' ';
 	
-	switch( sense )
+	switch( sensorSign )
 	{
 		case 0:	
 		{
-			str[0] = '`';
+			if ( sign == 0x5A )
+			{
+				buff[0]	= '-'; // Sollte Wert negativ sein, '-' hinzufügen
+			}
+			else
+			{
+				buff[0]	= '`'; // Gibt an welcher Sensor angezeigt wird
+			}
 		}break;
 		
 		case 1:	
 		{
 			if ( sign == 0x5A )
 			{
-				str[0]	= 16;
+				buff[0]	= '-'; // Sollte Wert negativ sein, '-' hinzufügen
 			}
 			else
 			{
-				str[0]	= '´';
+				buff[0]	= '´'; // Gibt an welcher Sensor angezeigt wird
 			}
-		}break;
-		
-		default:   
-		{
-			if ( sign == 0x5A && sense == 0xFF )
-			{
-				str[0] = '-';
-			}
-			else
-			{
-				str[0] = ' ';
-			}
-			
-		}break;
+		}break;		
 	}
 
-	str[1] = (result/10)  + '0';
-	str[2] = (result%10)  + '0';
-	str[3] = '°';
-	str[4] = 'C';
-	str[5] = '\0';
+	buff[1] = (result/10)  + '0';
+	buff[2] = (result%10)  + '0';
+	buff[3] = '°';
+	buff[4] = 'C';
+	buff[5] = '\0';
 	
-	return str;
+	return buff;
 }
 
 void chToRam( char ch , enum mcp23017_gpb dig )

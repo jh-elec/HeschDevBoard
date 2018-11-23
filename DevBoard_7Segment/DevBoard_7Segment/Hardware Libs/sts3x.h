@@ -155,8 +155,14 @@ uint16_t sts3xRead(void);
 * @return           -> - Temperature in °C
 * @description      -> -none
 */
-int16_t sts3xGetTemp(void);
+int8_t sts3xGetTemp(void);
 
+
+/* sts3xReset
+* @para             -> -none
+* @return           -> -none
+* @description      -> Initiate Software Reset
+*/
 void sts3xReset(void);
 
 #endif

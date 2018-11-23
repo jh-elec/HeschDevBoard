@@ -49,7 +49,7 @@ static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
 }
 
 
-void sts3xInit(void)
+void		sts3xInit		(void)
 {
 	sts3xReset();
 	
@@ -64,7 +64,7 @@ void sts3xInit(void)
 	i2c_stop();
 }
 
-int16_t sts3xCalc(uint16_t temp)
+int16_t		sts3xCalc		(uint16_t temp)
 {	
 	double stemp=temp;
 	stemp *= 175;
@@ -74,7 +74,7 @@ int16_t sts3xCalc(uint16_t temp)
 	return (int16_t)stemp;
 }
 
-uint16_t sts3xRead(void)
+uint16_t	sts3xRead		(void)
 {
 	static uint8_t read[STS3X_NUM_OF_BYTES] = "";
 	
@@ -116,24 +116,19 @@ uint16_t sts3xRead(void)
 	return 1700;
 }
 
-int16_t sts3xGetTemp(void)
+int8_t		sts3xGetTemp	(void)
 {
 	/*
 	*	Sollte ein Checksummenfehler auftreten,
 	*	so wird der zuletzt gemessene Wert zurück gegeben
 	*/
-	if ( (sts3x.state & STS3X_CRC_ERR)  )
-	{
-		//return sts3x.actual;
-	}
 	
 	sts3x.actual = sts3xCalc( sts3xRead() );
 	
 	return (sts3x.actual);
 }
 
-
-void sts3xReset(void)
+void		sts3xReset		(void)
 {
 	i2c_start_wait( STS3x_ADDR + I2C_WRITE );
 	i2c_write( 0xA2 );

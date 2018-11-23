@@ -22,7 +22,7 @@
 #include "Hardware Libs/hard_init.h"
 #include "Hardware Libs/i2cmaster.h"
 #include "Hardware Libs/sts3x.h"
-#include "Hardware Libs/tmp_102.h"
+#include "Hardware Libs/tmp102.h"
 #include "Hardware Libs/mcp23017.h"
 #include "Hardware Libs/rx8564.h"
 #include "Hardware Libs/uart.h"
@@ -78,6 +78,14 @@ typedef struct
 	*/
 	uint8_t scrollIsRdy;
 	
+	struct  
+	{
+		uint16_t error;
+		uint16_t okay;
+	}crc;
+	
+	uint16_t cmdCounter;
+		
 }sys_t;
 volatile sys_t sys;
 
@@ -247,6 +255,37 @@ uint8_t		cmdGetTemp		( cmd_t *c )
 	return 0;
 }
 
+uint8_t		cmdGetState		( cmd_t *c )
+{
+	uint8_t buff[] =
+	{
+		/*
+		*	CRC Fehler
+		*/
+		sys.crc.error & 0x00FF,
+		((sys.crc.error & 0xFF00) >> 8),
+
+		/*
+		*	CRC Erfolgreich
+		*/
+		sys.crc.okay & 0x00FF,
+		((sys.crc.okay & 0xFF00) >> 8),		
+		
+		/*
+		*	Kommandozähler
+		*/
+		sys.cmdCounter & 0x00FF,
+		((sys.cmdCounter & 0xFF00) >> 8),
+		
+	};
+	
+	cmdBuildAnswer( &cmd , 6 , DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
+	cmdSendAnswer( &cmd );
+	
+	return 0;
+}
+
+
 const cmdFuncTab_t cmdTab[] =
 {
 	{	cmdPing			},
@@ -255,6 +294,7 @@ const cmdFuncTab_t cmdTab[] =
 	{	cmdReadRtc		},
 	{	cmdRelais		},
 	{	cmdGetTemp		},
+	{	cmdGetState		},
 };
 
 
@@ -371,11 +411,15 @@ int main(void)
 				if( cmd.inCrc == cmd.outCrc && (cmd.id < sizeof(cmdTab) / sizeof(*cmdTab)) )
 				{
 					cmdTab[cmd.id].fnc( &cmd );
+					sys.cmdCounter++;
+					sys.crc.okay++;
 				}else
 				{
 					cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 7 , (uint8_t*)"cmd_bad" );
 					cmdSendAnswer( &cmd );
+					sys.crc.error++;
 				}
+				
 			}
 		}
 
@@ -392,13 +436,13 @@ int main(void)
 			sys.i2cBusy = 0; // Multiplexing wieder freigeben
 			sys.scrollIsRdy = 0; // Es darf wieder gescrollt werden
 		}
-
-		strcpy( out , tempToStr( sts3x.actual , 0 ) );
+		
+		strcpy( out , buildTemperatureString( out , sts3x.actual , 0 ) );
 		strcat( out , " - " );
-		strcat( out , tempToStr( tmp102.actual , 1 ) );
+		strcat( out , buildTemperatureString( out , tmp102.actual , 1 ) );
 		strcat( out , " - " );
-		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );				
-		scrollMessage( out , 2000 , 0 );	
+		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );
+		scrollMessage( out , 2000 , 0 );		
     }
 }
 
