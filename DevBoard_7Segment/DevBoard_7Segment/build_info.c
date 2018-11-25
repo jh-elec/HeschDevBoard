@@ -18,7 +18,7 @@
 
 char *buildVer(void)
 {
-	static char build[] = "000000000000000000000000";
+	static char build[17];
 	
 	/*
 	*	major and minor version
@@ -29,81 +29,192 @@ char *buildVer(void)
 	build[3] = verMinor;
 	build[4] = '.';
 	build[5] = ' ';
-	
-	/*
-	*	Fehlerkorrekturen
-	*/
-	build[6] = ( ( FEHLERKORREKTUR / 10000 )	% 10 )	+ '0';
-	build[7] = ( ( FEHLERKORREKTUR / 1000 )		% 10 )	+ '0';
-	build[8] = ( ( FEHLERKORREKTUR / 100 )		% 10 )	+ '0';
-	build[9] = ( ( FEHLERKORREKTUR / 10 )		% 10 )	+ '0';
-	build[10] = (   FEHLERKORREKTUR % 10 )				+ '0';
-	build[11] = '.';
-	build[12] = ' ';
-	
+		
 	/*
 	*	time.: hour|min
 	*/
-	build[13] = __TIME__[0];
-	build[14] = __TIME__[1];
-	build[15] = __TIME__[3];
-	build[16] = __TIME__[4];
+	build[6] = __TIME__[0];
+	build[7] = __TIME__[1];
+	build[8] = __TIME__[3];
+	build[9] = __TIME__[4];
 	
-	build[17] = '.';
-	build[18] = ' ';
+	build[10] = '.';
+	build[11] = ' ';
 	
 	/*
 	*	day
 	*/
-	build[19] = ((__DATE__[4] >= '0') ? (__DATE__[4]) : '0');
-	build[20] = (__DATE__[ 5]);
+	build[12] = ((__DATE__[4] >= '0') ? (__DATE__[4]) : '0');
+	build[13] = (__DATE__[ 5]);
 	
 	/*
 	*	month
 	*/
 	if(__DATE__[0] == 'J' && __DATE__[1] == 'a')
-	build[21] = '1'; // Januar
+	{
+		build[14] = '0'; // Januar
+		build[15] = '1'; // Januar		
+	}
 
 	if(__DATE__[0] == 'F')
-	build[21] = '2'; // Februar
-	
+	{
+		build[14] = '0'; // Februar
+		build[15] = '2'; // Februar		
+	}
+
 	if(__DATE__[0] == 'M' && __DATE__[1] == 'a' && __DATE__[2] == 'r')
-	build[21] = '3'; // März
-	
+	{
+		build[14] = '0'; // März
+		build[15] = '3'; // März		
+	}
+
 	if(__DATE__[0] == 'A' && __DATE__[1] == 'p')
-	build[21] = '4'; // April
-	
+	{
+		build[14] = '0'; // April
+		build[15] = '4'; // April		
+	}
+
 	if(__DATE__[0] == 'M' && __DATE__[1] == 'a' && __DATE__[2] == 'y')
-	build[21] = '5'; // Mai
-	
+	{
+		build[14] = '0'; // Mai	
+		build[15] = '5'; // Mai		
+	}
+
 	if(__DATE__[0] == 'J' && __DATE__[1] == 'u' && __DATE__[2] == 'n')
-	build[21] = '6'; // Juni
-	
+	{
+		build[14] = '0'; // Juni	
+		build[15] = '6'; // Juni		
+	}
+
 	if(__DATE__[0] == 'J' && __DATE__[1] == 'u' && __DATE__[2] == 'l')
-	build[21] = '7'; // Juli
-	
+	{
+		build[14] = '0'; // Juli	
+		build[15] = '7'; // Juli		
+	}
+
 	if(__DATE__[0] == 'A' && __DATE__[1] == 'u')
-	build[21] = '8'; // August
-	
+	{
+		build[14] = '0'; // August	
+		build[15] = '8'; // August	
+	}
+
 	if(__DATE__[0] == 'S')
-	build[21] = '9'; // September
-
-	if(__DATE__[0] == 'O'){
-		build[21] = '1';
-		build[22] = '0'; // Oktober
+	{
+		build[14] = '0'; // September	
+		build[15] = '9'; // September		
 	}
 
-	if(__DATE__[0] == 'N'){
-		build[21] = '1';
-		build[22] = '1'; // November
+	if(__DATE__[0] == 'O')
+	{
+		build[14] = '1';
+		build[15] = '0'; // Oktober
+	}
+
+	if(__DATE__[0] == 'N')
+	{
+		build[14] = '1';
+		build[15] = '1'; // November
 	}
 	
-	if(__DATE__[0] == 'D'){
-		build[21] = '1';
-		build[22] = '2'; // Dezember
+	if(__DATE__[0] == 'D')
+	{
+		build[14] = '1';
+		build[15] = '2'; // Dezember
 	}
 
-	build[23] = '\0';
+	build[16] = '\0';
+	
+	return build;
+}
+
+
+uint8_t *buildVerBytes(void)
+{
+	static uint8_t build[9];
+	
+	/*
+	*	major and minor version
+	*/
+	build[0] = VERSION_MAJOR;
+	build[1] = VERSION_MINOR;
+
+		
+	/*
+	*	time.: hour|min
+	*/
+	build[2] = __TIME__[0] - '0';
+	build[3] = __TIME__[1] - '0';
+	build[4] = __TIME__[3] - '0';
+	build[5] = __TIME__[4] - '0';
+	
+	/*
+	*	day
+	*/
+	build[6] = ((__DATE__[4] >= '0') ? (__DATE__[4]) : '0' ) - '0';
+	build[7] = (__DATE__[ 5]) - '0';
+	
+	/*
+	*	month
+	*/
+	if(__DATE__[0] == 'J' && __DATE__[1] == 'a')
+	{
+		build[8] = 1; // Januar
+	}
+
+	if(__DATE__[0] == 'F')
+	{
+		build[8] = 2; // Februar
+	}
+
+	if(__DATE__[0] == 'M' && __DATE__[1] == 'a' && __DATE__[2] == 'r')
+	{
+		build[8] = 3; // März	
+	}
+
+	if(__DATE__[0] == 'A' && __DATE__[1] == 'p')
+	{
+		build[8] = 4; // April	
+	}
+
+	if(__DATE__[0] == 'M' && __DATE__[1] == 'a' && __DATE__[2] == 'y')
+	{
+		build[8] = 5; // Mai		
+	}
+
+	if(__DATE__[0] == 'J' && __DATE__[1] == 'u' && __DATE__[2] == 'n')
+	{
+		build[8] = 6; // Juni		
+	}
+
+	if(__DATE__[0] == 'J' && __DATE__[1] == 'u' && __DATE__[2] == 'l')
+	{
+		build[8] = 7; // Juli	
+	}
+
+	if(__DATE__[0] == 'A' && __DATE__[1] == 'u')
+	{
+		build[8] = 8; // August	
+	}
+
+	if(__DATE__[0] == 'S')
+	{
+		build[8] = 9; // September	
+	}
+
+	if(__DATE__[0] == 'O')
+	{
+		build[8] = 10;
+	}
+
+	if(__DATE__[0] == 'N')
+	{
+		build[8] = 11;
+	}
+	
+	if(__DATE__[0] == 'D')
+	{
+		build[8] = 12;
+	}
 	
 	return build;
 }

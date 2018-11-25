@@ -47,9 +47,11 @@ enum Data_Type_Enum
 	__DATA_TYP_MAX_INDEX__
 };
 
-enum Cmd_Id_Enum
+enum Cmd_Basic_Id_Enum
 {
 	ID_PING = 0, // Darauf sollte die Firmware ein Lebenszeichen zurückliefern
+	ID_VERSION,
+	ID_PROJECT_NAME,
 	
 	/*...*/
 	

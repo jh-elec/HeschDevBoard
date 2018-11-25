@@ -131,16 +131,48 @@ uint8_t		cmdPing			( cmd_t *c )
 	return 0;
 }
 
-uint8_t		cmdSetDisplay	( cmd_t *c )
+uint8_t		cmdGetVersion	( cmd_t *c )
+{
+	uint8_t *version = (uint8_t*)buildVer();
+	
+	cmdBuildAnswer( &cmd , ID_VERSION , DATA_TYP_STRING , 0 , 17 , version );
+	cmdSendAnswer( &cmd );
+	
+	return 0;
+}
+
+uint8_t		cmdDisplay		( cmd_t *c )
 {
 	selectFont( (char**) charMap );
 	
-	for ( uint8_t x = 0 ; x < 4 ; x++ )
+	switch ( *c->dataPtr++ )
 	{
-		disp.dig[x] = (*c->dataPtr++) + '0';
+		case 0:
+		{
+			selectFont( (char**) segments );
+			for ( uint8_t x = 0 ; x < 7 ; x++ )
+			{
+				disp.dig[0] = (x + '0');
+				disp.dig[1] = (x + '0');
+				disp.dig[2] = (x + '0');
+				disp.dig[3] = (x + '0');
+				_delay_ms(500);
+			}			
+		}break;
+		
+		case 1:
+		{
+			for ( uint8_t x = 0 ; x < 4 ; x++ )
+			{
+				disp.dig[x] = (*c->dataPtr++) + '0';
+			}				
+			_delay_ms(1500);
+		}break;
 	}
+
+
 	
-	cmdBuildAnswer( &cmd , 1 , DATA_TYP_UINT8 , 0 , 0 , NULL );
+	cmdBuildAnswer( &cmd , 2 , DATA_TYP_UINT8 , 0 , 0 , NULL );
 	cmdSendAnswer( &cmd );
 		
 	return 0;
@@ -156,7 +188,7 @@ uint8_t		cmdSetTime		( cmd_t *c )
 	
 	rtcSetTime(hour , minute ,secound );
 	
-	cmdBuildAnswer( &cmd , 2 , DATA_TYP_UINT8 , 0 , 0 , NULL );
+	cmdBuildAnswer( &cmd , 3 , DATA_TYP_UINT8 , 0 , 0 , NULL );
 	cmdSendAnswer( &cmd );
 	
 	return 0;
@@ -175,7 +207,7 @@ uint8_t		cmdReadRtc		( cmd_t *c )
 		rtcBcdToDec( rtc.year	),
 	};
 	
-	cmdBuildAnswer( &cmd , 2 , DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
+	cmdBuildAnswer( &cmd , 4 , DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
 	cmdSendAnswer( &cmd );
 		
 	return 0;
@@ -229,7 +261,7 @@ uint8_t		cmdRelais		( cmd_t *c )
 		state,
 	};
 
-	cmdBuildAnswer( &cmd , 3 , DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
+	cmdBuildAnswer( &cmd , 5 , DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
 	cmdSendAnswer( &cmd );
 
 	return 0;
@@ -249,7 +281,7 @@ uint8_t		cmdGetTemp		( cmd_t *c )
 		tmp102.lowest,
 	};
 	
-	cmdBuildAnswer( &cmd , 5, DATA_TYP_INT8 , 0 , sizeof(buff) , (uint8_t*)buff );
+	cmdBuildAnswer( &cmd , 6, DATA_TYP_INT8 , 0 , sizeof(buff) , (uint8_t*)buff );
 	cmdSendAnswer( &cmd );
 	
 	return 0;
@@ -279,7 +311,7 @@ uint8_t		cmdGetState		( cmd_t *c )
 		
 	};
 	
-	cmdBuildAnswer( &cmd , 6 , DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
+	cmdBuildAnswer( &cmd , 7 , DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
 	cmdSendAnswer( &cmd );
 	
 	return 0;
@@ -289,7 +321,8 @@ uint8_t		cmdGetState		( cmd_t *c )
 const cmdFuncTab_t cmdTab[] =
 {
 	{	cmdPing			},
-	{	cmdSetDisplay	},
+	{	cmdGetVersion	},
+	{	cmdDisplay		},
 	{	cmdSetTime		},
 	{	cmdReadRtc		},
 	{	cmdRelais		},
@@ -393,12 +426,13 @@ int main(void)
 	cmdInit( &cmd );
 
 	sei();
-
-	cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 4 , (uint8_t*)"Boot");
-	cmdSendAnswer( &cmd );
 	
 
-	sys.scrollIsRdy = 0;
+		cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 4 , (uint8_t*)"Boot");
+		cmdSendAnswer( &cmd );		
+
+	
+	sys.scrollIsRdy = 1;
 
 	while (1) 
     {	
@@ -437,12 +471,13 @@ int main(void)
 			sys.scrollIsRdy = 0; // Es darf wieder gescrollt werden
 		}
 		
-		strcpy( out , buildTemperatureString( out , sts3x.actual , 0 ) );
-		strcat( out , " - " );
-		strcat( out , buildTemperatureString( out , tmp102.actual , 1 ) );
-		strcat( out , " - " );
-		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );
-		scrollMessage( out , 2000 , 0 );		
+		char tmp[6] = "";
+ 		strcpy( out , buildTemperatureString( tmp , sts3x.actual , 0 ) );
+ 		strcat( out , " - " );
+ 		strcat( out , buildTemperatureString( tmp , tmp102.actual , 1 ) );
+ 		strcat( out , " - " );
+ 		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );
+ 		scrollMessage( out , 1500 , 0 );		
     }
 }
 
