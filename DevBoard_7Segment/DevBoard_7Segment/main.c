@@ -127,7 +127,7 @@ uint8_t		cmdPing			( cmd_t *c )
 {
 	cmdBuildAnswer( &cmd , ID_PING , DATA_TYP_STRING , 0 , 4 , (uint8_t*)"ping" );
 	cmdSendAnswer( &cmd );
-	
+			
 	return 0;
 }
 
@@ -147,6 +147,11 @@ uint8_t		cmdDisplay		( cmd_t *c )
 	
 	switch ( *c->dataPtr++ )
 	{
+<<<<<<< .mine
+		disp.dig[x] = (*c->Data++) + '0';
+||||||| .r36
+		disp.dig[x] = (*c->dataPtr++) + '0';
+=======
 		case 0:
 		{
 			selectFont( (char**) segments );
@@ -168,6 +173,7 @@ uint8_t		cmdDisplay		( cmd_t *c )
 			}				
 			_delay_ms(1500);
 		}break;
+>>>>>>> .r38
 	}
 
 
@@ -180,11 +186,11 @@ uint8_t		cmdDisplay		( cmd_t *c )
 
 uint8_t		cmdSetTime		( cmd_t *c )
 {
-	if (c->dataLen != 3) return 1;
+	if (c->DataLength != 3) return 1;
 	
-	uint8_t hour	= *c->dataPtr++;
-	uint8_t minute	= *c->dataPtr++;
-	uint8_t secound = *c->dataPtr;
+	uint8_t hour	= *c->Data++;
+	uint8_t minute	= *c->Data++;
+	uint8_t secound = *c->Data;
 	
 	rtcSetTime(hour , minute ,secound );
 	
@@ -218,8 +224,8 @@ uint8_t		cmdRelais		( cmd_t *c )
 	uint16_t		kx;
 	uint8_t			state;
 	
-	kx		= c->dataPtr[0];
-	state	= c->dataPtr[1];
+	kx		= c->Data[0];
+	state	= c->Data[1];
 
 	switch ( state )
 	{
@@ -321,12 +327,18 @@ uint8_t		cmdGetState		( cmd_t *c )
 const cmdFuncTab_t cmdTab[] =
 {
 	{	cmdPing			},
+<<<<<<< .mine
+	{	cmdGetTemp		},		
+	{	cmdSetDisplay	},
+||||||| .r36
+	{	cmdSetDisplay	},
+=======
 	{	cmdGetVersion	},
 	{	cmdDisplay		},
+>>>>>>> .r38
 	{	cmdSetTime		},
 	{	cmdReadRtc		},
 	{	cmdRelais		},
-	{	cmdGetTemp		},
 	{	cmdGetState		},
 };
 
@@ -415,7 +427,7 @@ uint8_t	streamIn[128]	= "";
 int main(void)
 {
 	hardware_init();
-	uart_init( UART_BAUD_SELECT( 19200 , F_CPU ) );
+	uart_init( UART_BAUD_SELECT( 9600 , F_CPU ) );
 	
 	eepLoad( &eep );
 	i2c_init();
@@ -428,10 +440,18 @@ int main(void)
 	sei();
 	
 
+<<<<<<< .mine
+	sys.scrollIsRdy = 1;
+||||||| .r36
+	cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 4 , (uint8_t*)"Boot");
+	cmdSendAnswer( &cmd );
+	
+=======
 		cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 4 , (uint8_t*)"Boot");
 		cmdSendAnswer( &cmd );		
 
 	
+>>>>>>> .r38
 	sys.scrollIsRdy = 1;
 
 	while (1) 
@@ -440,21 +460,33 @@ int main(void)
 		
 		if ( streamPtr != NULL )
 		{
-			if ( !cmdParse( streamPtr , &cmd ) )
+			uint8_t ParserState = cmdParse( streamPtr , &cmd );
+			
+			// 			cmd_t LoopBack = cmd;
+			// 			cmdBuildAnswer(&LoopBack,LoopBack.MessageID,LoopBack.DataType,LoopBack.Exitcode,LoopBack.DataLength,LoopBack.Data);
+			// 			cmdSendAnswer(&LoopBack);
+			
+			cmd_t Answer;
+			
+			switch ( ParserState )
 			{
-				if( cmd.inCrc == cmd.outCrc && (cmd.id < sizeof(cmdTab) / sizeof(*cmdTab)) )
+				case 0:
 				{
-					cmdTab[cmd.id].fnc( &cmd );
-					sys.cmdCounter++;
-					sys.crc.okay++;
-				}else
-				{
-					cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 7 , (uint8_t*)"cmd_bad" );
-					cmdSendAnswer( &cmd );
-					sys.crc.error++;
-				}
+					cmdTab[cmd.MessageID].fnc( &cmd );
+				}break;
 				
-			}
+				case 1: // Kein Start gefunden
+				{
+					cmdBuildAnswer( &Answer , ID_APPLICATION , DATA_TYP_STRING , ParserState , 8 , (uint8_t*)"NO_START" );
+					cmdSendAnswer( &Answer );
+				}break;
+				
+				case 2: // Checksummen fehler
+				{
+					cmdBuildAnswer( &Answer , ID_APPLICATION , DATA_TYP_STRING , ParserState , 9 , (uint8_t*)"CRC_ERROR" );
+					cmdSendAnswer( &Answer );
+				}break;
+			}			
 		}
 
 		if ( sys.scrollIsRdy )
@@ -471,6 +503,22 @@ int main(void)
 			sys.scrollIsRdy = 0; // Es darf wieder gescrollt werden
 		}
 		
+<<<<<<< .mine
+		char tmp[10] = "";
+		strcpy( out , buildTemperatureString( tmp , sts3x.actual , 0 ) );
+		strcat( out , " - " );
+		strcat( out , buildTemperatureString( tmp , tmp102.actual , 1 ) );
+		strcat( out , " - " );
+		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );
+		scrollMessage( out , 2000 , 0 );		
+||||||| .r36
+		strcpy( out , buildTemperatureString( out , sts3x.actual , 0 ) );
+		strcat( out , " - " );
+		strcat( out , buildTemperatureString( out , tmp102.actual , 1 ) );
+		strcat( out , " - " );
+		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );
+		scrollMessage( out , 2000 , 0 );		
+=======
 		char tmp[6] = "";
  		strcpy( out , buildTemperatureString( tmp , sts3x.actual , 0 ) );
  		strcat( out , " - " );
@@ -478,6 +526,7 @@ int main(void)
  		strcat( out , " - " );
  		strcat( out , timeBcdToStr( rtc.hour , rtc.minute , rtc.second ) );
  		scrollMessage( out , 1500 , 0 );		
+>>>>>>> .r38
     }
 }
 
