@@ -433,6 +433,7 @@ void scrollMessage( char *msg , uint16_t delay_ms , uint8_t wait )
 	} while ( w_ );
 }
 
+uint8_t DebugModeThousend = 0;
 
 uint8_t *streamPtr		= NULL;
 uint8_t	streamIn[128]	= "";
@@ -478,7 +479,18 @@ int main(void)
 				case 0:
 				{
 					cmdTab[cmd.MessageID].fnc( &cmd );
-					sys.cmdCounter++;
+					if ( ++sys.cmdCounter % 10000 == 0 )
+					{
+						DebugModeThousend++;
+						if ( DebugModeThousend < 7 )
+						{
+							RELAIS_PORT1_PORT |= ( 1 << ( ( DebugModeThousend ) + 1 ) );
+						}
+						else
+						{
+							RELAIS_PORT2_PORT |= 1 << ( DebugModeThousend - 5 );
+						}	
+					}
 				}break;
 				
 				case 1: // Kein Start gefunden
