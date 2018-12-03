@@ -20,7 +20,7 @@
 /*	Frame Offset
 *	Specifies where the command package begins
 */
-#define CMD_START_FRAME_OFFSET	2
+#define CMD_START_FRAME_OFFSET	0
 
 
 enum Communication_Header_Enum
