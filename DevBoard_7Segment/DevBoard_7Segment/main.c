@@ -468,12 +468,6 @@ int main(void)
 		{
 			uint8_t ParserState = cmdParse( streamPtr , &cmd );
 			
-			// 			cmd_t LoopBack = cmd;
-			// 			cmdBuildAnswer(&LoopBack,LoopBack.MessageID,LoopBack.DataType,LoopBack.Exitcode,LoopBack.DataLength,LoopBack.DataPtr);
-			// 			cmdSendAnswer(&LoopBack);
-			
-			cmd_t Answer;
-			
 			switch ( ParserState )
 			{
 				case 0:
@@ -491,18 +485,6 @@ int main(void)
 							RELAIS_PORT2_PORT |= 1 << ( DebugModeThousend - 5 );
 						}	
 					}
-				}break;
-				
-				case 1: // Kein Start gefunden
-				{
-					cmdBuildAnswer( &Answer , ID_APPLICATION , DATA_TYP_STRING , ParserState , 8 , (uint8_t*)"NO_START" );
-					cmdSendAnswer( &Answer );
-				}break;
-				
-				case 2: // Checksummen fehler
-				{
-					cmdBuildAnswer( &Answer , ID_APPLICATION , DATA_TYP_STRING , ParserState , 9 , (uint8_t*)"CRC_ERROR" );
-					cmdSendAnswer( &Answer );
 				}break;
 			}	
 		}

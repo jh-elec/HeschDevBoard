@@ -28,6 +28,7 @@ static uint8_t	Frame[__CMD_HEADER_ENTRYS__];
 static uint8_t MasterFrameCRC = 0;
 static uint8_t SlaveFrameCRC = 0;
 
+static int8_t FrameStart = 0;
 
 static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
 {
@@ -84,47 +85,46 @@ void		cmdInit				( cmd_t *c )
 	MasterFrameCRC	= 0;	// Checksumme der gesamten Message ( Vom PC )
 	SlaveFrameCRC	= 0;	// Checksumme der gesamten Message ( Vom µC )
 	c->DataPtr		= NULL; // Zeiger auf Nutzdaten
+	FrameStart		= 0;	// Index eines Frames
 }
 
 uint8_t		cmdParse			( uint8_t *rx , cmd_t *c )		
 {
-// 	int8_t FrameStart = cmdSearchFrame( rx );
-// 	
-// 	if ( FrameStart == - 1 )
-// 	{
-// 		return 1;
-// 	}
+	FrameStart = cmdSearchFrame( rx );
+	
+	if ( FrameStart == - 1 )
+	{
+		return 1;
+	}
 		
-	c->DataLength 	= rx[ CMD_START_FRAME_OFFSET + CMD_HEADER_LENGHT		] -__CMD_HEADER_ENTRYS__;
-	c->DataType		= rx[ CMD_START_FRAME_OFFSET + CMD_HEADER_DATA_TYP		];
-	c->MessageID 	= rx[ CMD_START_FRAME_OFFSET + CMD_HEADER_ID			];
-	c->Exitcode		= rx[ CMD_START_FRAME_OFFSET + CMD_HEADER_Exitcode		];	
-	MasterFrameCRC	= rx[ CMD_START_FRAME_OFFSET + CMD_HEADER_CRC			];
+	c->DataLength 	= rx[ FrameStart + CMD_START_FRAME_OFFSET + CMD_HEADER_LENGHT		] -__CMD_HEADER_ENTRYS__;
+	c->DataType		= rx[ FrameStart + CMD_START_FRAME_OFFSET + CMD_HEADER_DATA_TYP		];
+	c->MessageID 	= rx[ FrameStart + CMD_START_FRAME_OFFSET + CMD_HEADER_ID			];
+	c->Exitcode		= rx[ FrameStart + CMD_START_FRAME_OFFSET + CMD_HEADER_Exitcode		];	
+	MasterFrameCRC	= rx[ FrameStart + CMD_START_FRAME_OFFSET + CMD_HEADER_CRC			];
 	
 	if ( c->DataLength )
 	{
-		c->DataPtr = rx + ( CMD_START_FRAME_OFFSET + __CMD_HEADER_ENTRYS__ );
+		c->DataPtr = rx + ( FrameStart + CMD_START_FRAME_OFFSET + __CMD_HEADER_ENTRYS__ );
 	}
 	else
 	{
 		c->DataPtr = NULL; // Keine Nutzdaten
 	}
 	
-	uint8_t crc = 0;
 	SlaveFrameCRC = 0;
 	
-	rx[ CMD_START_FRAME_OFFSET + CMD_HEADER_CRC ] = 0;
+	rx[ FrameStart + CMD_START_FRAME_OFFSET + CMD_HEADER_CRC ] = 0;
 	
 	for ( uint8_t x = 0 ; x < __CMD_HEADER_ENTRYS__ ; x++ )
 	{
-		crc = cmdCrc8CCITTUpdate( crc , &rx[ CMD_START_FRAME_OFFSET + ( CMD_HEADER_LENGHT ) + x ] );
+		SlaveFrameCRC = cmdCrc8CCITTUpdate( SlaveFrameCRC , &rx[FrameStart + CMD_START_FRAME_OFFSET + CMD_HEADER_LENGHT + x ] );
 	}
 	
 	for ( uint8_t x = 0 ; x < c->DataLength ; x++ )
 	{
-		crc = cmdCrc8CCITTUpdate( crc , &rx[  ( CMD_START_FRAME_OFFSET + __CMD_HEADER_ENTRYS__ ) + x ] );
+		SlaveFrameCRC = cmdCrc8CCITTUpdate( SlaveFrameCRC , &rx[FrameStart + CMD_START_FRAME_OFFSET + __CMD_HEADER_ENTRYS__ + x ] );
 	}
-	SlaveFrameCRC = crc;
 	
 	if ( SlaveFrameCRC != MasterFrameCRC )
 	{
