@@ -39,19 +39,19 @@
       </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.ispmk2</avrtool>
-    <avrtoolserialnumber>000200100760</avrtoolserialnumber>
+    <avrtoolserialnumber>0000A0004174</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x1E9502</avrdeviceexpectedsignature>
     <avrtoolinterface>ISP</avrtoolinterface>
-    <avrtoolinterfaceclock>1000000</avrtoolinterfaceclock>
+    <avrtoolinterfaceclock>500000</avrtoolinterfaceclock>
     <com_atmel_avrdbg_tool_ispmk2>
       <ToolOptions>
         <InterfaceProperties>
-          <IspClock>1000000</IspClock>
+          <IspClock>500000</IspClock>
         </InterfaceProperties>
         <InterfaceName>ISP</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.ispmk2</ToolType>
-      <ToolNumber>000200100760</ToolNumber>
+      <ToolNumber>0000A0004174</ToolNumber>
       <ToolName>AVRISP mkII</ToolName>
     </com_atmel_avrdbg_tool_ispmk2>
     <ResetRule>0</ResetRule>

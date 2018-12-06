@@ -438,6 +438,8 @@ uint8_t DebugModeThousend = 0;
 uint8_t *streamPtr		= NULL;
 uint8_t	streamIn[128]	= "";
 
+uint8_t RelaisState = 0;
+
 int main(void)
 {
 	hardware_init();
@@ -473,18 +475,19 @@ int main(void)
 				case 0:
 				{
 					cmdTab[cmd.MessageID].fnc( &cmd );
-					if ( ++sys.cmdCounter % 10000 == 0 )
+					sys.cmdCounter++;
+					RelaisState ^= 1<<0;
+					if ( RelaisState & 1<<0 )
 					{
-						DebugModeThousend++;
-						if ( DebugModeThousend < 7 )
-						{
-							RELAIS_PORT1_PORT |= ( 1 << ( ( DebugModeThousend ) + 1 ) );
-						}
-						else
-						{
-							RELAIS_PORT2_PORT |= 1 << ( DebugModeThousend - 5 );
-						}	
+						RELAIS_PORT2_PORT &= ~(RELAIS_7_PORT2 | RELAIS_8_PORT2);
+						RELAIS_PORT1_PORT = (RELAIS_1_PORT1 | RELAIS_2_PORT1 | RELAIS_3_PORT1 | RELAIS_4_PORT1);
 					}
+					else
+					{
+						RELAIS_PORT1_PORT = (RELAIS_5_PORT1 | RELAIS_6_PORT1);
+						RELAIS_PORT2_PORT = (RELAIS_7_PORT2 | RELAIS_8_PORT2);
+					}
+									
 				}break;
 			}	
 		}
