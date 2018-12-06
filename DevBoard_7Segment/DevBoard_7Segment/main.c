@@ -312,6 +312,7 @@ uint8_t		cmdGetState		( cmd_t *c )
 		sys.cmdCounter & 0x00FF,
 		((sys.cmdCounter & 0xFF00) >> 8),
 		
+		MCUCSR,	
 	};
 	
 	cmdBuildAnswer( &cmd , 7 , DATA_TYP_UINT8 , 0 , sizeof(buff) , buff );
