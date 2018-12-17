@@ -52,6 +52,7 @@ LICENSE:
 #error "This library requires AVR-GCC 3.4 or later, update to newer AVR-GCC compiler !"
 #endif
 
+#include "RingBuffer.h"
 
 /*
 ** constants and macros
@@ -151,7 +152,7 @@ uint8_t		*uartReadRingBuff		( uint8_t *stream );
  *           - \b UART_FRAME_ERROR       
  *             <br>Framing Error by UART
  */
-extern unsigned int uart_getc(void);
+extern uint8_t uart_getc(void);
 
 
 /**

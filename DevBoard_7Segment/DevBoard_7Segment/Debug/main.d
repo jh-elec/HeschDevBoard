@@ -25,9 +25,9 @@ main.d main.o: .././main.c \
  .././Hardware\ Libs/sts3x.h .././Hardware\ Libs/tmp102.h \
  .././Hardware\ Libs/mcp23017.h .././Hardware\ Libs/hard_def.h \
  .././Hardware\ Libs/rx8564.h .././Hardware\ Libs/i2cmaster.h \
- .././Hardware\ Libs/uart.h .././build_info.h .././cmd.h \
+ .././Hardware\ Libs/uart.h .././Hardware\ Libs/RingBuffer.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- .././LED\ Font/led_font.h
+ .././build_info.h .././cmd.h .././LED\ Font/led_font.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -93,10 +93,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 .././Hardware\ Libs/uart.h:
 
+.././Hardware\ Libs/RingBuffer.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
 .././build_info.h:
 
 .././cmd.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
 .././LED\ Font/led_font.h:

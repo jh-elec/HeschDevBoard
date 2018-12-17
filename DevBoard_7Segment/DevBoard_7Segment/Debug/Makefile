@@ -48,6 +48,7 @@ C_SRCS +=  \
 ../Hardware\ Libs/mcp23017.c \
 ../Hardware\ Libs/rx8564.c \
 ../Hardware\ Libs/sts3x.c \
+../Hardware\ Libs/RingBuffer.c \
 ../Hardware\ Libs/tmp102.c \
 ../Hardware\ Libs/uart.c \
 ../main.c
@@ -69,6 +70,7 @@ Hardware\ Libs/i2cmaster.o \
 Hardware\ Libs/mcp23017.o \
 Hardware\ Libs/rx8564.o \
 Hardware\ Libs/sts3x.o \
+Hardware\ Libs/RingBuffer.o \
 Hardware\ Libs/tmp102.o \
 Hardware\ Libs/uart.o \
 main.o
@@ -82,6 +84,7 @@ DevBoardSegment.o \
 "Hardware Libs/mcp23017.o" \
 "Hardware Libs/rx8564.o" \
 "Hardware Libs/sts3x.o" \
+"Hardware Libs/RingBuffer.o" \
 "Hardware Libs/tmp102.o" \
 "Hardware Libs/uart.o" \
 main.o
@@ -95,6 +98,7 @@ Hardware\ Libs/i2cmaster.d \
 Hardware\ Libs/mcp23017.d \
 Hardware\ Libs/rx8564.d \
 Hardware\ Libs/sts3x.d \
+Hardware\ Libs/RingBuffer.d \
 Hardware\ Libs/tmp102.d \
 Hardware\ Libs/uart.d \
 main.d
@@ -108,6 +112,7 @@ DevBoardSegment.d \
 "Hardware Libs/mcp23017.d" \
 "Hardware Libs/rx8564.d" \
 "Hardware Libs/sts3x.d" \
+"Hardware Libs/RingBuffer.d" \
 "Hardware Libs/tmp102.d" \
 "Hardware Libs/uart.d" \
 main.d
@@ -169,6 +174,13 @@ Hardware\ Libs/rx8564.o: ../Hardware\ Libs/rx8564.c
 	
 
 Hardware\ Libs/sts3x.o: ../Hardware\ Libs/sts3x.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Hardware\ Libs/RingBuffer.o: ../Hardware\ Libs/RingBuffer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -18,6 +18,8 @@ Hardware Libs\rx8564.c
 
 Hardware Libs\sts3x.c
 
+Hardware Libs\RingBuffer.c
+
 Hardware Libs\tmp102.c
 
 Hardware Libs\uart.c

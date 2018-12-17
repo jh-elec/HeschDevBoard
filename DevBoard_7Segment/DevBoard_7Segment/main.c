@@ -29,8 +29,8 @@
 #include "Hardware Libs/uart.h"
 #include "build_info.h"
 #include "cmd.h"
-
 #include "LED Font/led_font.h"
+
 
 char out[60] = "";
 
@@ -300,11 +300,6 @@ uint8_t		cmdGetState		( cmd_t *c )
 		sys.crc.error & 0x00FF,
 		((sys.crc.error & 0xFF00) >> 8),
 
-		/*
-		*	CRC Erfolgreich
-		*/
-		sys.crc.okay & 0x00FF,
-		((sys.crc.okay & 0xFF00) >> 8),		
 		
 		/*
 		*	Kommandozähler
@@ -343,17 +338,24 @@ uint8_t		cmdSetDebugMode ( cmd_t *c )
 	return 0;
 }
 
+uint8_t		cmdDebug		( cmd_t *c )
+{
+
+	return 0;
+}
+
 const cmdFuncTab_t cmdTab[] =
 {
-	{	cmdPing			},
-	{	cmdGetVersion	},
-	{	cmdDisplay		},
-	{	cmdSetTime		},
-	{	cmdReadRtc		},
-	{	cmdRelais		},
-	{	cmdGetTemp		},
-	{	cmdGetState		},
-	{	cmdSetDebugMode	},
+	{	cmdPing			},//0
+	{	cmdGetVersion	},//1
+	{	cmdDisplay		},//2
+	{	cmdSetTime		},//3
+	{	cmdReadRtc		},//4
+	{	cmdRelais		},//5
+	{	cmdGetTemp		},//6
+	{	cmdGetState		},//7
+	{	cmdSetDebugMode	},//8
+	{	cmdDebug		},//9
 };
 
 
@@ -466,7 +468,7 @@ int main(void)
 	while (1) 
     {	
 		streamPtr	= uartReadRingBuff( streamIn );
-		
+
 		if ( streamPtr != NULL )
 		{
 			uint8_t ParserState = cmdParse( streamPtr , &cmd );
