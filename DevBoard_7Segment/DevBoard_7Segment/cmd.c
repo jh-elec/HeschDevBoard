@@ -53,23 +53,24 @@ static inline uint8_t cmdCrc8CCITTUpdate ( uint8_t inCrc , uint8_t *inData )
 	return data;
 }
 
-int8_t		cmdSearchFrame( uint8_t *frame )
+int16_t		cmdSearchFrame( uint8_t *frame )
 {
-	for ( uint8_t x = 0 ; x < 127 ; x++ )
+	for ( int16_t x = 0 ; x < 65534 ; x++ )
 	{
 		if ( frame[x] == '-' )
 		{
-			if ( x < 127 )
-			{
-				if ( frame[x+1] == '+' )
-				{
-					return x + 2;
-				}
-			}
-			else
-			{
-				return -1; // Überlauf
-			}
+		  if ( frame[x+1] == '+' )
+		  {
+			return x + 2;
+		  }
+		  else
+		  {
+			  return -1;
+		  }
+		}
+		else
+		{
+			return -2; // Überlauf
 		}
 	}
 	
@@ -126,9 +127,16 @@ uint8_t		cmdParse			( uint8_t *rx , cmd_t *c )
 		SlaveFrameCRC = cmdCrc8CCITTUpdate( SlaveFrameCRC , &rx[FrameStart + CMD_START_FRAME_OFFSET + __CMD_HEADER_ENTRYS__ + x ] );
 	}
 	
+	/* Checksumme überprüfen */
 	if ( SlaveFrameCRC != MasterFrameCRC )
 	{
 		return 2;
+	}
+	
+	/* Synchrosnisations Frame empfangen? */
+	if ( c->MessageID == ID_PING && c->DataPtr[0] == 'C')
+	{
+		return 3; // Sync 
 	}
 	
 	return 0;
