@@ -17,6 +17,7 @@
 #include "Hardware Libs/uart.h"
 #include "build_info.h"
 #include "cmd.h"
+#include "Switch.h"
 
 uint8_t *streamPtr		= NULL;
 cmd_t cmd;
@@ -72,19 +73,7 @@ uint8_t		cmdRelais	( cmd_t *c )
 			
 		}break;
 	}
-
-	uint8_t buff[] =
-	{
-		kx,
-		state,
-	};
-
-// 	cmd.id = 0;
-// 	cmd.exitcode = 0;
-// 	cmd.dataPtr = buff;
-// 	cmd.dataLen = sizeof(buff);
-// 	cmdSendAnswer( &cmd );
-
+	
 	return 0;
 }
 
@@ -176,6 +165,9 @@ int main(void)
 
 	sei();
 
+	Switch_t Switch;
+	SwitchInit( &PORTB , 0b00001111 , &Switch );
+
 	cmdBuildAnswer( &cmd , ID_APPLICATION , DATA_TYP_STRING , 0 , 4 , (uint8_t*)"Boot");
 	cmdSendAnswer( &cmd );
 
@@ -201,6 +193,23 @@ int main(void)
 				}
 			}
 		}	
+		
+		SwitchRead( &Switch , &PORTB );
+		if ( Switch.Info & 1<<0 )
+		{			
+			Switch.Info = 0;
+			/*
+				kx		= c->dataPtr[0];
+				state	= c->dataPtr[1];
+			*/
+			cmd_t Test;
+			static uint8_t RelaisState = 0x00;
+			
+			Test.dataLen	= 2;
+			uint8_t buff[]	= { RelaisState ^= 0xFF ,0x02};
+			Test.dataPtr	= buff;
+			cmdRelais( &Test );
+		}
     }
 }
 

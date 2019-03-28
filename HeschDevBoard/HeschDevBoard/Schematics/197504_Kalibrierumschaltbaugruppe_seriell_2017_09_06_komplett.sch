@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE eagle sys "eagle.dtd">
-<eagle version="6.5.0">
+<!DOCTYPE eagle SYSTEM "eagle.dtd">
+<eagle version="6.4">
 <drawing>
 <settings>
 <setting alwaysvectorfont="yes"/>
@@ -11375,7 +11375,7 @@ http://www.bccomponents.com/</description>
 </package>
 <package name="140CLH-0810">
 <description>&lt;b&gt;Aluminum electrolytic capacitors SMD (Chip)&lt;/b&gt;&lt;p&gt;
-Long life base plate, High temp 140 CLH&lt;p&gt;
+Long life base plate, High temperature 140 CLH&lt;p&gt;
 http://www.bccomponents.com/</description>
 <wire x1="-4.85" y1="4.2" x2="3.4" y2="4.2" width="0.2032" layer="21"/>
 <wire x1="4.85" y1="2.75" x2="4.85" y2="1.45" width="0.2032" layer="21"/>
@@ -11398,7 +11398,7 @@ http://www.bccomponents.com/</description>
 </package>
 <package name="140CLH-1010">
 <description>&lt;b&gt;Aluminum electrolytic capacitors SMD (Chip)&lt;/b&gt;&lt;p&gt;
-Long life base plate, High temp 140 CLH&lt;p&gt;
+Long life base plate, High temperature 140 CLH&lt;p&gt;
 http://www.bccomponents.com/</description>
 <wire x1="-5.8" y1="5.15" x2="4.35" y2="5.15" width="0.2032" layer="21"/>
 <wire x1="5.8" y1="3.7" x2="5.8" y2="1.45" width="0.2032" layer="21"/>
@@ -11421,7 +11421,7 @@ http://www.bccomponents.com/</description>
 </package>
 <package name="140CLH-1014">
 <description>&lt;b&gt;Aluminum electrolytic capacitors SMD (Chip)&lt;/b&gt;&lt;p&gt;
-Long life base plate, High temp 140 CLH&lt;p&gt;
+Long life base plate, High temperature 140 CLH&lt;p&gt;
 http://www.bccomponents.com/</description>
 <wire x1="-5.8" y1="5.15" x2="4.35" y2="5.15" width="0.2032" layer="21"/>
 <wire x1="5.8" y1="3.7" x2="5.8" y2="1.45" width="0.2032" layer="21"/>
@@ -11697,7 +11697,7 @@ http://www.bccomponents.com/</description>
 </package>
 <package name="175TMP-0808">
 <description>&lt;b&gt;Aluminum electrolytic capacitors&lt;/b&gt;&lt;p&gt;
-High temp solid electrolytic SMD 175 TMP&lt;p&gt;
+High Temperature solid electrolytic SMD 175 TMP&lt;p&gt;
 http://www.bccomponents.com/</description>
 <wire x1="3.2" y1="-4.1" x2="-4.1" y2="-4.1" width="0.2032" layer="21"/>
 <wire x1="-4.1" y1="-4.1" x2="-4.1" y2="-1.55" width="0.2032" layer="21"/>
@@ -11720,7 +11720,7 @@ http://www.bccomponents.com/</description>
 </package>
 <package name="175TMP-0810">
 <description>&lt;b&gt;Aluminum electrolytic capacitors&lt;/b&gt;&lt;p&gt;
-High temp solid electrolytic SMD 175 TMP&lt;p&gt;
+High Temperature solid electrolytic SMD 175 TMP&lt;p&gt;
 http://www.bccomponents.com/</description>
 <wire x1="3.2" y1="-4.1" x2="-4.1" y2="-4.1" width="0.2032" layer="21"/>
 <wire x1="-4.1" y1="-4.1" x2="-4.1" y2="-1.55" width="0.2032" layer="21"/>
@@ -18297,7 +18297,7 @@ Based on the following sources:&lt;p&gt;
 2 Kbytes SRAM&lt;br&gt;
 1 Kbytes EEPROM&lt;br&gt;
 USART&lt;br&gt;
-8-ledCh 10 bit ADC&lt;br&gt;
+8-channel 10 bit ADC&lt;br&gt;
 Source: www.atmel.com .. doc2503.pdf</description>
 <gates>
 <gate name="G$1" symbol="32-I/O-M32-A" x="0" y="0"/>
@@ -24932,7 +24932,7 @@ Source: K2.pdf</description>
 <rectangle x1="0.508" y1="-0.254" x2="1.397" y2="0.254" layer="51"/>
 </package>
 <package name="LZR181">
-<description>&lt;B&gt;LED BstartUpDevice&lt;/B&gt;&lt;p&gt;
+<description>&lt;B&gt;LED BLOCK&lt;/B&gt;&lt;p&gt;
 1 LED, Siemens</description>
 <wire x1="-1.27" y1="-1.27" x2="1.27" y2="-1.27" width="0.1524" layer="21"/>
 <wire x1="1.27" y1="-1.27" x2="1.27" y2="-0.889" width="0.1524" layer="21"/>
@@ -27210,7 +27210,7 @@ Based on  the following source:
 </deviceset>
 </devicesets>
 </library>
-<library name="Taster - DIcrcBeginnPtrONICS_DTSM6">
+<library name="Taster - DIPTRONICS_DTSM6">
 <description>&lt;b&gt;Artikelnummer:&lt;
 &lt;br&gt;
 &lt;br&gt;
@@ -27304,7 +27304,7 @@ erstellt von:  Hm</description>
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
---&gt;SMD Taster DIcrcBeginnPtrONICS: DTSM6
+--&gt;SMD Taster DIPTRONICS: DTSM6
 &lt;hr&gt;
 &lt;b&gt;Daten:&lt;b/
 &lt;br&gt;
@@ -27912,7 +27912,7 @@ erstellt von:  Hm</description>
 </package>
 </packages>
 <symbols>
-<symbol name="DREHencoder_MIT_TASTE">
+<symbol name="DREHENCODER_MIT_TASTE">
 <wire x1="-6.35" y1="-7.62" x2="-6.35" y2="7.62" width="0.5" layer="94"/>
 <wire x1="-6.35" y1="7.62" x2="6.35" y2="7.62" width="0.5" layer="94"/>
 <wire x1="6.35" y1="7.62" x2="6.35" y2="-7.62" width="0.5" layer="94"/>
@@ -27967,7 +27967,7 @@ erstellt von:  Hm</description>
 <devicesets>
 <deviceset name="BOURNS_PEC11S" prefix="ENC" uservalue="yes">
 <gates>
-<gate name="G$1" symbol="DREHencoder_MIT_TASTE" x="0" y="0"/>
+<gate name="G$1" symbol="DREHENCODER_MIT_TASTE" x="0" y="0"/>
 </gates>
 <devices>
 <device name="" package="BOURNS_PEC11S">
@@ -28382,38 +28382,38 @@ erstellt von:  Hm</description>
 <wire x1="37.5" y1="-25" x2="33.9" y2="-25" width="0" layer="21"/>
 <wire x1="37.5" y1="-21.4" x2="38.7" y2="-21.4" width="0" layer="21"/>
 <wire x1="33.9" y1="-25" x2="33.9" y2="-26.2" width="0" layer="21"/>
-<pad name="1" x="17.14" y="-25" drill="0.4"/>
-<pad name="2" x="15.87" y="-25" drill="0.4"/>
-<pad name="3" x="14.6" y="-25" drill="0.4"/>
-<pad name="4" x="13.33" y="-25" drill="0.4"/>
-<pad name="5" x="12.06" y="-25" drill="0.4"/>
-<pad name="6" x="10.79" y="-25" drill="0.4"/>
-<pad name="7" x="9.52" y="-25" drill="0.4"/>
-<pad name="8" x="8.25" y="-25" drill="0.4"/>
-<pad name="9" x="6.98" y="-25" drill="0.4"/>
-<pad name="10" x="5.71" y="-25" drill="0.4"/>
-<pad name="11" x="4.44" y="-25" drill="0.4"/>
-<pad name="12" x="3.17" y="-25" drill="0.4"/>
-<pad name="13" x="1.9" y="-25" drill="0.4"/>
-<pad name="14" x="0.63" y="-25" drill="0.4"/>
-<pad name="15" x="-0.64" y="-25" drill="0.4"/>
-<pad name="16" x="-1.91" y="-25" drill="0.4"/>
-<pad name="17" x="-3.18" y="-25" drill="0.4"/>
-<pad name="18" x="-4.45" y="-25" drill="0.4"/>
-<pad name="19" x="-5.72" y="-25" drill="0.4"/>
-<pad name="20" x="-6.99" y="-25" drill="0.4"/>
-<pad name="21" x="-8.26" y="-25" drill="0.4"/>
-<pad name="22" x="-9.53" y="-25" drill="0.4"/>
-<pad name="23" x="-10.8" y="-25" drill="0.4"/>
-<pad name="24" x="-12.07" y="-25" drill="0.4"/>
-<pad name="25" x="-13.34" y="-25" drill="0.4"/>
-<pad name="26" x="-14.61" y="-25" drill="0.4"/>
-<pad name="27" x="-15.88" y="-25" drill="0.4"/>
-<pad name="28" x="-17.15" y="-25" drill="0.4"/>
-<pad name="A" x="27" y="-22.41" drill="1.6"/>
-<pad name="KB" x="-27" y="-22.41" drill="1.6"/>
-<pad name="KG" x="-30" y="-22.41" drill="1.6"/>
-<pad name="KR" x="30" y="-22.41" drill="1.6"/>
+<pad name="1" x="17.14" y="-25" drill="0.65"/>
+<pad name="2" x="15.87" y="-25" drill="0.65"/>
+<pad name="3" x="14.6" y="-25" drill="0.65"/>
+<pad name="4" x="13.33" y="-25" drill="0.65"/>
+<pad name="5" x="12.06" y="-25" drill="0.65"/>
+<pad name="6" x="10.79" y="-25" drill="0.65"/>
+<pad name="7" x="9.52" y="-25" drill="0.65"/>
+<pad name="8" x="8.25" y="-25" drill="0.65"/>
+<pad name="9" x="6.98" y="-25" drill="0.65"/>
+<pad name="10" x="5.71" y="-25" drill="0.65"/>
+<pad name="11" x="4.44" y="-25" drill="0.65"/>
+<pad name="12" x="3.17" y="-25" drill="0.65"/>
+<pad name="13" x="1.9" y="-25" drill="0.65"/>
+<pad name="14" x="0.63" y="-25" drill="0.65"/>
+<pad name="15" x="-0.64" y="-25" drill="0.65"/>
+<pad name="16" x="-1.91" y="-25" drill="0.65"/>
+<pad name="17" x="-3.18" y="-25" drill="0.65"/>
+<pad name="18" x="-4.45" y="-25" drill="0.65"/>
+<pad name="19" x="-5.72" y="-25" drill="0.65"/>
+<pad name="20" x="-6.99" y="-25" drill="0.65"/>
+<pad name="21" x="-8.26" y="-25" drill="0.65"/>
+<pad name="22" x="-9.53" y="-25" drill="0.65"/>
+<pad name="23" x="-10.8" y="-25" drill="0.65"/>
+<pad name="24" x="-12.07" y="-25" drill="0.65"/>
+<pad name="25" x="-13.34" y="-25" drill="0.65"/>
+<pad name="26" x="-14.61" y="-25" drill="0.65"/>
+<pad name="27" x="-15.88" y="-25" drill="0.65"/>
+<pad name="28" x="-17.15" y="-25" drill="0.65"/>
+<pad name="A" x="27" y="-22.41" drill="1.7"/>
+<pad name="KB" x="-27" y="-22.41" drill="1.7"/>
+<pad name="KG" x="-30" y="-22.41" drill="1.7"/>
+<pad name="KR" x="30" y="-22.41" drill="1.7"/>
 <text x="-38.7" y="27.3" size="1" layer="25">&gt;NAME</text>
 <text x="-32.9" y="27.3" size="1" layer="27">&gt;VALUE</text>
 <hole x="-36.2" y="-23.2" drill="1.6"/>
@@ -29759,7 +29759,7 @@ erstellt von:  Hm</description>
 </symbols>
 <devicesets>
 <deviceset name="TMP102AIDRLT" prefix="U">
-<description>temp Sensor</description>
+<description>Temperature Sensor</description>
 <gates>
 <gate name="A" symbol="TMP102AIDRLT" x="0" y="0"/>
 </gates>
@@ -31741,7 +31741,7 @@ Marke erzwingt Kupferfreihaltung in seiner Umgebung</description>
 <part name="USB_BU_1" library="con-berg" deviceset="PN61729-S" device="" value="134577 USB_B_Bu liegend mit Schirm"/>
 <part name="P+1" library="Versorgungs-Symbole" deviceset="VCC" device="" value="USB_Supply"/>
 <part name="GND37" library="Versorgungs-Symbole" deviceset="GND" device=""/>
-<part name="SW5" library="Taster - DIcrcBeginnPtrONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6"/>
+<part name="SW5" library="Taster - DIPTRONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6"/>
 <part name="GND10" library="Versorgungs-Symbole" deviceset="GND" device=""/>
 <part name="IC1" library="v-reg" deviceset="LM317?*" device="BD2T">
 <variant name="Development_Board_Graphic_LCD" populate="no"/>
@@ -31774,16 +31774,16 @@ Marke erzwingt Kupferfreihaltung in seiner Umgebung</description>
 <part name="R73" library="rcl" deviceset="R-EU_" device="R0603" value="100k"/>
 <part name="R74" library="rcl" deviceset="R-EU_" device="R0603" value="100k"/>
 <part name="+3V44" library="Versorgungs-Symbole" deviceset="+3V3" device=""/>
-<part name="SW1" library="Taster - DIcrcBeginnPtrONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6">
+<part name="SW1" library="Taster - DIPTRONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6">
 <variant name="Relais_Switchbox_USB" populate="no"/>
 </part>
-<part name="SW2" library="Taster - DIcrcBeginnPtrONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6">
+<part name="SW2" library="Taster - DIPTRONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6">
 <variant name="Relais_Switchbox_USB" populate="no"/>
 </part>
-<part name="SW3" library="Taster - DIcrcBeginnPtrONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6">
+<part name="SW3" library="Taster - DIPTRONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6">
 <variant name="Relais_Switchbox_USB" populate="no"/>
 </part>
-<part name="SW4" library="Taster - DIcrcBeginnPtrONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6">
+<part name="SW4" library="Taster - DIPTRONICS_DTSM6" deviceset="DIP_DTSM6" device="SMD" value="088037 DTSM6">
 <variant name="Relais_Switchbox_USB" populate="no"/>
 </part>
 <part name="SJ2" library="jumper" deviceset="SJ" device="" value="Lötjumper">
@@ -31817,7 +31817,7 @@ Marke erzwingt Kupferfreihaltung in seiner Umgebung</description>
 <part name="C17" library="Kondensator - GoldCaps" deviceset="PANASONIC-EN&amp;SD-SERIES" device="THT_1" value="Goldcap 0,33F stehend">
 <variant name="Relais_Switchbox_USB" populate="no"/>
 </part>
-<part name="R4" library="rcl" deviceset="R-EU_" device="R0603" value="100k"/>
+<part name="R4" library="rcl" deviceset="R-EU_" device="R0603" value="10k"/>
 <part name="ENC1" library="ALPS" deviceset="BOURNS_PEC11S" device="" value="BOURNS_PEC11S # 088034">
 <variant name="Relais_Switchbox_USB" populate="no"/>
 </part>
@@ -31832,12 +31832,12 @@ Marke erzwingt Kupferfreihaltung in seiner Umgebung</description>
 <part name="+3V5" library="Versorgungs-Symbole" deviceset="+3V3" device=""/>
 <part name="GND19" library="Versorgungs Symbole" deviceset="GND" device=""/>
 <part name="+3V6" library="Versorgungs-Symbole" deviceset="+3V3" device=""/>
-<part name="SJ3" library="jumper" deviceset="SJ" device="" value="Lötjumper">
+<part name="SJ4_3" library="jumper" deviceset="SJ" device="" value="Lötjumper">
 <variant name="Development_Board_Graphic_LCD" populate="no"/>
 </part>
 <part name="LED3" library="led" deviceset="LED" device="CHIPLED_0805" value="0805_blue"/>
 <part name="R15" library="rcl" deviceset="R-EU_" device="R0603" value="1k"/>
-<part name="SJ4" library="jumper" deviceset="SJ" device="" value="Lötjumper"/>
+<part name="SJ4_1" library="jumper" deviceset="SJ" device="" value="Lötjumper"/>
 <part name="C21" library="rcl" deviceset="C-EU" device="C0603" value="100n"/>
 <part name="C22" library="rcl" deviceset="C-EU" device="C0603" value="1µ / X7R / 25V mind.">
 <variant name="Relais_Switchbox_USB" populate="no"/>
@@ -32295,8 +32295,27 @@ Marke erzwingt Kupferfreihaltung in seiner Umgebung</description>
 <part name="FIDU2" library="Passermarken" deviceset="FIDUCIALS" device="MARKE_1MM" value="Passermarke"/>
 <part name="FIDU3" library="Passermarken" deviceset="FIDUCIALS" device="MARKE_1MM" value="Passermarke"/>
 <part name="+3V29" library="Versorgungs-Symbole" deviceset="+3V3" device=""/>
+<part name="RAHMEN_8" library="!!!Hesch Automation Frame!!!" deviceset="HESCH(C)DINA3" device=""/>
+<part name="+3V9" library="Versorgungs-Symbole" deviceset="+3V3" device=""/>
+<part name="SJ4_2" library="jumper" deviceset="SJ" device="" value="Lötjumper"/>
+<part name="R76" library="rcl" deviceset="R-EU_" device="R0603" value="100k"/>
+<part name="GND44" library="Versorgungs Symbole" deviceset="GND" device=""/>
 </parts>
 <sheets>
+<sheet>
+<plain>
+<text x="40.64" y="223.52" size="10" layer="98">ToDo-Liste</text>
+<text x="40.64" y="201.93" size="2" layer="98">erl. Gz 2017_09_05</text>
+<text x="40.64" y="208.28" size="2" layer="98">Neue Lib Displays.lbr im Standard-Pfad !</text>
+</plain>
+<instances>
+<instance part="RAHMEN_8" gate="G$1" x="0" y="0"/>
+</instances>
+<busses>
+</busses>
+<nets>
+</nets>
+</sheet>
 <sheet>
 <plain>
 <text x="40.64" y="187.96" size="5" layer="98">Seite 1: Übersichtsseite</text>
@@ -32974,20 +32993,6 @@ UART-Loopback: SJ5+SJ6+SJ7+SJ8 closed / SJ9+SJ10 open</text>
 <wire x1="267.97" y1="113.03" x2="265.43" y2="113.03" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="CP2102_RXD" class="0">
-<segment>
-<pinref part="SJ10" gate="1" pin="2"/>
-<wire x1="288.29" y1="123.19" x2="283.21" y2="123.19" width="0.1524" layer="91"/>
-<label x="288.29" y="123.19" size="1" layer="95" xref="yes"/>
-</segment>
-</net>
-<net name="CP2102_TXD" class="0">
-<segment>
-<pinref part="SJ9" gate="1" pin="2"/>
-<wire x1="288.29" y1="118.11" x2="283.21" y2="118.11" width="0.1524" layer="91"/>
-<label x="288.29" y="118.11" size="1" layer="95" xref="yes"/>
-</segment>
-</net>
 <net name="CP2102_TXD_" class="0">
 <segment>
 <pinref part="SJ7" gate="1" pin="2"/>
@@ -33010,6 +33015,20 @@ UART-Loopback: SJ5+SJ6+SJ7+SJ8 closed / SJ9+SJ10 open</text>
 <pinref part="IC9" gate="G$1" pin="TXD"/>
 <wire x1="237.49" y1="123.19" x2="252.73" y2="123.19" width="0.1524" layer="91"/>
 <junction x="252.73" y="123.19"/>
+</segment>
+</net>
+<net name="CP2102_TXD" class="0">
+<segment>
+<pinref part="SJ10" gate="1" pin="2"/>
+<wire x1="283.21" y1="123.19" x2="288.29" y2="123.19" width="0.1524" layer="91"/>
+<label x="288.29" y="123.19" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="CP2102_RXD" class="0">
+<segment>
+<pinref part="SJ9" gate="1" pin="2"/>
+<wire x1="283.21" y1="118.11" x2="288.29" y2="118.11" width="0.1524" layer="91"/>
+<label x="288.29" y="118.11" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>
@@ -33722,7 +33741,7 @@ CPU-Kreis</text>
 <wire x1="55.88" y1="157.48" x2="157.48" y2="157.48" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="KEY_BstartUpDevice_GPA0" class="0">
+<net name="KEY_BLOCK_GPA0" class="0">
 <segment>
 <pinref part="IC8" gate="G$1" pin="(T0/XCK)PB0"/>
 <wire x1="254" y1="129.54" x2="198.12" y2="129.54" width="0.1524" layer="91"/>
@@ -33745,7 +33764,7 @@ CPU-Kreis</text>
 <label x="121.92" y="62.23" size="0.5" layer="95" rot="R90" xref="yes"/>
 </segment>
 </net>
-<net name="KEY_BstartUpDevice_GPA1" class="0">
+<net name="KEY_BLOCK_GPA1" class="0">
 <segment>
 <pinref part="IC8" gate="G$1" pin="(T1)PB1"/>
 <wire x1="254" y1="132.08" x2="198.12" y2="132.08" width="0.1524" layer="91"/>
@@ -33768,7 +33787,7 @@ CPU-Kreis</text>
 <label x="115.57" y="69.85" size="0.5" layer="95" rot="R90" xref="yes"/>
 </segment>
 </net>
-<net name="KEY_BstartUpDevice_GPA2" class="0">
+<net name="KEY_BLOCK_GPA2" class="0">
 <segment>
 <pinref part="IC8" gate="G$1" pin="(AIN0/INT2)PB2"/>
 <wire x1="254" y1="134.62" x2="198.12" y2="134.62" width="0.1524" layer="91"/>
@@ -33791,7 +33810,7 @@ CPU-Kreis</text>
 <label x="109.22" y="77.47" size="0.5" layer="95" rot="R90" xref="yes"/>
 </segment>
 </net>
-<net name="KEY_BstartUpDevice_GPA3" class="0">
+<net name="KEY_BLOCK_GPA3" class="0">
 <segment>
 <pinref part="IC8" gate="G$1" pin="(AIN1/OC0)PB3"/>
 <wire x1="254" y1="137.16" x2="198.12" y2="137.16" width="0.1524" layer="91"/>
@@ -33863,14 +33882,14 @@ CPU-Kreis</text>
 <label x="201.93" y="165.1" size="0.5" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="encoder_B" class="0">
+<net name="ENCODER_B" class="0">
 <segment>
 <pinref part="IC8" gate="G$1" pin="(ADC1)PA1"/>
 <wire x1="198.12" y1="154.94" x2="218.44" y2="154.94" width="0.1524" layer="91"/>
 <label x="218.44" y="154.94" size="0.5" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="encoder_A" class="0">
+<net name="ENCODER_A" class="0">
 <segment>
 <pinref part="IC8" gate="G$1" pin="(ADC2)PA2"/>
 <wire x1="198.12" y1="157.48" x2="218.44" y2="157.48" width="0.1524" layer="91"/>
@@ -33919,7 +33938,7 @@ CPU-Kreis</text>
 <label x="295.91" y="218.44" size="0.5" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="SERIAL_CstartUpDevice(SCL)" class="0">
+<net name="SERIAL_CLOCK(SCL)" class="0">
 <segment>
 <pinref part="IC8" gate="G$1" pin="(ADC4)PA4"/>
 <wire x1="198.12" y1="162.56" x2="201.93" y2="162.56" width="0.1524" layer="91"/>
@@ -34555,7 +34574,7 @@ umschaltbaugruppe</text>
 <wire x1="314.96" y1="198.12" x2="322.58" y2="198.12" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="AV_ledCh2" class="0">
+<net name="AV_CHANNEL2" class="0">
 <segment>
 <pinref part="X2" gate="-4" pin="1"/>
 <wire x1="341.63" y1="149.86" x2="295.91" y2="149.86" width="0.1524" layer="91"/>
@@ -34571,7 +34590,7 @@ umschaltbaugruppe</text>
 <junction x="292.1" y="163.83"/>
 </segment>
 </net>
-<net name="AV_ledCh1" class="0">
+<net name="AV_CHANNEL1" class="0">
 <segment>
 <pinref part="K6" gate="UM_1" pin="NO1"/>
 <wire x1="275.59" y1="139.7" x2="276.86" y2="139.7" width="0.1524" layer="91"/>
@@ -34585,7 +34604,7 @@ umschaltbaugruppe</text>
 <junction x="292.1" y="144.78"/>
 </segment>
 </net>
-<net name="AV_ledCh4" class="0">
+<net name="AV_CHANNEL4" class="0">
 <segment>
 <pinref part="K7" gate="UM_1" pin="NO1"/>
 <wire x1="275.59" y1="198.12" x2="276.86" y2="198.12" width="0.1524" layer="91"/>
@@ -34601,7 +34620,7 @@ umschaltbaugruppe</text>
 <junction x="289.56" y="201.93"/>
 </segment>
 </net>
-<net name="AV_ledCh3" class="0">
+<net name="AV_CHANNEL3" class="0">
 <segment>
 <pinref part="K8" gate="UM_1" pin="NO1"/>
 <wire x1="275.59" y1="177.8" x2="276.86" y2="177.8" width="0.1524" layer="91"/>
@@ -34964,8 +34983,8 @@ umschaltbaugruppe</text>
 </sheet>
 <sheet>
 <plain>
-<text x="251.46" y="179.07" size="1.778" layer="97">Real Time CstartUpDevice</text>
-<text x="240.03" y="113.03" size="1.778" layer="97">encoders</text>
+<text x="251.46" y="179.07" size="1.778" layer="97">Real Time Clock</text>
+<text x="240.03" y="113.03" size="1.778" layer="97">Encoders</text>
 <text x="104.14" y="236.22" size="5" layer="98">Display, RTC, Drehencoder</text>
 </plain>
 <instances>
@@ -35034,11 +35053,11 @@ umschaltbaugruppe</text>
 <instance part="+3V5" gate="G$1" x="231.14" y="210.82"/>
 <instance part="GND19" gate="1" x="256.54" y="53.34"/>
 <instance part="+3V6" gate="G$1" x="289.56" y="104.14"/>
-<instance part="SJ3" gate="1" x="300.99" y="165.1" smashed="yes" rot="R180">
+<instance part="SJ4_3" gate="1" x="300.99" y="165.1" smashed="yes" rot="R180">
 <attribute name="NAME" x="303.53" y="162.56" size="0.75" layer="95" rot="R180"/>
 <attribute name="VALUE" x="303.53" y="168.91" size="0.75" layer="96" rot="R180"/>
 </instance>
-<instance part="SJ4" gate="1" x="254" y="190.5" smashed="yes" rot="R180">
+<instance part="SJ4_1" gate="1" x="254" y="190.5" smashed="yes" rot="R180">
 <attribute name="NAME" x="256.54" y="187.96" size="0.75" layer="95" rot="R180"/>
 <attribute name="VALUE" x="256.54" y="194.31" size="0.75" layer="96" rot="R180"/>
 </instance>
@@ -35120,6 +35139,16 @@ umschaltbaugruppe</text>
 <attribute name="NAME" x="168.91" y="163.83" size="0.75" layer="95"/>
 <attribute name="VALUE" x="165.1" y="167.64" size="0.75" layer="96"/>
 </instance>
+<instance part="+3V9" gate="G$1" x="293.37" y="210.82"/>
+<instance part="SJ4_2" gate="1" x="273.05" y="186.69" smashed="yes" rot="R180">
+<attribute name="NAME" x="275.59" y="184.15" size="0.75" layer="95" rot="R180"/>
+<attribute name="VALUE" x="275.59" y="190.5" size="0.75" layer="96" rot="R180"/>
+</instance>
+<instance part="R76" gate="G$1" x="238.76" y="138.43" smashed="yes" rot="R90">
+<attribute name="NAME" x="237.2614" y="134.62" size="0.75" layer="95" rot="R90"/>
+<attribute name="VALUE" x="242.062" y="134.62" size="0.75" layer="96" rot="R90"/>
+</instance>
+<instance part="GND44" gate="1" x="238.76" y="128.27"/>
 </instances>
 <busses>
 </busses>
@@ -35282,6 +35311,11 @@ umschaltbaugruppe</text>
 <wire x1="274.32" y1="134.62" x2="283.21" y2="134.62" width="0.1524" layer="91"/>
 <junction x="283.21" y="134.62"/>
 </segment>
+<segment>
+<pinref part="R76" gate="G$1" pin="1"/>
+<pinref part="GND44" gate="1" pin="GND"/>
+<wire x1="238.76" y1="133.35" x2="238.76" y2="130.81" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -35357,6 +35391,15 @@ umschaltbaugruppe</text>
 <wire x1="118.11" y1="165.1" x2="128.27" y2="165.1" width="0.1524" layer="91"/>
 <junction x="128.27" y="165.1"/>
 </segment>
+<segment>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="293.37" y1="180.34" x2="293.37" y2="186.69" width="0.1524" layer="91"/>
+<pinref part="+3V9" gate="G$1" pin="+3V3"/>
+<wire x1="293.37" y1="208.28" x2="293.37" y2="186.69" width="0.1524" layer="91"/>
+<pinref part="SJ4_2" gate="1" pin="1"/>
+<wire x1="278.13" y1="186.69" x2="293.37" y2="186.69" width="0.1524" layer="91"/>
+<junction x="293.37" y="186.69"/>
+</segment>
 </net>
 <net name="SDA" class="0">
 <segment>
@@ -35392,7 +35435,7 @@ umschaltbaugruppe</text>
 <wire x1="293.37" y1="152.4" x2="293.37" y2="165.1" width="0.1524" layer="91"/>
 <junction x="293.37" y="152.4"/>
 <label x="293.37" y="152.4" size="1.27" layer="95" xref="yes"/>
-<pinref part="SJ3" gate="1" pin="2"/>
+<pinref part="SJ4_3" gate="1" pin="2"/>
 <wire x1="293.37" y1="165.1" x2="293.37" y2="170.18" width="0.1524" layer="91"/>
 <wire x1="295.91" y1="165.1" x2="293.37" y2="165.1" width="0.1524" layer="91"/>
 <junction x="293.37" y="165.1"/>
@@ -35404,7 +35447,7 @@ umschaltbaugruppe</text>
 <wire x1="248.92" y1="165.1" x2="246.38" y2="165.1" width="0.1524" layer="91"/>
 <wire x1="246.38" y1="165.1" x2="246.38" y2="190.5" width="0.1524" layer="91"/>
 <label x="246.38" y="200.66" size="1.27" layer="95" rot="R90" xref="yes"/>
-<pinref part="SJ4" gate="1" pin="2"/>
+<pinref part="SJ4_1" gate="1" pin="2"/>
 <wire x1="246.38" y1="190.5" x2="246.38" y2="200.66" width="0.1524" layer="91"/>
 <wire x1="246.38" y1="190.5" x2="248.92" y2="190.5" width="0.1524" layer="91"/>
 <junction x="246.38" y="190.5"/>
@@ -35423,15 +35466,7 @@ umschaltbaugruppe</text>
 <junction x="215.9" y="170.18"/>
 <pinref part="D6" gate="G$1" pin="C"/>
 <wire x1="215.9" y1="186.69" x2="215.9" y2="195.58" width="0.1524" layer="91"/>
-<pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="238.76" y1="184.15" x2="238.76" y2="186.69" width="0.1524" layer="91"/>
-<wire x1="238.76" y1="186.69" x2="215.9" y2="186.69" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="186.69" x2="215.9" y2="170.18" width="0.1524" layer="91"/>
-<junction x="215.9" y="186.69"/>
-<pinref part="R1" gate="G$1" pin="2"/>
-<wire x1="293.37" y1="180.34" x2="293.37" y2="186.69" width="0.1524" layer="91"/>
-<wire x1="238.76" y1="186.69" x2="293.37" y2="186.69" width="0.1524" layer="91"/>
-<junction x="238.76" y="186.69"/>
 <label x="220.98" y="175.26" size="0.75" layer="95" rot="R90" xref="yes"/>
 <wire x1="220.98" y1="170.18" x2="220.98" y2="175.26" width="0.1524" layer="91"/>
 </segment>
@@ -35442,9 +35477,12 @@ umschaltbaugruppe</text>
 <pinref part="R4" gate="G$1" pin="1"/>
 <wire x1="248.92" y1="160.02" x2="238.76" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="238.76" y1="160.02" x2="238.76" y2="173.99" width="0.1524" layer="91"/>
+<pinref part="R76" gate="G$1" pin="2"/>
+<wire x1="238.76" y1="160.02" x2="238.76" y2="143.51" width="0.1524" layer="91"/>
+<junction x="238.76" y="160.02"/>
 </segment>
 </net>
-<net name="encoder_B" class="0">
+<net name="ENCODER_B" class="0">
 <segment>
 <wire x1="289.56" y1="76.2" x2="289.56" y2="82.55" width="0.1524" layer="91"/>
 <pinref part="C20" gate="G$1" pin="1"/>
@@ -35458,7 +35496,7 @@ umschaltbaugruppe</text>
 <label x="212.09" y="76.2" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="encoder_A" class="0">
+<net name="ENCODER_A" class="0">
 <segment>
 <wire x1="284.48" y1="82.55" x2="284.48" y2="80.01" width="0.1524" layer="91"/>
 <pinref part="C19" gate="G$1" pin="1"/>
@@ -35584,7 +35622,7 @@ umschaltbaugruppe</text>
 <label x="111.76" y="140.97" size="1.5" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="SERIAL_CstartUpDevice(SCL)" class="0">
+<net name="SERIAL_CLOCK(SCL)" class="0">
 <segment>
 <wire x1="78.74" y1="166.37" x2="78.74" y2="143.51" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="143.51" x2="111.76" y2="143.51" width="0.1524" layer="91"/>
@@ -35720,7 +35758,7 @@ umschaltbaugruppe</text>
 </net>
 <net name="CLK_OUT_LED" class="0">
 <segment>
-<pinref part="SJ4" gate="1" pin="1"/>
+<pinref part="SJ4_1" gate="1" pin="1"/>
 <wire x1="259.08" y1="190.5" x2="261.62" y2="190.5" width="0.1524" layer="91"/>
 <wire x1="261.62" y1="190.5" x2="261.62" y2="200.66" width="0.1524" layer="91"/>
 <label x="261.62" y="200.66" size="1.27" layer="95" rot="R90" xref="yes"/>
@@ -35728,10 +35766,20 @@ umschaltbaugruppe</text>
 </net>
 <net name="RTC_INT_LED" class="0">
 <segment>
-<pinref part="SJ3" gate="1" pin="1"/>
+<pinref part="SJ4_3" gate="1" pin="1"/>
 <wire x1="306.07" y1="165.1" x2="309.88" y2="165.1" width="0.1524" layer="91"/>
 <wire x1="309.88" y1="165.1" x2="309.88" y2="175.26" width="0.1524" layer="91"/>
 <label x="309.88" y="175.26" size="1.27" layer="95" rot="R90" xref="yes"/>
+</segment>
+</net>
+<net name="N$23" class="0">
+<segment>
+<pinref part="R4" gate="G$1" pin="2"/>
+<wire x1="238.76" y1="184.15" x2="238.76" y2="186.69" width="0.1524" layer="91"/>
+<wire x1="238.76" y1="186.69" x2="265.43" y2="186.69" width="0.1524" layer="91"/>
+<wire x1="265.43" y1="186.69" x2="266.7" y2="186.69" width="0.1524" layer="91"/>
+<pinref part="SJ4_2" gate="1" pin="2"/>
+<wire x1="266.7" y1="186.69" x2="267.97" y2="186.69" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
@@ -36793,7 +36841,7 @@ umschaltbaugruppe</text>
 <pinref part="VT4" gate="G$1" pin="B"/>
 </segment>
 </net>
-<net name="DRIVE_dig_1" class="0">
+<net name="DRIVE_DIGIT_1" class="0">
 <segment>
 <pinref part="R54" gate="G$1" pin="1"/>
 <wire x1="19.05" y1="74.93" x2="19.05" y2="48.26" width="0.1524" layer="91"/>
@@ -36805,7 +36853,7 @@ umschaltbaugruppe</text>
 <label x="181.61" y="161.29" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="DRIVE_dig_2" class="0">
+<net name="DRIVE_DIGIT_2" class="0">
 <segment>
 <pinref part="R55" gate="G$1" pin="1"/>
 <wire x1="34.29" y1="74.93" x2="34.29" y2="43.18" width="0.1524" layer="91"/>
@@ -36817,7 +36865,7 @@ umschaltbaugruppe</text>
 <label x="181.61" y="158.75" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="DRIVE_dig_3" class="0">
+<net name="DRIVE_DIGIT_3" class="0">
 <segment>
 <pinref part="R56" gate="G$1" pin="1"/>
 <wire x1="49.53" y1="74.93" x2="49.53" y2="39.37" width="0.1524" layer="91"/>
@@ -36829,7 +36877,7 @@ umschaltbaugruppe</text>
 <label x="181.61" y="156.21" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="DRIVE_dig_4" class="0">
+<net name="DRIVE_DIGIT_4" class="0">
 <segment>
 <pinref part="R57" gate="G$1" pin="1"/>
 <wire x1="64.77" y1="74.93" x2="64.77" y2="34.29" width="0.1524" layer="91"/>
@@ -36852,45 +36900,45 @@ umschaltbaugruppe</text>
 </sheet>
 </sheets>
 <errors>
-<approved hash="102,2,156.21,173.99,+15V,+24V,,,,"/>
-<approved hash="102,3,105.41,170.18,VCC,USB_SUPPLY,,,,"/>
-<approved hash="102,4,323.85,218.44,VCC,+3V3,,,,"/>
-<approved hash="102,7,121.92,143.51,EXP_PAD,GND,,,,"/>
-<approved hash="102,7,317.5,187.96,VDD,+3V3,,,,"/>
-<approved hash="102,7,317.5,182.88,NC/GND,GND,,,,"/>
-<approved hash="104,4,157.48,132.08,IC8,GND1,GND,,,"/>
-<approved hash="104,4,157.48,127,IC8,GND2,GND,,,"/>
-<approved hash="104,4,157.48,142.24,IC8,VCC1,N$4,,,"/>
-<approved hash="104,4,157.48,139.7,IC8,VCC,N$4,,,"/>
-<approved hash="104,4,157.48,137.16,IC8,VCC2,N$4,,,"/>
-<approved hash="202,5,35.56,180.34,IC3,I7,,,,"/>
-<approved hash="202,5,35.56,137.16,IC4,I7,,,,"/>
-<approved hash="103,6,274.32,170.18,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,167.64,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,165.1,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,162.56,IC2,NC,GND,,,"/>
-<approved hash="104,6,248.92,170.18,IC2,VDD,SUPPLY_RTC,,,"/>
-<approved hash="103,6,274.32,134.62,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,160.02,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,157.48,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,147.32,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,144.78,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,142.24,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,139.7,IC2,NC,GND,,,"/>
-<approved hash="103,6,274.32,137.16,IC2,NC,GND,,,"/>
-<approved hash="202,6,40.64,166.37,DISPLAY1,C86,,,,"/>
-<approved hash="104,6,63.5,166.37,DISPLAY1,CAP1N,N$50,,,"/>
-<approved hash="104,6,60.96,166.37,DISPLAY1,CAP1P,N$51,,,"/>
-<approved hash="104,6,55.88,166.37,DISPLAY1,CAP2N,N$53,,,"/>
-<approved hash="104,6,58.42,166.37,DISPLAY1,CAP2P,N$54,,,"/>
-<approved hash="104,6,66.04,166.37,DISPLAY1,CAP3P,N$41,,,"/>
-<approved hash="104,6,73.66,166.37,DISPLAY1,VDD,+3V3,,,"/>
-<approved hash="104,6,68.58,166.37,DISPLAY1,VOUT,N$13,,,"/>
-<approved hash="104,6,71.12,166.37,DISPLAY1,VSS,GND,,,"/>
-<approved hash="104,7,121.92,189.23,IC7,VDD,+3V3,,,"/>
-<approved hash="104,7,121.92,181.61,IC7,VSS,GND,,,"/>
-<approved hash="104,7,281.94,154.94,TS2,V+,+3V3,,,"/>
-<approved hash="104,4,64.77,130.81,REF1,VIN,+3V3,,,"/>
+<approved hash="102,3,156.21,173.99,+15V,+24V,,,,"/>
+<approved hash="102,4,105.41,170.18,VCC,USB_SUPPLY,,,,"/>
+<approved hash="102,5,323.85,218.44,VCC,+3V3,,,,"/>
+<approved hash="102,8,121.92,143.51,EXP_PAD,GND,,,,"/>
+<approved hash="102,8,317.5,187.96,VDD,+3V3,,,,"/>
+<approved hash="102,8,317.5,182.88,NC/GND,GND,,,,"/>
+<approved hash="104,5,157.48,132.08,IC8,GND1,GND,,,"/>
+<approved hash="104,5,157.48,127,IC8,GND2,GND,,,"/>
+<approved hash="104,5,157.48,142.24,IC8,VCC1,N$4,,,"/>
+<approved hash="104,5,157.48,139.7,IC8,VCC,N$4,,,"/>
+<approved hash="104,5,157.48,137.16,IC8,VCC2,N$4,,,"/>
+<approved hash="202,6,35.56,180.34,IC3,I7,,,,"/>
+<approved hash="202,6,35.56,137.16,IC4,I7,,,,"/>
+<approved hash="103,7,274.32,170.18,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,167.64,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,165.1,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,162.56,IC2,NC,GND,,,"/>
+<approved hash="104,7,248.92,170.18,IC2,VDD,SUPPLY_RTC,,,"/>
+<approved hash="103,7,274.32,134.62,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,160.02,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,157.48,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,147.32,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,144.78,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,142.24,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,139.7,IC2,NC,GND,,,"/>
+<approved hash="103,7,274.32,137.16,IC2,NC,GND,,,"/>
+<approved hash="202,7,40.64,166.37,DISPLAY1,C86,,,,"/>
+<approved hash="104,7,63.5,166.37,DISPLAY1,CAP1N,N$50,,,"/>
+<approved hash="104,7,60.96,166.37,DISPLAY1,CAP1P,N$51,,,"/>
+<approved hash="104,7,55.88,166.37,DISPLAY1,CAP2N,N$53,,,"/>
+<approved hash="104,7,58.42,166.37,DISPLAY1,CAP2P,N$54,,,"/>
+<approved hash="104,7,66.04,166.37,DISPLAY1,CAP3P,N$41,,,"/>
+<approved hash="104,7,73.66,166.37,DISPLAY1,VDD,+3V3,,,"/>
+<approved hash="104,7,68.58,166.37,DISPLAY1,VOUT,N$13,,,"/>
+<approved hash="104,7,71.12,166.37,DISPLAY1,VSS,GND,,,"/>
+<approved hash="104,8,121.92,189.23,IC7,VDD,+3V3,,,"/>
+<approved hash="104,8,121.92,181.61,IC7,VSS,GND,,,"/>
+<approved hash="104,8,281.94,154.94,TS2,V+,+3V3,,,"/>
+<approved hash="104,5,64.77,130.81,REF1,VIN,+3V3,,,"/>
 </errors>
 </schematic>
 </drawing>

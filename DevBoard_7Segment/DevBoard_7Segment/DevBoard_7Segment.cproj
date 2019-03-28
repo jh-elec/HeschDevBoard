@@ -222,6 +222,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Switch.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Switch.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="version_num.h">
       <SubType>compile</SubType>
     </Compile>

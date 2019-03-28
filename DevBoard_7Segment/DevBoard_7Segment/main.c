@@ -30,7 +30,7 @@
 #include "build_info.h"
 #include "cmd.h"
 #include "LED Font/led_font.h"
-
+#include "Switch.h"
 
 char out[60] = "";
 
@@ -443,9 +443,14 @@ uint8_t	streamIn[128]	= "";
 
 uint8_t RelaisState = 0;
 
+Switch_t Switch;
+
 int main(void)
 {
 	hardware_init();
+	
+	SwitchInit( &PORTB , 0b00001111 , &Switch );
+	
 	uart_init( UART_BAUD_SELECT( 19200 , F_CPU ) );
 	
 	eepLoad( &eep );
@@ -487,7 +492,7 @@ int main(void)
 					}
 					else
 					{
-						RELAIS_PORT1_PORT = (RELAIS_5_PORT1 | RELAIS_6_PORT1);
+	 					RELAIS_PORT1_PORT = (RELAIS_5_PORT1 | RELAIS_6_PORT1);
 						RELAIS_PORT2_PORT = (RELAIS_7_PORT2 | RELAIS_8_PORT2);
 					}
 									
@@ -526,6 +531,18 @@ int main(void)
 			disp.dig[2] = ((sys.cmdCounter / 10) % 10) + '0';
 			disp.dig[3] = (sys.cmdCounter  % 10) + '0';
 		}
+		
+		if ( Switch.Info & 1<<0 )
+		{
+			Switch.Info = 0;
+			DebugModeEnable ^= true;
+		}
+		
+		if ( Switch.Info & 1<<3 )
+		{
+			Switch.Info = 0;
+			sys.cmdCounter++;
+		}
     }
 }
 
@@ -534,6 +551,8 @@ ISR(TIMER1_COMPA_vect)
 {
 	static uint32_t stateLED = 0;
 	sys.scroll++;
+	
+	SwitchRead( &Switch , &PORTB );
 	
 	/*
 	*	Status Anzeige
