@@ -29,12 +29,12 @@
 typedef struct
 {
 	uint8_t *BufferPtr;
-	uint8_t BufferSize;
+	uint16_t BufferSize;
 	
-	uint8_t NewestIndex;
-	uint8_t OldestIndex;
+	uint16_t NewestIndex;
+	uint16_t OldestIndex;
 	
-	uint8_t Entrys;
+	uint16_t Entrys;
 }RingBuffer_t;
 
 enum RingBufferStatus {BUFFER_OK, BUFFER_EMPTY, BUFFER_FULL};

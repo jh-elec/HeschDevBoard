@@ -436,6 +436,24 @@ void scrollMessage( char *msg , uint16_t delay_ms , uint8_t wait )
 	} while ( w_ );
 }
 
+void DecimalToBinaerStr( uint8_t uiValue , char *s )
+{
+	uint8_t tmp = uiValue;
+	
+	for ( uint8_t i = 0 ; i < 8 ; i++ )
+	{
+		if ( tmp & 0x80 )
+		{
+			s[i] = '1';
+		}
+		else
+		{
+			s[i] = '0';
+		}
+		tmp <<=1;
+	}s[8] = '\0';
+}
+
 uint8_t DebugModeThousend = 0;
 
 uint8_t *streamPtr		= NULL;
@@ -531,19 +549,43 @@ int main(void)
 			disp.dig[2] = ((sys.cmdCounter / 10) % 10) + '0';
 			disp.dig[3] = (sys.cmdCounter  % 10) + '0';
 		}
-		
-		if ( Switch.Info & 1<<0 )
-		{
-			Switch.Info = 0;
-			DebugModeEnable ^= true;
-		}
-		
-		if ( Switch.Info & 1<<3 )
-		{
-			Switch.Info = 0;
-			sys.cmdCounter++;
-		}
-    }
+	
+
+			
+			if ( Switch.Info & 1<<0 )
+			{
+				Switch.Info &= ~(1<<0);
+				DebugModeEnable ^= true;
+			}else if ( Switch.Info & 1<<2 )
+			{
+				Switch.Info &= ~(1<<2);
+				sys.cmdCounter--;
+			}else if ( Switch.Info & 1<<3 )
+			{
+				Switch.Info &= ~(1<<3);
+				sys.cmdCounter++;
+			}else if ( Switch.Info & 1<<1 )
+			{
+				Switch.Info &= ~(1<<1);
+				cmd_t TestRelais;
+				static int8_t Relais = 1;
+				static uint8_t SetState = 0x01;
+				uint8_t Buffer[] = { Relais , SetState };
+				TestRelais.DataPtr = Buffer;
+				cmdRelais( &TestRelais );
+				
+				if ( Relais < 8 )
+				{
+					Relais++;
+					SetState = 1;
+				}
+				else
+				{
+					Relais = 0;
+					SetState = 2;
+				}
+			}
+   }
 }
 
 /* live the CPU?*/

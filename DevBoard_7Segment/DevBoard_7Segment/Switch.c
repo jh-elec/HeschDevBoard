@@ -24,7 +24,7 @@ void SwitchInit( volatile uint8_t *SwitchInPort , uint8_t SwitchMask , Switch_t 
 	Switch->Mask = SwitchMask;
 }
 
-void SwitchRead( Switch_t *Switch , volatile uint8_t *SwitchInPort )
+uint8_t SwitchRead( Switch_t *Switch , volatile uint8_t *SwitchInPort )
 {
 	Switch->New = ( ( PORT_PIN_ADDR( SwitchInPort ) & Switch->Mask ) ^ Switch->Mask );
 	
@@ -34,6 +34,8 @@ void SwitchRead( Switch_t *Switch , volatile uint8_t *SwitchInPort )
 	}
 	
 	Switch->Old = Switch->New;
+	
+	return Switch->Info;
 }
 
 void SwitchClear( Switch_t *Switch )

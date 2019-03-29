@@ -37,7 +37,7 @@ typedef struct
 
 void SwitchInit( volatile uint8_t *SwitchInPort , uint8_t SwitchMask , Switch_t *Switch );
 
-void SwitchRead( Switch_t *Switch , volatile uint8_t *SwitchInPort );
+uint8_t SwitchRead( Switch_t *Switch , volatile uint8_t *SwitchInPort );
 
 void SwitchClear( Switch_t *Switch );
 

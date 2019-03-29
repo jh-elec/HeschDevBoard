@@ -371,12 +371,9 @@ void	uartPutByte	( uint8_t byte )
 
 void	uartPutByteStr	( uint8_t *str , uint8_t len )
 {
-	if ( str )
+	for ( uint8_t x = 0 ; x < len ; x++ )
 	{
-		for ( uint8_t x = 0 ; x < len ; x++ )
-		{
-			uartPutByte( *str++ );
-		}
+		uartPutByte( *( str+x ) );
 	}
 }
 
