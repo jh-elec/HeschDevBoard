@@ -2080,15 +2080,18 @@ void DevBoardUnlock( void )
 
 int main(void)
 {				
+	i2c_init();	
+	rtcInit(); 	
+	rtcSetClkOut( F_1Hz );	
 	hardware_init();
 	uart_init(UART_BAUD_SELECT(UART_BAUD_RATE,16e6));
-	i2c_init();	
-	rtcInit(); 
+
 	rtcSetClkOut(F_1Hz);
  	timerInit();	
 	sts3x_init();
 	sei();
 
+	
 	
 	/*
 	*	EEPROM Daten laden..
@@ -2180,23 +2183,23 @@ int main(void)
 	
 	while (1) 
     {			
-// 		/*
-// 		*	Lauftext.: Newsticker.
-// 		*/
-// 		if (sys.scrollTime > 5000)
-// 		{
-// 			sys.scrollTime = 0;
-// 	
-// 			glcdDrawLine(10,0,127);	
-// 			addNewstickerErrors(&newsticker,sys.state.result);
-// 			addNewstickerTime(&newsticker);
-// 			addNewstickerStr(&newsticker,"User.: ",0);
-// 			addNewstickerStr(&newsticker,(char*)eepRAM.userName,1);	
-// 						
-// 			glcdScrollMsg(7,newsticker.newsBuff);
-// 		}
-// 		
-// 		refreshTemp();
+		/*
+		*	Lauftext.: Newsticker.
+		*/
+		if (sys.scrollTime > 5000)
+		{
+			sys.scrollTime = 0;
+	
+			glcdDrawLine(10,0,127);	
+			addNewstickerErrors(&newsticker,sys.state.result);
+			addNewstickerTime(&newsticker);
+			addNewstickerStr(&newsticker,"User.: ",0);
+			addNewstickerStr(&newsticker,(char*)eepRAM.userName,1);	
+						
+			glcdScrollMsg(7,newsticker.newsBuff);
+		}
+		
+		refreshTemp();
 		
 		/*
 		*	Verarbeite Kommandos von der Seriellen Schnittstelle

@@ -4,7 +4,7 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.2.209\include/avr/iom32.h \
+ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\include/avr/iom32.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\portpins.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
@@ -24,12 +24,12 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
  .././Hardware\ Libs/hard_init.h .././Hardware\ Libs/hard_def.h \
  .././Hardware\ Libs/i2cmaster.h .././Hardware\ Libs/uart.h \
- .././Hardware\ Libs/rx8564.h .././Hardware\ Libs/st7565r.h \
- .././Hardware\ Libs/sts3x.h .././Glcd\ Fonts/font_arial14.h \
- .././Glcd\ Fonts/corsiva_12.h .././Glcd\ Fonts/fixed_num_8x16.h \
- .././Glcd\ Fonts/fixed_num_15x31.h .././Glcd\ Fonts/System_5x7.h \
- .././Bitmaps/key.h .././Bitmaps/schloss.h .././strings.h \
- .././build_info.h .././ttostr.h .././cmd.h .././convert.h \
+ .././Hardware\ Libs/rx8564.h .././Hardware\ Libs/i2cmaster.h \
+ .././Hardware\ Libs/st7565r.h .././Hardware\ Libs/sts3x.h \
+ .././Glcd\ Fonts/font_arial14.h .././Glcd\ Fonts/corsiva_12.h \
+ .././Glcd\ Fonts/fixed_num_8x16.h .././Glcd\ Fonts/fixed_num_15x31.h \
+ .././Glcd\ Fonts/System_5x7.h .././Bitmaps/key.h .././Bitmaps/schloss.h \
+ .././strings.h .././build_info.h .././ttostr.h .././cmd.h .././convert.h \
  .././app_state.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -42,7 +42,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\1.2.209\include/avr/iom32.h:
+C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\include/avr/iom32.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\portpins.h:
 
@@ -87,6 +87,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././Hardware\ Libs/uart.h:
 
 .././Hardware\ Libs/rx8564.h:
+
+.././Hardware\ Libs/i2cmaster.h:
 
 .././Hardware\ Libs/st7565r.h:
 

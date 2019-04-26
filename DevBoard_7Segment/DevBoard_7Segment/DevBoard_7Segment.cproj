@@ -42,11 +42,11 @@
     <avrtoolserialnumber>0000A0004174</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x1E9502</avrdeviceexpectedsignature>
     <avrtoolinterface>ISP</avrtoolinterface>
-    <avrtoolinterfaceclock>500000</avrtoolinterfaceclock>
+    <avrtoolinterfaceclock>250000</avrtoolinterfaceclock>
     <com_atmel_avrdbg_tool_ispmk2>
       <ToolOptions>
         <InterfaceProperties>
-          <IspClock>500000</IspClock>
+          <IspClock>250000</IspClock>
         </InterfaceProperties>
         <InterfaceName>ISP</InterfaceName>
       </ToolOptions>
