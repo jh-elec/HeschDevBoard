@@ -2089,6 +2089,7 @@ int main(void)
 	rtcSetClkOut(F_1Hz);
  	timerInit();	
 	sts3x_init();
+	rtcSetClkOut(F_1Hz);
 	sei();
 
 	

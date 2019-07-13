@@ -246,7 +246,7 @@ ISR (UART0_RECEIVE_INTERRUPT)
 Function: UART Receive Complete interrupt
 Purpose:  called when the UART has received a character
 **************************************************************************/
-{
+{  
 	RingBufferWrite(&RingBufferRx,UART0_DATA);
 }
 
@@ -257,39 +257,26 @@ Function: UART Data Register Empty interrupt
 Purpose:  called when the UART is ready to transmit the next byte
 **************************************************************************/
 {
-    uint8_t tempy;
-    enum RingBufferStatus status_tx;
-    status_tx = RingBufferRead(&RingBufferTx, &tempy);
-    if (status_tx == BUFFER_EMPTY)
+    uint8_t Data;
+    enum RingBufferStatus StatusTx;
+    StatusTx = RingBufferRead(&RingBufferTx, &Data);
+    if (StatusTx == BUFFER_EMPTY)
     {
 	    UART0_CONTROL &= ~_BV(UART0_UDRIE);
 	} 
 	else 
 	{
-	    UART0_DATA = tempy; /* write it out to the hardware serial */
+	    UART0_DATA = Data;
     }
 }
 
 
-/*************************************************************************
-Function: uart_init()
-Purpose:  initialize UART and set baudrate
-Input:    baudrate using macro UART_BAUD_SELECT()
-Returns:  none
-**************************************************************************/
-void uart_init(unsigned int baudrate)
+
+void	uartInit(unsigned int baudrate)
 {
 	RingBufferInit((RingBuffer_t*)&RingBufferTx,(uint8_t*)RING_BUFF_TX,sizeof(RING_BUFF_TX));
 	RingBufferInit((RingBuffer_t*)&RingBufferRx,(uint8_t*)RING_BUFF_RX,sizeof(RING_BUFF_RX));
 
-#if defined( AT90_UART )
-    /* set baud rate */
-    UBRR = (unsigned char)baudrate; 
-
-    /* enable UART receiver and transmmitter and receive complete interrupt */
-    UART0_CONTROL = _BV(RXCIE)|_BV(RXEN)|_BV(TXEN);
-
-#elif defined (ATMEGA_USART)
     /* Set baud rate */
     if ( baudrate & 0x8000 )
     {
@@ -308,65 +295,16 @@ void uart_init(unsigned int baudrate)
     #else
     UCSRC = (3<<UCSZ0);
     #endif 
-    
-#elif defined (ATMEGA_USART0 )
-    /* Set baud rate */
-    if ( baudrate & 0x8000 ) 
-    {
-   		UART0_STATUS = (1<<U2X0);  //Enable 2x speed 
-   		baudrate &= ~0x8000;
-   	}
-    UBRR0H = (unsigned char)(baudrate>>8);
-    UBRR0L = (unsigned char) baudrate;
-
-    /* Enable USART receiver and transmitter and receive complete interrupt */
-    UART0_CONTROL = _BV(RXCIE0)|(1<<RXEN0)|(1<<TXEN0);
-    
-    /* Set frame format: asynchronous, 8data, no parity, 1stop bit */
-    #ifdef URSEL0
-    UCSR0C = (1<<URSEL0)|(3<<UCSZ00);
-    #else
-    UCSR0C = (3<<UCSZ00);
-    #endif 
-
-#elif defined ( ATMEGA_UART )
-    /* set baud rate */
-    if ( baudrate & 0x8000 ) 
-    {
-    	UART0_STATUS = (1<<U2X);  //Enable 2x speed 
-    	baudrate &= ~0x8000;
-    }
-    UBRRHI = (unsigned char)(baudrate>>8);
-    UBRR   = (unsigned char) baudrate;
-
-    /* Enable UART receiver and transmitter and receive complete interrupt */
-    UART0_CONTROL = _BV(RXCIE)|(1<<RXEN)|(1<<TXEN);
-
-#elif defined ( AT90USB_USART )
-   /* set baud rate */
-    if ( baudrate & 0x8000 ) 
-    {
-    	UART0_STATUS = (1<<U2X1 );  //Enable 2x speed 
-    	baudrate &= ~0x8000;
-    }
-    UBRR1H = (unsigned char)(baudrate>>8);
-    UBRR1L = (unsigned char) baudrate;
-
-    /* Enable UART receiver and transmitter and receive complete interrupt */
-    UART0_CONTROL = _BV(RXCIE1)|(1<<RXEN1)|(1<<TXEN1);
-    
-    /* Set frame format: asynchronous, 8data, no parity, 1stop bit */
-    UCSR1C = (1<<UCSZ11)|(1<<UCSZ10);
-#endif
-
-}/* uart_init */
+}
 
 void	uartPutByte	( uint8_t byte )
 {
-	RingBufferWrite(&RingBufferTx,byte);
+	enum RingBufferStatus StatusTx;
+			
+	StatusTx = RingBufferWriteBusy( &RingBufferTx , byte );
 
-    /* enable UDRE interrupt */
-    UART0_CONTROL    |= _BV(UART0_UDRIE);
+	/* enable UDRE interrupt */
+	UART0_CONTROL    |= _BV(UART0_UDRIE);
 }
 
 void	uartPutByteStr	( uint8_t *str , uint8_t len )
@@ -377,12 +315,18 @@ void	uartPutByteStr	( uint8_t *str , uint8_t len )
 	}
 }
 
-uint8_t	*uartReadRingBuff		( uint8_t *stream )		
+uint8_t	*uartReadRingBuff		( uint8_t *stream , uint8_t Reset )		
 {
 	static uint8_t index = 0;
 	
     uint8_t ReceivedByte;
     enum RingBufferStatus status;
+	
+	if ( Reset == 0x01 )
+	{
+		index = 0;
+		return NULL;
+	}
 	
 	status = RingBufferRead(&RingBufferRx, &ReceivedByte);
 	if (status != BUFFER_OK) 

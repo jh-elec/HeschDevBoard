@@ -466,10 +466,16 @@ Switch_t Switch;
 int main(void)
 {
 	hardware_init();
+<<<<<<< .mine
+	uartInit( UART_BAUD_SELECT( 19200 , F_CPU ) );
+||||||| .r47
+	uart_init( UART_BAUD_SELECT( 19200 , F_CPU ) );
+=======
 	
 	SwitchInit( &PORTB , 0b00001111 , &Switch );
 	
 	uart_init( UART_BAUD_SELECT( 19200 , F_CPU ) );
+>>>>>>> .r50
 	
 	eepLoad( &eep );
 	i2c_init();
@@ -485,12 +491,10 @@ int main(void)
 	cmdSendAnswer( &cmd );		
 
 	cmdGetVersion( &cmd );
-	
-	sys.scrollIsRdy = 1;
 
 	while (1) 
-    {	
-		streamPtr	= uartReadRingBuff( streamIn );
+    {			
+		streamPtr	= uartReadRingBuff( streamIn , 0 );
 
 		if ( streamPtr != NULL )
 		{
@@ -515,6 +519,13 @@ int main(void)
 					}
 									
 				}break;
+				
+				case 3:
+				{
+					uartReadRingBuff( NULL , 0x01 );
+					cmdBuildAnswer(&cmd,ID_APPLICATION,DATA_TYP_UINT8,4,0,NULL);
+					cmdSendAnswer(&cmd);
+				}
 			}	
 		}
 
@@ -631,7 +642,7 @@ ISR(TIMER1_COMPA_vect)
 		encoder.Last |= 1;
 	} 	
 	encoder.result += encoder.Table[encoder.Last];	
-		
+
 	if ( !sys.i2cBusy )
 	{
 		muxDigits();

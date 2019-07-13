@@ -32,6 +32,8 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
                               Hardware Libs/sts3x.o (__mulsf3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o) (__mulsf3x)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                              Hardware Libs/RingBuffer.o (__udivmodhi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
                               Hardware Libs/rx8564.o (__divmodhi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
@@ -44,8 +46,6 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
                               build_info.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
                               Hardware Libs/rx8564.o (__umulhisi3)
-c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
-                              c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o) (__udivmodhi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
                               main.o (strcat)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcpy.o)
@@ -58,13 +58,13 @@ C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/a
 Allocating common symbols
 Common symbol       size              file
 
-RingBufferRx        0x6               Hardware Libs/uart.o
+RingBufferRx        0x9               Hardware Libs/uart.o
 DebugModeEnable     0x1               main.o
 Switch              0x4               main.o
 sys                 0xb               main.o
 rtc                 0xc               main.o
 eepRAM              0x1               main.o
-RingBufferTx        0x6               Hardware Libs/uart.o
+RingBufferTx        0x9               Hardware Libs/uart.o
 rx8564_regs_enum    0x1               Hardware Libs/rx8564.o
 cmd                 0x6               main.o
 
@@ -138,17 +138,17 @@ Discarded input sections
  .data          0x00000000        0x0 Hardware Libs/RingBuffer.o
  .bss           0x00000000        0x0 Hardware Libs/RingBuffer.o
  .text.RingBufferClear
-                0x00000000        0xa Hardware Libs/RingBuffer.o
+                0x00000000        0xe Hardware Libs/RingBuffer.o
  .text.RingBufferLength
-                0x00000000       0x12 Hardware Libs/RingBuffer.o
+                0x00000000       0x10 Hardware Libs/RingBuffer.o
  .text.RingBufferPeek
-                0x00000000       0x3e Hardware Libs/RingBuffer.o
+                0x00000000       0x46 Hardware Libs/RingBuffer.o
  .text.RingBufferReadByte
                 0x00000000       0x28 Hardware Libs/RingBuffer.o
  .text.RingBufferWriteBurst
                 0x00000000       0x4e Hardware Libs/RingBuffer.o
  .text.RingBufferReadBurst
-                0x00000000       0x5c Hardware Libs/RingBuffer.o
+                0x00000000       0x6a Hardware Libs/RingBuffer.o
  .text          0x00000000        0x0 Hardware Libs/tmp102.o
  .data          0x00000000        0x0 Hardware Libs/tmp102.o
  .bss           0x00000000        0x0 Hardware Libs/tmp102.o
@@ -219,11 +219,27 @@ Discarded input sections
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
+ .text.libgcc.div
+                0x00000000       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
@@ -310,20 +326,6 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
- .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .text.libgcc.mul
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .text.libgcc.prologue
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .text.libgcc.builtins
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .text.libgcc.fmul
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .text.libgcc.fixed
-                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
@@ -472,7 +474,13 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
+<<<<<<< .mine
+.text           0x00000000     0x1b3c
+||||||| .r47
+.text           0x00000000     0x1ae2
+=======
 .text           0x00000000     0x1bba
+>>>>>>> .r50
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -640,81 +648,285 @@ END GROUP
                 0x00000924       0x28 Hardware Libs/sts3x.o
                 0x00000924                sts3xInit
  .text.RingBufferInit
+<<<<<<< .mine
+                0x00000954       0x18 Hardware Libs/RingBuffer.o
+                0x00000954                RingBufferInit
+||||||| .r47
+                0x00000954       0x10 Hardware Libs/RingBuffer.o
+                0x00000954                RingBufferInit
+=======
                 0x0000094c       0x10 Hardware Libs/RingBuffer.o
                 0x0000094c                RingBufferInit
+>>>>>>> .r50
  .text.RingBufferWrite
+<<<<<<< .mine
+                0x0000096c       0x3c Hardware Libs/RingBuffer.o
+                0x0000096c                RingBufferWrite
+||||||| .r47
+                0x00000964       0x2e Hardware Libs/RingBuffer.o
+                0x00000964                RingBufferWrite
+=======
                 0x0000095c       0x2e Hardware Libs/RingBuffer.o
                 0x0000095c                RingBufferWrite
+>>>>>>> .r50
  .text.RingBufferRead
+<<<<<<< .mine
+                0x000009a8       0x40 Hardware Libs/RingBuffer.o
+                0x000009a8                RingBufferRead
+ .text.RingBufferWriteBusy
+                0x000009e8       0x1e Hardware Libs/RingBuffer.o
+                0x000009e8                RingBufferWriteBusy
+||||||| .r47
+                0x00000992       0x32 Hardware Libs/RingBuffer.o
+                0x00000992                RingBufferRead
+=======
                 0x0000098a       0x32 Hardware Libs/RingBuffer.o
                 0x0000098a                RingBufferRead
+>>>>>>> .r50
  .text.tmp102Read
+<<<<<<< .mine
+                0x00000a06       0x32 Hardware Libs/tmp102.o
+                0x00000a06                tmp102Read
+||||||| .r47
+                0x000009c4       0x32 Hardware Libs/tmp102.o
+                0x000009c4                tmp102Read
+=======
                 0x000009bc       0x32 Hardware Libs/tmp102.o
                 0x000009bc                tmp102Read
+>>>>>>> .r50
  .text.tmp102GetTemp
+<<<<<<< .mine
+                0x00000a38       0x22 Hardware Libs/tmp102.o
+                0x00000a38                tmp102GetTemp
+||||||| .r47
+                0x000009f6       0x22 Hardware Libs/tmp102.o
+                0x000009f6                tmp102GetTemp
+=======
                 0x000009ee       0x22 Hardware Libs/tmp102.o
                 0x000009ee                tmp102GetTemp
+>>>>>>> .r50
  .text.__vector_13
+<<<<<<< .mine
+                0x00000a5a       0x4e Hardware Libs/uart.o
+                0x00000a5a                __vector_13
+||||||| .r47
+                0x00000a18       0x4e Hardware Libs/uart.o
+                0x00000a18                __vector_13
+=======
                 0x00000a10       0x4e Hardware Libs/uart.o
                 0x00000a10                __vector_13
+>>>>>>> .r50
  .text.__vector_14
+<<<<<<< .mine
+                0x00000aa8       0x6e Hardware Libs/uart.o
+                0x00000aa8                __vector_14
+ .text.uartInit
+                0x00000b16       0x42 Hardware Libs/uart.o
+                0x00000b16                uartInit
+||||||| .r47
+                0x00000a66       0x6e Hardware Libs/uart.o
+                0x00000a66                __vector_14
+ .text.uart_init
+                0x00000ad4       0x42 Hardware Libs/uart.o
+                0x00000ad4                uart_init
+=======
                 0x00000a5e       0x6e Hardware Libs/uart.o
                 0x00000a5e                __vector_14
  .text.uart_init
                 0x00000acc       0x42 Hardware Libs/uart.o
                 0x00000acc                uart_init
+>>>>>>> .r50
  .text.uartPutByte
+<<<<<<< .mine
+                0x00000b58        0xe Hardware Libs/uart.o
+                0x00000b58                uartPutByte
+||||||| .r47
+                0x00000b16        0xe Hardware Libs/uart.o
+                0x00000b16                uartPutByte
+=======
                 0x00000b0e        0xe Hardware Libs/uart.o
                 0x00000b0e                uartPutByte
+>>>>>>> .r50
  .text.uartPutByteStr
+<<<<<<< .mine
+                0x00000b66       0x36 Hardware Libs/uart.o
+                0x00000b66                uartPutByteStr
+||||||| .r47
+                0x00000b24       0x36 Hardware Libs/uart.o
+                0x00000b24                uartPutByteStr
+=======
                 0x00000b1c       0x32 Hardware Libs/uart.o
                 0x00000b1c                uartPutByteStr
+>>>>>>> .r50
  .text.uartReadRingBuff
+<<<<<<< .mine
+                0x00000b9c       0x82 Hardware Libs/uart.o
+                0x00000b9c                uartReadRingBuff
+||||||| .r47
+                0x00000b5a       0x6a Hardware Libs/uart.o
+                0x00000b5a                uartReadRingBuff
+=======
                 0x00000b4e       0x6a Hardware Libs/uart.o
                 0x00000b4e                uartReadRingBuff
+>>>>>>> .r50
  .text.cmdDebug
+<<<<<<< .mine
+                0x00000c1e        0x4 main.o
+                0x00000c1e                cmdDebug
+ .text.cmdPing  0x00000c22       0x34 main.o
+                0x00000c22                cmdPing
+||||||| .r47
+                0x00000bc4        0x4 main.o
+                0x00000bc4                cmdDebug
+ .text.cmdPing  0x00000bc8       0x34 main.o
+                0x00000bc8                cmdPing
+=======
                 0x00000bb8        0x4 main.o
                 0x00000bb8                cmdDebug
  .text.cmdPing  0x00000bbc       0x34 main.o
                 0x00000bbc                cmdPing
+>>>>>>> .r50
  .text.cmdRelais
+<<<<<<< .mine
+                0x00000c56      0x108 main.o
+                0x00000c56                cmdRelais
+||||||| .r47
+                0x00000bfc      0x108 main.o
+                0x00000bfc                cmdRelais
+=======
                 0x00000bf0      0x108 main.o
                 0x00000bf0                cmdRelais
+>>>>>>> .r50
  .text.cmdGetTemp
+<<<<<<< .mine
+                0x00000d5e       0x76 main.o
+                0x00000d5e                cmdGetTemp
+||||||| .r47
+                0x00000d04       0x76 main.o
+                0x00000d04                cmdGetTemp
+=======
                 0x00000cf8       0x76 main.o
                 0x00000cf8                cmdGetTemp
+>>>>>>> .r50
  .text.cmdGetState
+<<<<<<< .mine
+                0x00000dd4       0x6a main.o
+                0x00000dd4                cmdGetState
+||||||| .r47
+                0x00000d7a       0x6a main.o
+                0x00000d7a                cmdGetState
+=======
                 0x00000d6e       0x6a main.o
                 0x00000d6e                cmdGetState
+>>>>>>> .r50
  .text.cmdSetDebugMode
+<<<<<<< .mine
+                0x00000e3e       0x72 main.o
+                0x00000e3e                cmdSetDebugMode
+||||||| .r47
+                0x00000de4       0x72 main.o
+                0x00000de4                cmdSetDebugMode
+=======
                 0x00000dd8       0x72 main.o
                 0x00000dd8                cmdSetDebugMode
+>>>>>>> .r50
  .text.cmdGetVersion
+<<<<<<< .mine
+                0x00000eb0       0x2e main.o
+                0x00000eb0                cmdGetVersion
+||||||| .r47
+                0x00000e56       0x2e main.o
+                0x00000e56                cmdGetVersion
+=======
                 0x00000e4a       0x2e main.o
                 0x00000e4a                cmdGetVersion
+>>>>>>> .r50
  .text.cmdDisplay
+<<<<<<< .mine
+                0x00000ede       0xb8 main.o
+                0x00000ede                cmdDisplay
+||||||| .r47
+                0x00000e84       0xb8 main.o
+                0x00000e84                cmdDisplay
+=======
                 0x00000e78       0xb8 main.o
                 0x00000e78                cmdDisplay
+>>>>>>> .r50
  .text.cmdSetTime
+<<<<<<< .mine
+                0x00000f96       0x5e main.o
+                0x00000f96                cmdSetTime
+||||||| .r47
+                0x00000f3c       0x5e main.o
+                0x00000f3c                cmdSetTime
+=======
                 0x00000f30       0x5e main.o
                 0x00000f30                cmdSetTime
+>>>>>>> .r50
  .text.cmdReadRtc
+<<<<<<< .mine
+                0x00000ff4       0x90 main.o
+                0x00000ff4                cmdReadRtc
+||||||| .r47
+                0x00000f9a       0x90 main.o
+                0x00000f9a                cmdReadRtc
+=======
                 0x00000f8e       0x90 main.o
                 0x00000f8e                cmdReadRtc
+>>>>>>> .r50
  .text.checkTempSwell
+<<<<<<< .mine
+                0x00001084       0x3e main.o
+                0x00001084                checkTempSwell
+||||||| .r47
+                0x0000102a       0x3e main.o
+                0x0000102a                checkTempSwell
+=======
                 0x0000101e       0x3e main.o
                 0x0000101e                checkTempSwell
+>>>>>>> .r50
  .text.timerInit
+<<<<<<< .mine
+                0x000010c2       0x16 main.o
+                0x000010c2                timerInit
+ .text.eepLoad  0x000010d8       0x28 main.o
+                0x000010d8                eepLoad
+||||||| .r47
+                0x00001068       0x16 main.o
+                0x00001068                timerInit
+ .text.eepLoad  0x0000107e       0x28 main.o
+                0x0000107e                eepLoad
+=======
                 0x0000105c       0x16 main.o
                 0x0000105c                timerInit
  .text.eepLoad  0x00001072       0x28 main.o
                 0x00001072                eepLoad
+>>>>>>> .r50
  .text.scrollMessage
+<<<<<<< .mine
+                0x00001100       0xd4 main.o
+                0x00001100                scrollMessage
+ .text.main     0x000011d4      0x35c main.o
+                0x000011d4                main
+||||||| .r47
+                0x000010a6       0xd4 main.o
+                0x000010a6                scrollMessage
+ .text.main     0x0000117a      0x334 main.o
+                0x0000117a                main
+=======
                 0x0000109a       0xd4 main.o
                 0x0000109a                scrollMessage
  .text.main     0x0000116e      0x3ce main.o
                 0x0000116e                main
+>>>>>>> .r50
  .text.__vector_7
+<<<<<<< .mine
+                0x00001530      0x148 main.o
+                0x00001530                __vector_7
+||||||| .r47
+                0x000014ae      0x148 main.o
+                0x000014ae                __vector_7
+=======
                 0x0000153c      0x154 main.o
                 0x0000153c                __vector_7
  .text.SwitchInit
@@ -723,90 +935,301 @@ END GROUP
  .text.SwitchRead
                 0x000016a8       0x26 Switch.o
                 0x000016a8                SwitchRead
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x00001678        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x00001678                __subsf3
+                0x0000167a                __addsf3
+||||||| .r47
+                0x000015f6        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x000015f6                __subsf3
+                0x000015f8                __addsf3
+=======
                 0x000016ce        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
                 0x000016ce                __subsf3
                 0x000016d0                __addsf3
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x00001686       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x000016a8                __addsf3x
+||||||| .r47
+                0x00001604       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x00001626                __addsf3x
+=======
                 0x000016dc       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
                 0x000016fe                __addsf3x
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x00001752        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x00001752                __divsf3
+||||||| .r47
+                0x000016d0        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x000016d0                __divsf3
+=======
                 0x000017a8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
                 0x000017a8                __divsf3
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x0000175a       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x0000177a                __divsf3x
+                0x00001780                __divsf3_pse
+||||||| .r47
+                0x000016d8       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x000016f8                __divsf3x
+                0x000016fe                __divsf3_pse
+=======
                 0x000017b0       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
                 0x000017d0                __divsf3x
                 0x000017d6                __divsf3_pse
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x00001836        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
+                0x00001836                __fixsfsi
+||||||| .r47
+                0x000017b4        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
+                0x000017b4                __fixsfsi
+=======
                 0x0000188c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
                 0x0000188c                __fixsfsi
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x00001844       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x00001844                __fixunssfsi
+||||||| .r47
+                0x000017c2       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x000017c2                __fixunssfsi
+=======
                 0x0000189a       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
                 0x0000189a                __fixunssfsi
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x000018a2       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x000018a2                __floatunsisf
+                0x000018a6                __floatsisf
+||||||| .r47
+                0x00001820       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x00001820                __floatunsisf
+                0x00001824                __floatsisf
+=======
                 0x000018f8       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
                 0x000018f8                __floatunsisf
                 0x000018fc                __floatsisf
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x0000191c        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x0000191c                __fp_inf
+||||||| .r47
+                0x0000189a        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x0000189a                __fp_inf
+=======
                 0x00001972        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
                 0x00001972                __fp_inf
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x00001928        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x00001928                __fp_nan
+||||||| .r47
+                0x000018a6        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x000018a6                __fp_nan
+=======
                 0x0000197e        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
                 0x0000197e                __fp_nan
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x0000192e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x0000192e                __fp_pscA
+||||||| .r47
+                0x000018ac        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x000018ac                __fp_pscA
+=======
                 0x00001984        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
                 0x00001984                __fp_pscA
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x0000193c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x0000193c                __fp_pscB
+||||||| .r47
+                0x000018ba        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x000018ba                __fp_pscB
+=======
                 0x00001992        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
                 0x00001992                __fp_pscB
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x0000194a       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x0000194a                __fp_round
+||||||| .r47
+                0x000018c8       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x000018c8                __fp_round
+=======
                 0x000019a0       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
                 0x000019a0                __fp_round
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x0000196c       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x0000196c                __fp_split3
+                0x0000197c                __fp_splitA
+||||||| .r47
+                0x000018ea       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x000018ea                __fp_split3
+                0x000018fa                __fp_splitA
+=======
                 0x000019c2       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
                 0x000019c2                __fp_split3
                 0x000019d2                __fp_splitA
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x000019b0        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x000019b0                __fp_zero
+                0x000019b2                __fp_szero
+||||||| .r47
+                0x0000192e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x0000192e                __fp_zero
+                0x00001930                __fp_szero
+=======
                 0x00001a06        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
                 0x00001a06                __fp_zero
                 0x00001a08                __fp_szero
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x000019be        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x000019be                __mulsf3
+||||||| .r47
+                0x0000193c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x0000193c                __mulsf3
+=======
                 0x00001a14        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
                 0x00001a14                __mulsf3
+>>>>>>> .r50
  .text.avr-libc.fplib
+<<<<<<< .mine
+                0x000019c6       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x000019e4                __mulsf3x
+                0x000019ea                __mulsf3_pse
+||||||| .r47
+                0x00001944       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x00001962                __mulsf3x
+                0x00001968                __mulsf3_pse
+=======
                 0x00001a1c       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
                 0x00001a3a                __mulsf3x
                 0x00001a40                __mulsf3_pse
+>>>>>>> .r50
  .text.libgcc.div
+<<<<<<< .mine
+                0x00001a98       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                0x00001a98                __udivmodhi4
+ .text.libgcc   0x00001ac0        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x00001ac0                __tablejump2__
+||||||| .r47
+                0x00001a16       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
+                0x00001a16                _div
+                0x00001a16                __divmodhi4
+ .text.libgcc   0x00001a3e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x00001a3e                __tablejump2__
+=======
                 0x00001aee       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
                 0x00001aee                _div
                 0x00001aee                __divmodhi4
  .text.libgcc   0x00001b16        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
                 0x00001b16                __tablejump2__
+>>>>>>> .r50
  .text.libgcc.mul
+<<<<<<< .mine
+                0x00001acc       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00001acc                __umulhisi3
+||||||| .r47
+                0x00001a4a       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00001a4a                __umulhisi3
+ .text.libgcc.div
+                0x00001a68       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                0x00001a68                __udivmodhi4
+=======
                 0x00001b22       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
                 0x00001b22                __umulhisi3
  .text.libgcc.div
                 0x00001b40       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
                 0x00001b40                __udivmodhi4
+>>>>>>> .r50
  .text.avr-libc
+<<<<<<< .mine
+                0x00001aea       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
+                0x00001aea                strcat
+||||||| .r47
+                0x00001a90       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
+                0x00001a90                strcat
+=======
                 0x00001b68       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
                 0x00001b68                strcat
+>>>>>>> .r50
  .text.avr-libc
+<<<<<<< .mine
+                0x00001b00        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x00001b00                strcpy
+||||||| .r47
+                0x00001aa6        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x00001aa6                strcpy
+=======
                 0x00001b7e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcpy.o)
                 0x00001b7e                strcpy
+>>>>>>> .r50
  .text.avr-libc
+<<<<<<< .mine
+                0x00001b0e       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+                0x00001b0e                eeprom_read_byte
+||||||| .r47
+                0x00001ab4       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+                0x00001ab4                eeprom_read_byte
+=======
                 0x00001b8c       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
                 0x00001b8c                eeprom_read_byte
+>>>>>>> .r50
  .text.avr-libc
+<<<<<<< .mine
+                0x00001b1e       0x1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+                0x00001b1e                eeprom_write_byte
+                0x00001b20                eeprom_write_r18
+                0x00001b38                . = ALIGN (0x2)
+||||||| .r47
+                0x00001ac4       0x1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+                0x00001ac4                eeprom_write_byte
+                0x00001ac6                eeprom_write_r18
+                0x00001ade                . = ALIGN (0x2)
+=======
                 0x00001b9c       0x1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
                 0x00001b9c                eeprom_write_byte
                 0x00001b9e                eeprom_write_r18
                 0x00001bb6                . = ALIGN (0x2)
+>>>>>>> .r50
  *(.fini9)
+<<<<<<< .mine
+ .fini9         0x00001b38        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00001b38                _exit
+                0x00001b38                exit
+||||||| .r47
+ .fini9         0x00001ade        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00001ade                _exit
+                0x00001ade                exit
+=======
  .fini9         0x00001bb6        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                 0x00001bb6                _exit
                 0x00001bb6                exit
+>>>>>>> .r50
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -825,11 +1248,29 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
+<<<<<<< .mine
+ .fini0         0x00001b38        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+||||||| .r47
+ .fini0         0x00001ade        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+=======
  .fini0         0x00001bb6        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+>>>>>>> .r50
  *(.fini0)
+<<<<<<< .mine
+                0x00001b3c                _etext = .
+||||||| .r47
+                0x00001ae2                _etext = .
+=======
                 0x00001bba                _etext = .
+>>>>>>> .r50
 
+<<<<<<< .mine
+.data           0x00800060       0xca load address 0x00001b3c
+||||||| .r47
+.data           0x00800060       0xca load address 0x00001ae2
+=======
 .data           0x00800060       0xcc load address 0x00001bba
+>>>>>>> .r50
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -839,7 +1280,13 @@ END GROUP
                 0x00800067                sts3x
  .data.tmp102   0x0080006b        0x4 Hardware Libs/tmp102.o
                 0x0080006b                tmp102
+<<<<<<< .mine
+ .data.pos.2727
+||||||| .r47
+ .data.pos.2740
+=======
  .data.SetState.2786
+>>>>>>> .r50
                 0x0080006f        0x1 main.o
  .data.Relais.2785
                 0x00800070        0x1 main.o
@@ -864,15 +1311,33 @@ END GROUP
                 0x0080012c                _edata = .
                 0x0080012c                PROVIDE (__data_end, .)
 
+<<<<<<< .mine
+.bss            0x0080012a      0x16f
+                0x0080012a                PROVIDE (__bss_start, .)
+||||||| .r47
+.bss            0x0080012a      0x549
+                0x0080012a                PROVIDE (__bss_start, .)
+=======
 .bss            0x0080012c      0x54d
                 0x0080012c                PROVIDE (__bss_start, .)
+>>>>>>> .r50
  *(.bss)
  *(.bss*)
  .bss.build.1609
+<<<<<<< .mine
+                0x0080012a       0x11 build_info.o
+ .bss.HeaderInfo.2254
+                0x0080013b        0x3 cmd.o
+||||||| .r47
+                0x0080012a       0x11 build_info.o
+ .bss.HeaderInfo.2267
+                0x0080013b        0x3 cmd.o
+=======
                 0x0080012c       0x11 build_info.o
  .bss.HeaderInfo.2265
                 0x0080013d        0x3 cmd.o
- .bss.data.2229
+>>>>>>> .r50
+ .bss.data.2216
                 0x00800140        0x1 cmd.o
  .bss.FrameStart
                 0x00800141        0x1 cmd.o
@@ -889,27 +1354,94 @@ END GROUP
                 0x00800161        0x1 Hardware Libs/sts3x.o
  .bss.read.1695
                 0x00800162        0x3 Hardware Libs/sts3x.o
- .bss.index.1861
+ .bss.last.1853
                 0x00800165        0x1 Hardware Libs/uart.o
- .bss.last.1864
+ .bss.index.1850
                 0x00800166        0x1 Hardware Libs/uart.o
  .bss.RING_BUFF_RX
+<<<<<<< .mine
+                0x00800165       0x20 Hardware Libs/uart.o
+||||||| .r47
+                0x00800165      0x400 Hardware Libs/uart.o
+=======
                 0x00800167      0x400 Hardware Libs/uart.o
+>>>>>>> .r50
  .bss.RING_BUFF_TX
+<<<<<<< .mine
+                0x00800185       0x20 Hardware Libs/uart.o
+ .bss.stateLED.2753
+                0x008001a5        0x4 main.o
+||||||| .r47
+                0x00800565       0x20 Hardware Libs/uart.o
+ .bss.stateLED.2765
+                0x00800585        0x4 main.o
+=======
                 0x00800567       0x20 Hardware Libs/uart.o
  .bss.stateLED.2794
                 0x00800587        0x4 main.o
+>>>>>>> .r50
  .bss.RelaisState
+<<<<<<< .mine
+                0x008001a9        0x1 main.o
+                0x008001a9                RelaisState
+ .bss.streamIn  0x008001aa       0x80 main.o
+                0x008001aa                streamIn
+||||||| .r47
+                0x00800589        0x1 main.o
+                0x00800589                RelaisState
+ .bss.streamIn  0x0080058a       0x80 main.o
+                0x0080058a                streamIn
+=======
                 0x0080058b        0x1 main.o
                 0x0080058b                RelaisState
  .bss.streamIn  0x0080058c       0x80 main.o
                 0x0080058c                streamIn
+>>>>>>> .r50
  .bss.streamPtr
+<<<<<<< .mine
+                0x0080022a        0x2 main.o
+                0x0080022a                streamPtr
+ .bss.out       0x0080022c       0x3c main.o
+                0x0080022c                out
+||||||| .r47
+                0x0080060a        0x2 main.o
+                0x0080060a                streamPtr
+ .bss.out       0x0080060c       0x3c main.o
+                0x0080060c                out
+=======
                 0x0080060c        0x2 main.o
                 0x0080060c                streamPtr
  .bss.out       0x0080060e       0x3c main.o
                 0x0080060e                out
+>>>>>>> .r50
  *(COMMON)
+<<<<<<< .mine
+ COMMON         0x00800268       0x12 Hardware Libs/uart.o
+                0x00800268                RingBufferRx
+                0x00800271                RingBufferTx
+ COMMON         0x0080027a       0x1f main.o
+                0x0080027a                DebugModeEnable
+                0x0080027b                sys
+                0x00800286                rtc
+                0x00800292                eepRAM
+                0x00800293                cmd
+                0x00800299                PROVIDE (__bss_end, .)
+                0x00001b3c                __data_load_start = LOADADDR (.data)
+                0x00001c06                __data_load_end = (__data_load_start + SIZEOF (.data))
+||||||| .r47
+ COMMON         0x00800648        0xc Hardware Libs/uart.o
+                0x00800648                RingBufferRx
+                0x0080064e                RingBufferTx
+ COMMON         0x00800654       0x1f main.o
+                0x00800654                DebugModeEnable
+                0x00800655                sys
+                0x00800660                rtc
+                0x0080066c                eepRAM
+                0x0080066d                cmd
+                0x00800673                PROVIDE (__bss_end, .)
+                0x00001ae2                __data_load_start = LOADADDR (.data)
+                0x00001bac                __data_load_end = (__data_load_start + SIZEOF (.data))
+=======
  COMMON         0x0080064a        0xc Hardware Libs/uart.o
                 0x0080064a                RingBufferRx
                 0x00800650                RingBufferTx
@@ -923,12 +1455,25 @@ END GROUP
                 0x00800679                PROVIDE (__bss_end, .)
                 0x00001bba                __data_load_start = LOADADDR (.data)
                 0x00001c86                __data_load_end = (__data_load_start + SIZEOF (.data))
+>>>>>>> .r50
 
+<<<<<<< .mine
+.noinit         0x00800299        0x0
+||||||| .r47
+.noinit         0x00800673        0x0
+=======
 .noinit         0x00800679        0x0
+>>>>>>> .r50
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
+<<<<<<< .mine
+                0x00800299                _end = .
+||||||| .r47
+                0x00800673                _end = .
+=======
                 0x00800679                _end = .
+>>>>>>> .r50
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x1
@@ -1008,7 +1553,13 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
+<<<<<<< .mine
+.debug_aranges  0x00000000      0x3e8
+||||||| .r47
+.debug_aranges  0x00000000      0x3e0
+=======
 .debug_aranges  0x00000000      0x418
+>>>>>>> .r50
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 build_info.o
@@ -1027,27 +1578,80 @@ END GROUP
  .debug_aranges
                 0x000001e8       0x40 Hardware Libs/sts3x.o
  .debug_aranges
-                0x00000228       0x60 Hardware Libs/RingBuffer.o
+                0x00000228       0x68 Hardware Libs/RingBuffer.o
  .debug_aranges
-                0x00000288       0x30 Hardware Libs/tmp102.o
+                0x00000290       0x30 Hardware Libs/tmp102.o
  .debug_aranges
-                0x000002b8       0x48 Hardware Libs/uart.o
+                0x000002c0       0x48 Hardware Libs/uart.o
  .debug_aranges
+<<<<<<< .mine
+                0x00000308       0xa0 main.o
+||||||| .r47
+                0x00000300       0xa0 main.o
+=======
                 0x00000300       0xa8 main.o
+>>>>>>> .r50
  .debug_aranges
+<<<<<<< .mine
+                0x000003a8       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+||||||| .r47
+                0x000003a0       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+=======
                 0x000003a8       0x30 Switch.o
+>>>>>>> .r50
  .debug_aranges
+<<<<<<< .mine
+                0x000003c8       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+||||||| .r47
+                0x000003c0       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+=======
                 0x000003d8       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
  .debug_aranges
                 0x000003f8       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+>>>>>>> .r50
 
 .debug_pubnames
  *(.debug_pubnames)
 
+<<<<<<< .mine
+.debug_info     0x00000000     0x4838
+||||||| .r47
+.debug_info     0x00000000     0x46f4
+=======
 .debug_info     0x00000000     0x4a17
+>>>>>>> .r50
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x124 build_info.o
+<<<<<<< .mine
+ .debug_info    0x0000060a      0x671 cmd.o
+ .debug_info    0x00000c7b      0x493 DevBoardSegment.o
+ .debug_info    0x0000110e       0xd5 Hardware Libs/hard_init.o
+ .debug_info    0x000011e3       0xc5 Hardware Libs/i2cmaster.o
+ .debug_info    0x000012a8      0x2a8 Hardware Libs/mcp23017.o
+ .debug_info    0x00001550      0xcc0 Hardware Libs/rx8564.o
+ .debug_info    0x00002210      0x483 Hardware Libs/sts3x.o
+ .debug_info    0x00002693      0x4d3 Hardware Libs/RingBuffer.o
+ .debug_info    0x00002b66      0x27a Hardware Libs/tmp102.o
+ .debug_info    0x00002de0      0x41a Hardware Libs/uart.o
+ .debug_info    0x000031fa     0x14ea main.o
+ .debug_info    0x000046e4       0xaa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+ .debug_info    0x0000478e       0xaa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+||||||| .r47
+ .debug_info    0x0000060a      0x647 cmd.o
+ .debug_info    0x00000c51      0x493 DevBoardSegment.o
+ .debug_info    0x000010e4       0xd5 Hardware Libs/hard_init.o
+ .debug_info    0x000011b9       0xc5 Hardware Libs/i2cmaster.o
+ .debug_info    0x0000127e      0x2a8 Hardware Libs/mcp23017.o
+ .debug_info    0x00001526      0xcc0 Hardware Libs/rx8564.o
+ .debug_info    0x000021e6      0x483 Hardware Libs/sts3x.o
+ .debug_info    0x00002669      0x466 Hardware Libs/RingBuffer.o
+ .debug_info    0x00002acf      0x27a Hardware Libs/tmp102.o
+ .debug_info    0x00002d49      0x3eb Hardware Libs/uart.o
+ .debug_info    0x00003134     0x146c main.o
+ .debug_info    0x000045a0       0xaa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+ .debug_info    0x0000464a       0xaa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+=======
  .debug_info    0x0000060a      0x676 cmd.o
  .debug_info    0x00000c80      0x493 DevBoardSegment.o
  .debug_info    0x00001113       0xd5 Hardware Libs/hard_init.o
@@ -1062,11 +1666,47 @@ END GROUP
  .debug_info    0x00004747      0x17c Switch.o
  .debug_info    0x000048c3       0xaa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
  .debug_info    0x0000496d       0xaa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+>>>>>>> .r50
 
+<<<<<<< .mine
+.debug_abbrev   0x00000000     0x1730
+||||||| .r47
+.debug_abbrev   0x00000000     0x174f
+=======
 .debug_abbrev   0x00000000     0x1860
+>>>>>>> .r50
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3       0x95 build_info.o
+<<<<<<< .mine
+ .debug_abbrev  0x00000538      0x21f cmd.o
+ .debug_abbrev  0x00000757      0x19e DevBoardSegment.o
+ .debug_abbrev  0x000008f5       0x6b Hardware Libs/hard_init.o
+ .debug_abbrev  0x00000960       0x14 Hardware Libs/i2cmaster.o
+ .debug_abbrev  0x00000974       0xe6 Hardware Libs/mcp23017.o
+ .debug_abbrev  0x00000a5a      0x25d Hardware Libs/rx8564.o
+ .debug_abbrev  0x00000cb7      0x207 Hardware Libs/sts3x.o
+ .debug_abbrev  0x00000ebe      0x150 Hardware Libs/RingBuffer.o
+ .debug_abbrev  0x0000100e      0x192 Hardware Libs/tmp102.o
+ .debug_abbrev  0x000011a0      0x1bd Hardware Libs/uart.o
+ .debug_abbrev  0x0000135d      0x3ab main.o
+ .debug_abbrev  0x00001708       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+ .debug_abbrev  0x0000171c       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+||||||| .r47
+ .debug_abbrev  0x00000538      0x21f cmd.o
+ .debug_abbrev  0x00000757      0x19e DevBoardSegment.o
+ .debug_abbrev  0x000008f5       0x6b Hardware Libs/hard_init.o
+ .debug_abbrev  0x00000960       0x14 Hardware Libs/i2cmaster.o
+ .debug_abbrev  0x00000974       0xe6 Hardware Libs/mcp23017.o
+ .debug_abbrev  0x00000a5a      0x25d Hardware Libs/rx8564.o
+ .debug_abbrev  0x00000cb7      0x207 Hardware Libs/sts3x.o
+ .debug_abbrev  0x00000ebe      0x175 Hardware Libs/RingBuffer.o
+ .debug_abbrev  0x00001033      0x192 Hardware Libs/tmp102.o
+ .debug_abbrev  0x000011c5      0x1b9 Hardware Libs/uart.o
+ .debug_abbrev  0x0000137e      0x3a9 main.o
+ .debug_abbrev  0x00001727       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+ .debug_abbrev  0x0000173b       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+=======
  .debug_abbrev  0x00000538      0x227 cmd.o
  .debug_abbrev  0x0000075f      0x19e DevBoardSegment.o
  .debug_abbrev  0x000008fd       0x6b Hardware Libs/hard_init.o
@@ -1081,11 +1721,47 @@ END GROUP
  .debug_abbrev  0x00001758       0xe0 Switch.o
  .debug_abbrev  0x00001838       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
  .debug_abbrev  0x0000184c       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+>>>>>>> .r50
 
+<<<<<<< .mine
+.debug_line     0x00000000     0x2662
+||||||| .r47
+.debug_line     0x00000000     0x25e3
+=======
 .debug_line     0x00000000     0x27d1
+>>>>>>> .r50
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000115      0x16c build_info.o
+<<<<<<< .mine
+ .debug_line    0x00000281      0x3d6 cmd.o
+ .debug_line    0x00000657      0x36e DevBoardSegment.o
+ .debug_line    0x000009c5      0x102 Hardware Libs/hard_init.o
+ .debug_line    0x00000ac7      0x2af Hardware Libs/i2cmaster.o
+ .debug_line    0x00000d76      0x15a Hardware Libs/mcp23017.o
+ .debug_line    0x00000ed0      0x5d7 Hardware Libs/rx8564.o
+ .debug_line    0x000014a7      0x1fd Hardware Libs/sts3x.o
+ .debug_line    0x000016a4      0x301 Hardware Libs/RingBuffer.o
+ .debug_line    0x000019a5      0x12c Hardware Libs/tmp102.o
+ .debug_line    0x00001ad1      0x20f Hardware Libs/uart.o
+ .debug_line    0x00001ce0      0x870 main.o
+ .debug_line    0x00002550       0x7a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+ .debug_line    0x000025ca       0x98 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+||||||| .r47
+ .debug_line    0x00000281      0x3b8 cmd.o
+ .debug_line    0x00000639      0x36e DevBoardSegment.o
+ .debug_line    0x000009a7      0x102 Hardware Libs/hard_init.o
+ .debug_line    0x00000aa9      0x2af Hardware Libs/i2cmaster.o
+ .debug_line    0x00000d58      0x15a Hardware Libs/mcp23017.o
+ .debug_line    0x00000eb2      0x5d7 Hardware Libs/rx8564.o
+ .debug_line    0x00001489      0x1fd Hardware Libs/sts3x.o
+ .debug_line    0x00001686      0x2ca Hardware Libs/RingBuffer.o
+ .debug_line    0x00001950      0x12c Hardware Libs/tmp102.o
+ .debug_line    0x00001a7c      0x1f1 Hardware Libs/uart.o
+ .debug_line    0x00001c6d      0x864 main.o
+ .debug_line    0x000024d1       0x7a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
+ .debug_line    0x0000254b       0x98 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+=======
  .debug_line    0x00000281      0x3c0 cmd.o
  .debug_line    0x00000641      0x36e DevBoardSegment.o
  .debug_line    0x000009af      0x102 Hardware Libs/hard_init.o
@@ -1100,10 +1776,40 @@ END GROUP
  .debug_line    0x000025a8      0x117 Switch.o
  .debug_line    0x000026bf       0x7a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eerd_byte.o)
  .debug_line    0x00002739       0x98 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5\libatmega32.a(eewr_byte.o)
+>>>>>>> .r50
 
+<<<<<<< .mine
+.debug_frame    0x00000000      0xa80
+||||||| .r47
+.debug_frame    0x00000000      0xa60
+=======
 .debug_frame    0x00000000      0xaa8
+>>>>>>> .r50
  *(.debug_frame)
  .debug_frame   0x00000000       0x34 build_info.o
+<<<<<<< .mine
+ .debug_frame   0x00000034       0xc0 cmd.o
+ .debug_frame   0x000000f4       0xb4 DevBoardSegment.o
+ .debug_frame   0x000001a8       0x24 Hardware Libs/hard_init.o
+ .debug_frame   0x000001cc       0x54 Hardware Libs/mcp23017.o
+ .debug_frame   0x00000220      0x278 Hardware Libs/rx8564.o
+ .debug_frame   0x00000498       0x70 Hardware Libs/sts3x.o
+ .debug_frame   0x00000508      0x138 Hardware Libs/RingBuffer.o
+ .debug_frame   0x00000640       0x50 Hardware Libs/tmp102.o
+ .debug_frame   0x00000690      0x150 Hardware Libs/uart.o
+ .debug_frame   0x000007e0      0x2a0 main.o
+||||||| .r47
+ .debug_frame   0x00000034       0xcc cmd.o
+ .debug_frame   0x00000100       0xb4 DevBoardSegment.o
+ .debug_frame   0x000001b4       0x24 Hardware Libs/hard_init.o
+ .debug_frame   0x000001d8       0x54 Hardware Libs/mcp23017.o
+ .debug_frame   0x0000022c      0x278 Hardware Libs/rx8564.o
+ .debug_frame   0x000004a4       0x70 Hardware Libs/sts3x.o
+ .debug_frame   0x00000514      0x10c Hardware Libs/RingBuffer.o
+ .debug_frame   0x00000620       0x50 Hardware Libs/tmp102.o
+ .debug_frame   0x00000670      0x150 Hardware Libs/uart.o
+ .debug_frame   0x000007c0      0x2a0 main.o
+=======
  .debug_frame   0x00000034       0xc0 cmd.o
  .debug_frame   0x000000f4       0xb4 DevBoardSegment.o
  .debug_frame   0x000001a8       0x24 Hardware Libs/hard_init.o
@@ -1115,9 +1821,65 @@ END GROUP
  .debug_frame   0x00000664      0x150 Hardware Libs/uart.o
  .debug_frame   0x000007b4      0x2b0 main.o
  .debug_frame   0x00000a64       0x44 Switch.o
+>>>>>>> .r50
 
+<<<<<<< .mine
+.debug_str      0x00000000     0x1306
+||||||| .r47
+.debug_str      0x00000000     0x12c5
+=======
 .debug_str      0x00000000     0x1336
+>>>>>>> .r50
  *(.debug_str)
+<<<<<<< .mine
+ .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
+ .debug_str     0x00000196      0x1b2 build_info.o
+                                0x1eb (size before relaxing)
+ .debug_str     0x00000348      0x28c cmd.o
+                                0x455 (size before relaxing)
+ .debug_str     0x000005d4      0x13e DevBoardSegment.o
+                                0x2ef (size before relaxing)
+ .debug_str     0x00000712       0xbd Hardware Libs/hard_init.o
+                                0x259 (size before relaxing)
+ .debug_str     0x000007cf       0xf3 Hardware Libs/mcp23017.o
+                                0x2b1 (size before relaxing)
+ .debug_str     0x000008c2      0x355 Hardware Libs/rx8564.o
+                                0x550 (size before relaxing)
+ .debug_str     0x00000c17      0x12e Hardware Libs/sts3x.o
+                                0x35a (size before relaxing)
+ .debug_str     0x00000d45      0x1cf Hardware Libs/RingBuffer.o
+                                0x3b0 (size before relaxing)
+ .debug_str     0x00000f14       0x7d Hardware Libs/tmp102.o
+                                0x29e (size before relaxing)
+ .debug_str     0x00000f91       0xc2 Hardware Libs/uart.o
+                                0x35b (size before relaxing)
+ .debug_str     0x00001053      0x2b3 main.o
+                                0x92f (size before relaxing)
+||||||| .r47
+ .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
+ .debug_str     0x00000196      0x1b2 build_info.o
+                                0x1eb (size before relaxing)
+ .debug_str     0x00000348      0x258 cmd.o
+                                0x421 (size before relaxing)
+ .debug_str     0x000005a0      0x13e DevBoardSegment.o
+                                0x2ef (size before relaxing)
+ .debug_str     0x000006de       0xbd Hardware Libs/hard_init.o
+                                0x259 (size before relaxing)
+ .debug_str     0x0000079b       0xf3 Hardware Libs/mcp23017.o
+                                0x2b1 (size before relaxing)
+ .debug_str     0x0000088e      0x35b Hardware Libs/rx8564.o
+                                0x550 (size before relaxing)
+ .debug_str     0x00000be9      0x12e Hardware Libs/sts3x.o
+                                0x35a (size before relaxing)
+ .debug_str     0x00000d17      0x17d Hardware Libs/RingBuffer.o
+                                0x358 (size before relaxing)
+ .debug_str     0x00000e94       0x7d Hardware Libs/tmp102.o
+                                0x29e (size before relaxing)
+ .debug_str     0x00000f11       0xca Hardware Libs/uart.o
+                                0x326 (size before relaxing)
+ .debug_str     0x00000fdb      0x2ea main.o
+                                0x930 (size before relaxing)
+=======
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.132/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x195 build_info.o
                                 0x1ce (size before relaxing)
@@ -1143,9 +1905,37 @@ END GROUP
                                 0x980 (size before relaxing)
  .debug_str     0x00001304       0x32 Switch.o
                                 0x1e1 (size before relaxing)
+>>>>>>> .r50
 
+<<<<<<< .mine
+.debug_loc      0x00000000     0x34d8
+||||||| .r47
+.debug_loc      0x00000000     0x3428
+=======
 .debug_loc      0x00000000     0x346d
+>>>>>>> .r50
  *(.debug_loc)
+<<<<<<< .mine
+ .debug_loc     0x00000000      0x75a cmd.o
+ .debug_loc     0x0000075a      0x3fd DevBoardSegment.o
+ .debug_loc     0x00000b57       0x9c Hardware Libs/mcp23017.o
+ .debug_loc     0x00000bf3     0x1103 Hardware Libs/rx8564.o
+ .debug_loc     0x00001cf6      0x146 Hardware Libs/sts3x.o
+ .debug_loc     0x00001e3c      0x605 Hardware Libs/RingBuffer.o
+ .debug_loc     0x00002441      0x138 Hardware Libs/tmp102.o
+ .debug_loc     0x00002579      0x448 Hardware Libs/uart.o
+ .debug_loc     0x000029c1      0xb17 main.o
+||||||| .r47
+ .debug_loc     0x00000000      0x75c cmd.o
+ .debug_loc     0x0000075c      0x3fd DevBoardSegment.o
+ .debug_loc     0x00000b59       0x9c Hardware Libs/mcp23017.o
+ .debug_loc     0x00000bf5     0x1103 Hardware Libs/rx8564.o
+ .debug_loc     0x00001cf8      0x146 Hardware Libs/sts3x.o
+ .debug_loc     0x00001e3e      0x59d Hardware Libs/RingBuffer.o
+ .debug_loc     0x000023db      0x138 Hardware Libs/tmp102.o
+ .debug_loc     0x00002513      0x409 Hardware Libs/uart.o
+ .debug_loc     0x0000291c      0xb0c main.o
+=======
  .debug_loc     0x00000000      0x6fc cmd.o
  .debug_loc     0x000006fc      0x3fd DevBoardSegment.o
  .debug_loc     0x00000af9       0x9c Hardware Libs/mcp23017.o
@@ -1156,6 +1946,7 @@ END GROUP
  .debug_loc     0x000024b3      0x3fa Hardware Libs/uart.o
  .debug_loc     0x000028ad      0xb73 main.o
  .debug_loc     0x00003420       0x4d Switch.o
+>>>>>>> .r50
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1175,9 +1966,38 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
+<<<<<<< .mine
+.debug_ranges   0x00000000      0x350
+||||||| .r47
+.debug_ranges   0x00000000      0x360
+=======
 .debug_ranges   0x00000000      0x370
+>>>>>>> .r50
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 build_info.o
+<<<<<<< .mine
+ .debug_ranges  0x00000018       0x58 cmd.o
+ .debug_ranges  0x00000070       0x50 DevBoardSegment.o
+ .debug_ranges  0x000000c0       0x10 Hardware Libs/hard_init.o
+ .debug_ranges  0x000000d0       0x20 Hardware Libs/mcp23017.o
+ .debug_ranges  0x000000f0       0xa8 Hardware Libs/rx8564.o
+ .debug_ranges  0x00000198       0x30 Hardware Libs/sts3x.o
+ .debug_ranges  0x000001c8       0x58 Hardware Libs/RingBuffer.o
+ .debug_ranges  0x00000220       0x20 Hardware Libs/tmp102.o
+ .debug_ranges  0x00000240       0x38 Hardware Libs/uart.o
+ .debug_ranges  0x00000278       0xd8 main.o
+||||||| .r47
+ .debug_ranges  0x00000018       0x58 cmd.o
+ .debug_ranges  0x00000070       0x50 DevBoardSegment.o
+ .debug_ranges  0x000000c0       0x10 Hardware Libs/hard_init.o
+ .debug_ranges  0x000000d0       0x20 Hardware Libs/mcp23017.o
+ .debug_ranges  0x000000f0       0xa8 Hardware Libs/rx8564.o
+ .debug_ranges  0x00000198       0x30 Hardware Libs/sts3x.o
+ .debug_ranges  0x000001c8       0x68 Hardware Libs/RingBuffer.o
+ .debug_ranges  0x00000230       0x20 Hardware Libs/tmp102.o
+ .debug_ranges  0x00000250       0x38 Hardware Libs/uart.o
+ .debug_ranges  0x00000288       0xd8 main.o
+=======
  .debug_ranges  0x00000018       0x40 cmd.o
  .debug_ranges  0x00000058       0x50 DevBoardSegment.o
  .debug_ranges  0x000000a8       0x10 Hardware Libs/hard_init.o
@@ -1189,6 +2009,7 @@ END GROUP
  .debug_ranges  0x00000238       0x38 Hardware Libs/uart.o
  .debug_ranges  0x00000270       0xe0 main.o
  .debug_ranges  0x00000350       0x20 Switch.o
+>>>>>>> .r50
 
 .debug_macro
  *(.debug_macro)

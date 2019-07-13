@@ -25,6 +25,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct
 {
@@ -34,10 +35,16 @@ typedef struct
 	uint16_t NewestIndex;
 	uint16_t OldestIndex;
 	
+<<<<<<< .mine
+	bool IsFull;
+||||||| .r47
+	uint8_t Entrys;
+=======
 	uint16_t Entrys;
+>>>>>>> .r50
 }RingBuffer_t;
 
-enum RingBufferStatus {BUFFER_OK, BUFFER_EMPTY, BUFFER_FULL};
+enum RingBufferStatus {BUFFER_OK, BUFFER_EMPTY, BUFFER_FULL,BUFFER_TIMEOUT};
 
 typedef struct
 {
@@ -110,6 +117,12 @@ Burst_Info_t RingBufferReadBurst(volatile RingBuffer_t *RingBuff , uint16_t Leng
 */
 enum RingBufferStatus RingBufferWriteBurst(volatile RingBuffer_t *RingBuff , uint8_t *Source , uint16_t Length );
 
+/* RingBufferWriteBusy
+* @para             -> - Pointer of volatile RingBuffer Struct , Data
+* @return           -> - State of RingBuffer
+* @description      -> Wait for free Space in external Buffer and then write the Byte
+*/
+enum RingBufferStatus RingBufferWriteBusy( volatile RingBuffer_t *RingBuff , uint8_t Byte );
 
 
 #endif // __RINGBUFFER_H__
